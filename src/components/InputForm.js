@@ -8,14 +8,14 @@ const InputForm = () => {
 				style={styles.input}
 				placeholder='로그인'
 				placeholderTextColor='#808080'
-				multiline='false'
+				// multiline='false'
 				autoCapitalize='none'
 			/>
 			<TextInput
             style={styles.input}
             placeholder='비밀번호'
             placeholderTextColor='#808080'
-            multiline='false'
+            // multiline='false'
             secureTextEntry={true}
       />
 		</View>

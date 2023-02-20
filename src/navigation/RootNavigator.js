@@ -4,8 +4,8 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import LoginScreen from '../screens/LoginScreen'
-import MainScreen from '../screens/MainScreen'
-import MomoScreen from '../screens/MomoScreen';
+// import MainScreen from '../screens/MainScreen'
+// import MomoScreen from '../screens/MomoScreen';
 
 const AuthStack = createStackNavigator();
 const MainScreenTab = createBottomTabNavigator();
