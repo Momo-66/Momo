@@ -23,7 +23,7 @@ const InitTutorialScreen = () => {
   }, []);
 
   return (
-    <View style={{flex: 1, position:"relative"}}>
+    <View>
       <TextContent content={tutorialContent} textColor={tutorialTextColor}/>
     </View>
   );
