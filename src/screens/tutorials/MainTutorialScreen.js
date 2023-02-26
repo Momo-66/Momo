@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+import {View, SafeAreaView} from 'react-native';
+import BackgroundImgComponent from '../../components/tutorials/BackgroundImgComponent';
+import TutorialHeader from '../../components/tutorials/TutorialHeader';
+import InitTutorialScreen from './InitTutorialScreen';
 import { useEffect, useRef, useState } from 'react';
 import {View, SafeAreaView, Animated} from 'react-native';
 import { BackgroundImgComponent } from '../../components/tutorials/BackgroundImgComponent';
@@ -85,6 +90,28 @@ export const MainTutorialScreen = () => {
                         enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent}/> : null
                     }
                 </View>
+            </SafeAreaView>
+        </View>
+    );
+}
+const MainTutorialScreen = () => {
+    const [isChangeBackground, setisChangeBackground] = useState(false);
+    const [tutorialTextColor, settutorialTextColor] = useState("black");
+
+    useEffect(() => {
+        setTimeout(() => {
+            setisChangeBackground(true);
+            settutorialTextColor("white");
+            console.log("Main Screen");
+        }, 3000);
+    }, []);
+
+    return(
+        <View style={{flex:1}}>
+            <BackgroundImgComponent isChangeBackground={isChangeBackground}/>
+            <SafeAreaView style={{flex:1}}>
+                <TutorialHeader textColor={tutorialTextColor}/>
+                <InitTutorialScreen/>
             </SafeAreaView>
         </View>
     );
