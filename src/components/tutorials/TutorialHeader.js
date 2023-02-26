@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 const TutorialHeader = props => {
     useEffect(() => {
@@ -8,8 +8,12 @@ const TutorialHeader = props => {
 
     return (
     <View style={{flex: 1, margin:15, flexDirection:"row", justifyContent:"space-between"}}>
-        <Text style={{color:props.textColor}}>이전으로</Text>
-        <Text style={{color:props.textColor}}>건너뛰기</Text>
+        <TouchableOpacity onPress={() => alert('이전으로')}>
+            <Text style={{color:props.textColor}}>이전으로</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => alert('건너뛰기')}>
+            <Text style={{color:props.textColor}}>건너뛰기</Text>    
+        </TouchableOpacity>
     </View>
     )
 }
