@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import {View, SafeAreaView} from 'react-native';
 import BackgroundImgComponent from '../../components/tutorials/BackgroundImgComponent';
 import TutorialHeader from '../../components/tutorials/TutorialHeader';
+import InitTutorialScreen from './InitTutorialScreen';
 
 const MainTutorialScreen = () => {
     const [isChangeBackground, setisChangeBackground] = useState(false);
@@ -20,6 +21,7 @@ const MainTutorialScreen = () => {
             <BackgroundImgComponent isChangeBackground={isChangeBackground}/>
             <SafeAreaView style={{flex:1}}>
                 <TutorialHeader textColor={tutorialTextColor}/>
+                <InitTutorialScreen/>
             </SafeAreaView>
         </View>
     );
