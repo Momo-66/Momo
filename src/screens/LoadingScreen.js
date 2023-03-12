@@ -1,6 +1,6 @@
 import {StyleSheet, View, Image, SafeAreaView} from 'react-native';
 import React from 'react';
-import LoadingImage from '../assets/images/LoadingAnimation.gif';
+import LoadingImage from '../assets/images/Intro_animation.gif';
 
 const LoadingScreen = () => {
   return (
