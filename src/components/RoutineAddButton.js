@@ -4,10 +4,10 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 
 import AddButton from '../assets/images/add.png';
 
-const RoutineAddButton = () => {
+const RoutineAddButton = (props) => {
   return (
     <View style={styles.container} >
-      <TouchableOpacity onPress={() => alert('Routine Add Button')}>
+      <TouchableOpacity onPress={() => props.onPressAction(true)}>
         <Image source={AddButton}/>
       </TouchableOpacity>
     </View>
