@@ -12,7 +12,6 @@ import RoutineEditScreen from '../screens/RoutineEditScreen';
 import ChallengeScreen from '../screens/ChallengeScreen';
 import ClosetScreen from '../screens/ClosetScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import SignUpScreen from '../screens/SignUpScreen';
 
 // TO-DO: replace pngs to svgs when svg configuration has been done
 import Home from '../assets/icons/light/home.png';
@@ -118,7 +117,6 @@ export const RootNavigator = () => {
       ) : (
         <AuthStack.Screen name="Login" component={LoginScreen}/>)
       }
-      <AuthStack.Screen name="SignUp" component={SignUpScreen}/>
     </AuthStack.Navigator>
   );
 };
