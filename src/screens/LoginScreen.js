@@ -1,21 +1,25 @@
 import React from 'react';
-import {StyleSheet,Text,View,Image,SafeAreaView} from 'react-native';
+import {StyleSheet,Text,View,Image,SafeAreaView,TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
 
+import {login} from '../redux/reducerSlices/userSlice';
 import LogoImage from '../assets/images/Logo.png';
 import LoginButton from '../components/LoginButton';
 import InputForm from '../components/InputForm';
 import GoogleLoginButton from '../components/GoogleLoginButton';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-
+import {signInAnonymously} from '../api/userAuthApi';
 
 const LoginScreen = () => {
 
+  const dispatch = useDispatch();
 
+  const handleAnonymousLoginPress = async () => {
+    await signInAnonymously(()=>{dispatch(login())});
+  };
 
   return (
     <View style={styles.contianer}>
-      <SafeAreaView
-        style={{flex: 1,}}>
+      <SafeAreaView style={{flex: 1}}>
         <View
           style={{flex: 1.5, alignItems: 'center', justifyContent: 'center'}}>
           <Image style={{marginTop: 50}} source={LogoImage} />
@@ -27,19 +31,19 @@ const LoginScreen = () => {
 
           <View style={{width: '100%', flexDirection: 'row', marginTop: 10}}>
             <View style={{flex: 1}}>
-              <Text style={{fontSize: 14, fontWeight: '500',color: '#808080'}}>
+              <Text style={{fontSize: 14, fontWeight: '500', color: '#808080'}}>
                 처음 오셨나요?
               </Text>
             </View>
-            <View style={{flex: 1, alignItems: 'flex-end'}} >
-              <TouchableOpacity onPress={() => alert('회원가입')}>
-                <Text style={{fontSize: 14, fontWeight: '500',color: '#3CE3AC'}}>
-                  회원가입 >
+            <View style={{flex: 1, alignItems: 'flex-end'}}>
+              <TouchableOpacity onPress={handleAnonymousLoginPress}>
+                <Text
+                  style={{fontSize: 14, fontWeight: '500', color: '#3CE3AC'}}>
+                  익명으로 로그인
                 </Text>
               </TouchableOpacity>
             </View>
           </View>
-          
         </View>
 
         <View
