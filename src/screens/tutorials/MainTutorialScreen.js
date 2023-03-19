@@ -4,6 +4,7 @@ import BackgroundImgComponent from '../../components/tutorials/BackgroundImgComp
 import TutorialHeader from '../../components/tutorials/TutorialHeader';
 import InitTutorialScreen from './InitTutorialScreen';
 import BottomButtonComponent from '../../components/tutorials/BottomButtonComponent';
+import TimePickerScreen from './TimePickerScreen';
 
 const MainTutorialScreen = () => {
     const [isChangeBackground, setisChangeBackground] = useState(false);
@@ -28,8 +29,9 @@ const MainTutorialScreen = () => {
                 <View style={{height: 50}}>
                     <TutorialHeader textColor={tutorialTextColor}/>
                 </View>
-                <View>
-                    <InitTutorialScreen/>
+                <View style={{flex: 1}}>
+                    {/* <InitTutorialScreen/> */}
+                    <TimePickerScreen/>
                 </View>
                 <View style={{height: 101}}>
                     <BottomButtonComponent opacity={bottomButtonOpacity}/>
