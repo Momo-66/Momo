@@ -116,6 +116,9 @@ export const tutorialSlice = createSlice({
                 state.enableBackgroundImg = true;
             }
         },
+        useBottomBtn: (state) => {
+            state.enableBottomBtn = true;
+        },
         setStep1: (state) => {
             state.step = 1;
         },
