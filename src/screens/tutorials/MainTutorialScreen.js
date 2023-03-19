@@ -13,6 +13,9 @@ import {
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
+import { useDispatch } from 'react-redux';
+import { useBackgroundImg } from '../../redux/reducerSlices/tutorialSlice';
+
 const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
     const isStepScreen = useSelector((state) => state.tutorial.isStepScreen);
