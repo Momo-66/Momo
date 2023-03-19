@@ -4,6 +4,7 @@ const initialState = {
     enableBackgroundImg: false,
     textColor: "#222222",
     step: 0,
+    enableBottomBtn: false,
 };
 
 export const tutorialSlice = createSlice({
@@ -14,12 +15,15 @@ export const tutorialSlice = createSlice({
             state.enableBackgroundImg = true;
             state.textColor = "#FFFFFF";
         },
+        useBottomBtn: (state) => {
+            state.enableBottomBtn = true;
+        },
         setStep1: (state) => {
             state.step = 1;
         },
     },
 });
 
-export const { useBackgroundImg, setStep1 } = tutorialSlice.actions;
+export const { useBackgroundImg, useBottomBtn, setStep1 } = tutorialSlice.actions;
 
 export default tutorialSlice.reducer;

@@ -8,7 +8,7 @@ import TimePickerScreen from './TimePickerScreen';
 
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
-import { useBackgroundImg, setStep1 } from '../../redux/reducerSlices/tutorialSlice';
+import { useBackgroundImg, setStep1, useBottomBtn } from '../../redux/reducerSlices/tutorialSlice';
 
 const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
@@ -19,17 +19,20 @@ const MainTutorialScreen = () => {
 		dispatch(useBackgroundImg());
 	}
 
+    function UseBottomBtnfun() {
+		dispatch(useBottomBtn());
+	}
+
     function setStep1fun() {
         dispatch(setStep1());
     }
 
     const opacityAnimation = useRef(new Animated.Value(0)).current;
 
-    const [bottomButtonOpacity, setbottomButtonOpacity] = useState(0);
-
     useEffect(() => {
         setTimeout(() => {
             // UseBackgroundImgfun();
+            UseBottomBtnfun();
             setStep1fun();
             Animated.timing(opacityAnimation, {
                 toValue: 1,
@@ -37,9 +40,6 @@ const MainTutorialScreen = () => {
               }).start();
             console.log("Main Screen");
         }, 3000);
-        setTimeout(() => {
-            setbottomButtonOpacity(1);
-        }, 6000);
     }, []);
 
     return(
@@ -58,7 +58,7 @@ const MainTutorialScreen = () => {
                     }
                 </View>
                 <View style={{height: 101}}>
-                    <BottomButtonComponent opacity={bottomButtonOpacity}/>
+                    <BottomButtonComponent />
                 </View>
             </SafeAreaView>
         </View>
