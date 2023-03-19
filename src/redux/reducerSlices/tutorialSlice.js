@@ -116,6 +116,9 @@ export const tutorialSlice = createSlice({
                 state.enableBackgroundImg = true;
             }
         },
+        setStep1: (state) => {
+            state.step = 1;
+        },
     },
 });
 
