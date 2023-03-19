@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    useBackgroundImg: false,
+    enableBackgroundImg: false,
+    textColor: "#222222",
 };
 
 export const tutorialSlice = createSlice({
@@ -9,7 +10,8 @@ export const tutorialSlice = createSlice({
     initialState,
     reducers: {
         useBackgroundImg: (state) => {
-            state.useBackgroundImg = true;
+            state.enableBackgroundImg = true;
+            state.textColor = "#FFFFFF";
         },
     },
 });

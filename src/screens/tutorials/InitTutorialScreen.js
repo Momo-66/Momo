@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import {View} from 'react-native';
 import TextContent from '../../components/tutorials/TextContent';
 
+import {useSelector} from 'react-redux';
+
 const InitTutorialScreen = () => {
+  const textColor = useSelector((state) => state.tutorial.textColor);
   const [tutorialContent, settutorialContent] = useState("");
-  const [tutorialTextColor, settutorialTextColor] = useState("black");
 
   useEffect(() => {
     setTimeout(() => {
@@ -13,7 +15,6 @@ const InitTutorialScreen = () => {
     }, 1500);
     setTimeout(() => {
       settutorialContent("세로운 세상이\n펑! 하고 나타났어요!");
-      settutorialTextColor("white");
       console.log("Second Step");
     }, 3000);
     setTimeout(() => {
@@ -24,7 +25,7 @@ const InitTutorialScreen = () => {
 
   return (
     <View>
-      <TextContent content={tutorialContent} textColor={tutorialTextColor}/>
+      <TextContent content={tutorialContent} textColor={textColor}/>
     </View>
   );
 };

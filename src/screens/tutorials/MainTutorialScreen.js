@@ -16,13 +16,11 @@ const MainTutorialScreen = () => {
 		dispatch(useBackgroundImg());
 	}
 
-    const [tutorialTextColor, settutorialTextColor] = useState("black");
     const [bottomButtonOpacity, setbottomButtonOpacity] = useState(0);
 
     useEffect(() => {
         setTimeout(() => {
             testUseBackgroundImg();
-            settutorialTextColor("white");
             console.log("Main Screen");
         }, 1000);
         setTimeout(() => {
@@ -35,7 +33,7 @@ const MainTutorialScreen = () => {
             <BackgroundImgComponent />
             <SafeAreaView style={{flex:1, flexDirection:"column", justifyContent:"space-between", position:"relative"}}>
                 <View style={{height: 50}}>
-                    <TutorialHeader textColor={tutorialTextColor}/>
+                    <TutorialHeader />
                 </View>
                 <View style={{flex: 1}}>
                     {/* <InitTutorialScreen/> */}
