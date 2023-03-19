@@ -20,7 +20,7 @@ const MainTutorialScreen = () => {
 
     useEffect(() => {
         setTimeout(() => {
-            testUseBackgroundImg();
+            // testUseBackgroundImg();
             console.log("Main Screen");
         }, 1000);
         setTimeout(() => {
@@ -36,8 +36,8 @@ const MainTutorialScreen = () => {
                     <TutorialHeader />
                 </View>
                 <View style={{flex: 1}}>
-                    {/* <InitTutorialScreen/> */}
-                    <TimePickerScreen/>
+                    <InitTutorialScreen/>
+                    {/* <TimePickerScreen/> */}
                 </View>
                 <View style={{height: 101}}>
                     <BottomButtonComponent opacity={bottomButtonOpacity}/>
