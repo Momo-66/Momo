@@ -6,17 +6,25 @@ import InitTutorialScreen from './InitTutorialScreen';
 import BottomButtonComponent from '../../components/tutorials/BottomButtonComponent';
 import TimePickerScreen from './TimePickerScreen';
 
+import { useDispatch } from 'react-redux';
+import { useBackgroundImg } from '../../redux/reducerSlices/tutorialSlice';
+
 const MainTutorialScreen = () => {
-    const [isChangeBackground, setisChangeBackground] = useState(false);
+    const dispatch = useDispatch();
+
+    function testUseBackgroundImg() {
+		dispatch(useBackgroundImg());
+	}
+
     const [tutorialTextColor, settutorialTextColor] = useState("black");
     const [bottomButtonOpacity, setbottomButtonOpacity] = useState(0);
 
     useEffect(() => {
         setTimeout(() => {
-            setisChangeBackground(true);
+            testUseBackgroundImg();
             settutorialTextColor("white");
             console.log("Main Screen");
-        }, 3000);
+        }, 1000);
         setTimeout(() => {
             setbottomButtonOpacity(1);
         }, 6000);
@@ -24,7 +32,7 @@ const MainTutorialScreen = () => {
 
     return(
         <View style={{flex:1}}>
-            <BackgroundImgComponent isChangeBackground={isChangeBackground}/>
+            <BackgroundImgComponent />
             <SafeAreaView style={{flex:1, flexDirection:"column", justifyContent:"space-between", position:"relative"}}>
                 <View style={{height: 50}}>
                     <TutorialHeader textColor={tutorialTextColor}/>

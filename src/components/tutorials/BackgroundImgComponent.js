@@ -1,9 +1,13 @@
 import React from 'react';
 import { View, ImageBackground } from 'react-native';
 
-const BackgroundImgComponent = props => {
+import {useSelector} from 'react-redux';
+
+const BackgroundImgComponent = () => {
+  const useBackgroundImg = useSelector((state) => state.tutorial.useBackgroundImg);
+
   return (
-    props.isChangeBackground ? 
+    useBackgroundImg ? 
     <ImageBackground 
         style={{flex:1, position:"absolute", width:"100%", height:"100%"}}
         source={require("../../assets/images/TutorialBackground.png")}
