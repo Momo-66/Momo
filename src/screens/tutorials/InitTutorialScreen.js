@@ -1,18 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {View, Animated, Text, Image} from 'react-native';
 import TextContent from '../../components/tutorials/TextContent';
-import { Step } from '../../utils/tutorials/Step';
-
-import {useSelector, useDispatch} from 'react-redux';
-
-import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 
 import { 
-  useBackgroundImg,
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
-
-import {useSelector} from 'react-redux';
 
 const InitTutorialScreen = () => {
   const textColor = useSelector((state) => state.tutorial.textColor);
