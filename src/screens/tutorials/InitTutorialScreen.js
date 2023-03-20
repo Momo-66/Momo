@@ -9,7 +9,9 @@ import {
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-import {useSelector} from 'react-redux';
+import { 
+  setStep,
+} from '../../redux/reducerSlices/tutorialSlice';
 
 const InitTutorialScreen = () => {
   const textColor = useSelector((state) => state.tutorial.textColor);
