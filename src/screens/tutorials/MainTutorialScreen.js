@@ -12,9 +12,11 @@ import {
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
-import { useBackgroundImg, setStep1, useBottomBtn } from '../../redux/reducerSlices/tutorialSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { 
+    setEnableBottomBtn,
+    setStep,
+} from '../../redux/reducerSlices/tutorialSlice';
 
 export const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
