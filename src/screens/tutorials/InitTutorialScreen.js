@@ -15,7 +15,9 @@ import {
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-import {useSelector} from 'react-redux';
+import { 
+  setStep,
+} from '../../redux/reducerSlices/tutorialSlice';
 
 export const InitTutorialScreen = () => {
   const step = useSelector((state) => state.tutorial.step);
