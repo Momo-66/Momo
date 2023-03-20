@@ -1,57 +1,59 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import {View, SafeAreaView, Animated} from 'react-native';
 import BackgroundImgComponent from '../../components/tutorials/BackgroundImgComponent';
 import TutorialHeader from '../../components/tutorials/TutorialHeader';
 import InitTutorialScreen from './InitTutorialScreen';
 import BottomButtonComponent from '../../components/tutorials/BottomButtonComponent';
 import TimePickerScreen from './TimePickerScreen';
+import { Step } from '../../utils/tutorials/Step';
 
-import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
-import { useBackgroundImg, setStep1, useBottomBtn } from '../../redux/reducerSlices/tutorialSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { 
+    setEnableBottomBtn,
+    setStep,
+} from '../../redux/reducerSlices/tutorialSlice';
 
 const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
 
     const dispatch = useDispatch();
 
-    function UseBackgroundImgfun() {
-		dispatch(useBackgroundImg());
-	}
+    function setEnableBottomBtnfun(value) {
+        dispatch(setEnableBottomBtn({
+            enableBottomBtn: value,
+        }));
+    }
 
-    function UseBottomBtnfun() {
-		dispatch(useBottomBtn());
-	}
-
-    function setStep1fun() {
-        dispatch(setStep1());
+    function setStepfun(value) {
+        dispatch(setStep({
+            step: value,
+        }));
     }
 
     const opacityAnimation = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
-        setTimeout(() => {
-            // UseBackgroundImgfun();
-            UseBottomBtnfun();
-            setStep1fun();
+        if(step === Step.INIT_TUTORIAL){
+            setStepfun(Step.INIT_TUTORIAL);
+        }
+        else if(step === Step.STEP_ONE){
             Animated.timing(opacityAnimation, {
                 toValue: 1,
                 useNativeDriver: true,
-              }).start();
-            console.log("Main Screen");
-        }, 3000);
-    }, []);
+            }).start();
+        }
+    }, [step]);
 
     return(
         <View style={{flex:1}}>
             <BackgroundImgComponent />
             <SafeAreaView style={{flex:1, flexDirection:"column", justifyContent:"space-between", position:"relative"}}>
                 <View style={{height: 50}}>
-                    <TutorialHeader />
+                    <TutorialHeader/>
                 </View>
                 <View style={{flex: 1}}>
                     {
-                        step == 0 ? <InitTutorialScreen/> : 
+                        step === Step.INIT_TUTORIAL ? <InitTutorialScreen/> : 
                         <Animated.View style={{opacity: opacityAnimation}}>
                             <TimePickerScreen/>
                         </Animated.View>
