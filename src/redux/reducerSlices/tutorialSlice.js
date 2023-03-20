@@ -116,11 +116,34 @@ export const tutorialSlice = createSlice({
                 state.enableBackgroundImg = true;
             }
         },
-        useBottomBtn: (state) => {
-            state.enableBottomBtn = true;
+        setEnableBottomBtn: (state, action) => {
+            state.enableBottomBtn = action.payload.enableBottomBtn;
         },
-        setStep1: (state) => {
-            state.step = 1;
+        setStep: (state, action) => {
+            if(action.payload.step == Step.INIT_TUTORIAL){
+                state.step = action.payload.step;
+                state.enableHeaderRightBtn = true;
+            }
+            else if(action.payload.step == Step.STEP_ONE){
+                state.step = action.payload.step;
+                state.enableHeaderRightBtn = false;
+                state.enableHeaderLeftBtn = true;
+            }
+            else if(action.payload.step == Step.STEP_TWO){
+
+            }
+            else if(action.payload.step == Step.MID_TUTORIAL){
+                
+            }
+            else if(action.payload.step == Step.STEP_THREE){
+                
+            }
+            else if(action.payload.step == Step.ANIMATION_TUTORIAL){
+                
+            }
+            else{
+                
+            }
         },
     },
 });
