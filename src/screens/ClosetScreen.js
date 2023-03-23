@@ -2,7 +2,7 @@ import {View, StyleSheet, Dimensions, Image} from 'react-native';
 import React from 'react';
 
 import Background from '../assets/images/closet_background.png'
-import CommingSoonImage from '../assets/images/wip.svg';
+import ComingSoonImage from '../assets/images/wip.svg';
 
 
 const ClosetScreen = () => {
@@ -10,7 +10,7 @@ const ClosetScreen = () => {
   return (
     <View style={styles.container}>
       <Image source={Background} style={{height: height, width: width, resizeMode: 'stretch'}}/>
-      <CommingSoonImage style={styles.coomingsoonContainer}/>
+      <ComingSoonImage style={styles.coomingsoonContainer}/>
     </View>
   );
 };
