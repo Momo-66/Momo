@@ -102,7 +102,7 @@ const TabComponent = () => {
 
 export const RootNavigator = () => {
 
-  const isAuthUser = false;useSelector((state) => state.user.signedIn);
+  const isAuthUser = useSelector((state) => state.user.signedIn);
   
   return (
     <AuthStack.Navigator
