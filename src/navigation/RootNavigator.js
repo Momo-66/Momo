@@ -12,6 +12,7 @@ import RoutineEditScreen from '../screens/RoutineEditScreen';
 import ChallengeScreen from '../screens/ChallengeScreen';
 import ClosetScreen from '../screens/ClosetScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreenAlpha from '../screens/LoginScreenAlpha';
 
 // TO-DO: replace pngs to svgs when svg configuration has been done
 import Home from '../assets/icons/light/home.png';
@@ -101,7 +102,7 @@ const TabComponent = () => {
 
 export const RootNavigator = () => {
 
-  const isAuthUser = useSelector((state) => state.user.signedIn);
+  const isAuthUser = false;useSelector((state) => state.user.signedIn);
   
   return (
     <AuthStack.Navigator
@@ -115,7 +116,7 @@ export const RootNavigator = () => {
           }}
           />
       ) : (
-        <AuthStack.Screen name="Login" component={LoginScreen}/>)
+        <AuthStack.Screen name="Login" component={LoginScreenAlpha}/>)
       }
     </AuthStack.Navigator>
   );
