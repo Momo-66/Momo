@@ -23,7 +23,7 @@ const BottomButtonComponent = props => {
             setStepfun(Step.STEP_TWO);
         }
         else if(step === Step.STEP_TWO){
-
+            setStepfun(Step.MID_TUTORIAL);
         }
     }
 
