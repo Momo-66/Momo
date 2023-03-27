@@ -15,6 +15,7 @@ import {
 
 const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
+    const isStepScreen = useSelector((state) => state.tutorial.isStepScreen);
 
     const dispatch = useDispatch();
 
@@ -53,7 +54,7 @@ const MainTutorialScreen = () => {
                 </View>
                 <View style={{flex: 1}}>
                     {
-                        step === Step.INIT_TUTORIAL ? <InitTutorialScreen/> : 
+                        !isStepScreen ? <InitTutorialScreen/> : 
                         <Animated.View style={{opacity: opacityAnimation}}>
                             <TimePickerScreen/>
                         </Animated.View>

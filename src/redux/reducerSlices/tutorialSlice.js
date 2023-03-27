@@ -11,6 +11,7 @@ const Step = {
 }
 
 const initialState = {
+    isStepScreen: false,
     enableBackgroundImg: false,
     enableHeaderRightBtn: false,
     enableHeaderLeftBtn: false,
@@ -36,12 +37,14 @@ export const tutorialSlice = createSlice({
         setStep: (state, action) => {
             if(action.payload.step == Step.INIT_TUTORIAL){
                 state.step = action.payload.step;
+                state.isStepScreen = false;
                 state.enableHeaderRightBtn = true;
                 state.enableHeaderLeftBtn = false;
                 state.enableBottomBtn = false;
             }
             else if(action.payload.step == Step.STEP_ONE){
                 state.step = action.payload.step;
+                state.isStepScreen = true;
                 state.enableHeaderRightBtn = false;
                 state.enableHeaderLeftBtn = true;
                 state.enableBottomBtn = true;
@@ -50,6 +53,8 @@ export const tutorialSlice = createSlice({
                 state.stepBottomContentOpacity = 0;
             }
             else if(action.payload.step == Step.STEP_TWO){
+                state.step = action.payload.step;
+                state.isStepScreen = true;
                 state.enableHeaderRightBtn = false;
                 state.enableHeaderLeftBtn = true;
                 state.enableBottomBtn = true;
@@ -58,22 +63,34 @@ export const tutorialSlice = createSlice({
                 state.stepBottomContentOpacity = 1;
             }
             else if(action.payload.step == Step.MID_TUTORIAL){
-                
+                state.step = action.payload.step;
+                state.isStepScreen = false;
+                state.enableHeaderRightBtn = false;
+                state.enableHeaderLeftBtn = false;
+                state.enableBottomBtn = false;
             }
             else if(action.payload.step == Step.STEP_THREE){
-                
+                state.step = action.payload.step;
+                state.isStepScreen = true;
+                state.enableHeaderRightBtn = false;
+                state.enableHeaderLeftBtn = true;
+                state.enableBottomBtn = true;
+                state.stepNumber = 3;
+                state.stepText = "기상 후에 수행하게 될\n나의 루틴을 설정해 주세요.";
+                state.stepBottomContentOpacity = 1;
             }
             else if(action.payload.step == Step.ANIMATION_TUTORIAL){
-                
+                state.step = action.payload.step;
             }
             else{
-                
+                state.step = action.payload.step;
             }
         },
     },
 });
 
 export const {
+    useBackgroundImg,
     setEnableBottomBtn,
     setStep,
 } = tutorialSlice.actions;

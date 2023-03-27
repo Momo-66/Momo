@@ -6,6 +6,7 @@ import { Step } from '../../utils/tutorials/Step';
 import {useSelector, useDispatch} from 'react-redux';
 
 import { 
+  useBackgroundImg,
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
@@ -36,7 +37,7 @@ const InitTutorialScreen = () => {
     }
     else if (step === Step.MID_TUTORIAL){
       setTimeout(() => {
-        settutorialContent("곧 새로운 세상이\n펑! 하고 나타났어요!");
+        settutorialContent("시간 설정을 완료해\n새로운 세상의 시간이 흐를 수 있게 되었고");
         Animated.timing(animation, {
           toValue: 1,
           useNativeDriver: true,
@@ -44,12 +45,26 @@ const InitTutorialScreen = () => {
         console.log("First Step");
       }, 1500);
       setTimeout(() => {
-        dispatch(setStep({
-          step: 4,
-        }));
+        Animated.timing(animation, {
+          toValue: 0,
+          useNativeDriver: true,
+        }).start();
       }, 3000);
+      setTimeout(() => {
+        settutorialContent("곧 새로운 세상이\n펑! 하고 나타났어요!");
+        Animated.timing(animation, {
+          toValue: 1,
+          useNativeDriver: true,
+        }).start();
+        dispatch(useBackgroundImg());
+      }, 4500);
+      setTimeout(() => {
+        dispatch(setStep({
+          step: Step.STEP_THREE,
+        }));
+      }, 6000);
     }
-  }, []);
+  }, [step]);
 
   return (
     <View style={{flex:1, justifyContent:'center'}}>
