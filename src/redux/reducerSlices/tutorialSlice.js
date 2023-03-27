@@ -123,14 +123,25 @@ export const tutorialSlice = createSlice({
             if(action.payload.step == Step.INIT_TUTORIAL){
                 state.step = action.payload.step;
                 state.enableHeaderRightBtn = true;
+                state.enableHeaderLeftBtn = false;
+                state.enableBottomBtn = false;
             }
             else if(action.payload.step == Step.STEP_ONE){
                 state.step = action.payload.step;
                 state.enableHeaderRightBtn = false;
                 state.enableHeaderLeftBtn = true;
+                state.enableBottomBtn = true;
+                state.stepNumber = 1;
+                state.stepText = "기상 시간을 설정해주세요.";
+                state.stepBottomContentOpacity = 0;
             }
             else if(action.payload.step == Step.STEP_TWO){
-
+                state.enableHeaderRightBtn = false;
+                state.enableHeaderLeftBtn = true;
+                state.enableBottomBtn = true;
+                state.stepNumber = 2;
+                state.stepText = "모든 루틴을 마칠 시간을\n설정해주세요.";
+                state.stepBottomContentOpacity = 1;
             }
             else if(action.payload.step == Step.MID_TUTORIAL){
                 
