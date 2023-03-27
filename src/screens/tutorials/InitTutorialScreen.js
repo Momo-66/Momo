@@ -3,6 +3,7 @@ import {View, Animated, Text, Image} from 'react-native';
 import TextContent from '../../components/tutorials/TextContent';
 
 import { 
+  useBackgroundImg,
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
