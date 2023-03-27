@@ -16,6 +16,7 @@ import {
 } from '../../redux/reducerSlices/tutorialSlice';
 
 import { 
+  useBackgroundImg,
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
