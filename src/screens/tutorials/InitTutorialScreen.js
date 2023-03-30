@@ -12,6 +12,8 @@ import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 import { Step } from '../../utils/tutorials/Step';
 import { useDispatch, useSelector } from 'react-redux';
 
+import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
+
 import { 
   useBackgroundImg,
   setStep,

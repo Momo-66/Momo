@@ -126,6 +126,7 @@ export const tutorialSlice = createSlice({
                 state.enableHeaderRightBtn = true;
                 state.enableHeaderLeftBtn = false;
                 state.enableBottomBtn = false;
+                state.isTutorialMomo = false;
             }
             else if(action.payload.step == Step.STEP_ONE){
                 state.step = action.payload.step;
@@ -136,6 +137,7 @@ export const tutorialSlice = createSlice({
                 state.stepNumber = 1;
                 state.stepText = "기상 시간을 설정해주세요.";
                 state.stepBottomContentOpacity = 0;
+                state.isTutorialMomo = false;
             }
             else if(action.payload.step == Step.STEP_TWO){
                 state.step = action.payload.step;
@@ -146,6 +148,7 @@ export const tutorialSlice = createSlice({
                 state.stepNumber = 2;
                 state.stepText = "모든 루틴을 마칠 시간을\n설정해주세요.";
                 state.stepBottomContentOpacity = 1;
+                state.isTutorialMomo = false;
             }
             else if(action.payload.step == Step.MID_TUTORIAL){
                 state.step = action.payload.step;
@@ -153,6 +156,7 @@ export const tutorialSlice = createSlice({
                 state.enableHeaderRightBtn = false;
                 state.enableHeaderLeftBtn = false;
                 state.enableBottomBtn = false;
+                state.isTutorialMomo = false;
             }
             else if(action.payload.step == Step.STEP_THREE){
                 state.step = action.payload.step;
@@ -163,12 +167,23 @@ export const tutorialSlice = createSlice({
                 state.stepNumber = 3;
                 state.stepText = "기상 후에 수행하게 될\n나의 루틴을 설정해 주세요.";
                 state.stepBottomContentOpacity = 1;
+                state.isTutorialMomo = false;
             }
             else if(action.payload.step == Step.ANIMATION_TUTORIAL){
                 state.step = action.payload.step;
+                state.isStepScreen = false;
+                state.enableHeaderRightBtn = true;
+                state.enableHeaderLeftBtn = true;
+                state.enableBottomBtn = false;
+                state.isTutorialMomo = true;
             }
             else{
                 state.step = action.payload.step;
+                state.isStepScreen = false;
+                state.enableHeaderRightBtn = false;
+                state.enableHeaderLeftBtn = true;
+                state.enableBottomBtn = true;
+                state.isTutorialMomo = true;
             }
         },
     },
