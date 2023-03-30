@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 
+import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
+
 import { 
   useBackgroundImg,
   setStep,
