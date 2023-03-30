@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import {View, Animated, Text, Image} from 'react-native';
 import TextContent from '../../components/tutorials/TextContent';
 
+import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
+
 import { 
   useBackgroundImg,
   setStep,
