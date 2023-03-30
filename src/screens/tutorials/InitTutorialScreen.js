@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {View, Animated} from 'react-native';
+import {View, Animated, Text, Image} from 'react-native';
 import TextContent from '../../components/tutorials/TextContent';
 import { Step } from '../../utils/tutorials/Step';
 
 import {useSelector, useDispatch} from 'react-redux';
+
+import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 
 import { 
   useBackgroundImg,
@@ -13,8 +15,12 @@ import {
 const InitTutorialScreen = () => {
   const textColor = useSelector((state) => state.tutorial.textColor);
   const step = useSelector((state) => state.tutorial.step);
+  const isTutorialMomo = useSelector((state) => state.tutorial.isTutorialMomo);
 
   const animation = useRef(new Animated.Value(0)).current;
+  const opacityMomoImage = useRef(new Animated.Value(0)).current;
+  const translateYMomoImage = useRef(new Animated.Value(50)).current;
+  const opacityTutorialContent = useRef(new Animated.Value(0)).current;
   const [tutorialContent, settutorialContent] = useState("");
 
   const dispatch = useDispatch();
@@ -64,13 +70,52 @@ const InitTutorialScreen = () => {
         }));
       }, 6000);
     }
+    else if(step === Step.ANIMATION_TUTORIAL){
+      settutorialContent("스스로 빛나는 태양이 될 수 있는\n아주 작은 먼지 '모모'가 나타났어요.\n\n그럼 모모와 함께 스스로를 빛내볼까요?");
+      setTimeout(() => {
+        Animated.timing(opacityMomoImage, {
+          toValue: 1,
+          useNativeDriver: true,
+        }).start();
+      }, 1500);
+      setTimeout(() => {
+        Animated.timing(translateYMomoImage, {
+          toValue: -50,
+          duration: 1500,
+          useNativeDriver: true,
+        }).start();
+      }, 3000);
+      setTimeout(() => {
+        dispatch(setStep({
+          step: Step.END_TUTORIAL,
+        }));
+      }, 6000);
+    }
+    else if(step === Step.END_TUTORIAL){
+      Animated.timing(opacityTutorialContent, {
+        toValue: 1,
+        useNativeDriver: true,
+      }).start();
+    }
   }, [step]);
 
   return (
     <View style={{flex:1, justifyContent:'center'}}>
-      <Animated.View style={{opacity: animation}}>
-        <TextContent content={tutorialContent} textColor={textColor}/>
-      </Animated.View>
+      {
+        isTutorialMomo ? 
+        <View style={{justifyContent:"center", alignItems:"center"}}>
+          <Animated.View style={{opacity: opacityMomoImage, transform: [{translateY: translateYMomoImage}], justifyContent:"center", alignItems:"center"}}>
+            <Image source={TutorialMomoImage} style={{marginBottom:50}}/>
+            <Animated.View style={{opacity: opacityTutorialContent}}>
+              <Text style={{color:"white", textAlign:"center"}}>{tutorialContent}</Text>
+            </Animated.View>
+          </Animated.View>
+        </View>
+        :
+        <Animated.View style={{opacity: animation}}>
+          <TextContent content={tutorialContent} textColor={textColor}/>
+        </Animated.View>
+      }
     </View>
   );
 };
