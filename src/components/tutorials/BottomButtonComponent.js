@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import { Step } from '../../utils/tutorials/Step';
@@ -11,6 +11,8 @@ const BottomButtonComponent = props => {
 
     const enableBottomBtn = useSelector((state) => state.tutorial.enableBottomBtn);
     const step = useSelector((state) => state.tutorial.step);
+
+    const [buttonContent, setbuttonContent] = useState("");
 
     function setStepfun(value) {
         dispatch(setStep({
@@ -25,11 +27,23 @@ const BottomButtonComponent = props => {
         else if(step === Step.STEP_TWO){
             setStepfun(Step.MID_TUTORIAL);
         }
+        else if(step === Step.STEP_THREE){
+            setStepfun(Step.ANIMATION_TUTORIAL);
+        }
     }
+
+    useEffect(() => {
+        if(step === Step.END_TUTORIAL){
+            setbuttonContent("모모 시작하기!");
+        }
+        else{
+            setbuttonContent("다음");
+        }
+    }, [step]);
 
     return (
         <TouchableOpacity disabled={!enableBottomBtn} style={{flex: 1, backgroundColor: "#3CE3AC", justifyContent:"center", opacity:enableBottomBtn ? 1 : 0}} onPress={clickBottomButton}>
-            <Text style={{textAlign:"center", color:"black", fontSize:20, fontWeight: 700}}>다음</Text>
+            <Text style={{textAlign:"center", color:"black", fontSize:20, fontWeight: 700}}>{buttonContent}</Text>
         </TouchableOpacity>
     )
 }
