@@ -6,14 +6,17 @@ import {login} from '../redux/reducerSlices/userSlice';
 import LogoImage from '../assets/images/Logo.png';
 import {signInAnonymously} from '../api/userAuthApi';
 
+import axios from 'axios';
+
 const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const handleAnonymousLoginPress = async () => {
-    await signInAnonymously(() => {
+    await signInAnonymously(async() => {
       dispatch(login());
     });
   };
+
 
   return (
     <View style={styles.contianer}>
