@@ -8,7 +8,7 @@ const GoogleLoginButton = () => {
         onPress={() => alert('Google Login')}
       >
         <Image
-          source={require('../assets/images/Google.png')}
+          source={require('../assets/images/google.png')}
         />
       </TouchableOpacity>
     </View>

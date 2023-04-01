@@ -2,7 +2,7 @@ import { StyleSheet, View, ImageBackground, SafeAreaView, Platform } from 'react
 import React, { useState } from 'react';
 // import { useDispatch } from 'react-redux';
 // import { logout } from '../redux/reducerSlices/userSlice';
-import globalStyles from '../styles';
+import { globalStyles } from '../styles';
 
 import PretendardedText from '../components/CustomComponent/PretendardedText';
 

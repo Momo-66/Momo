@@ -1,7 +1,7 @@
 import { StyleSheet, View, Pressable, Modal, SafeAreaView, ScrollView, ImageBackground } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import globalStyles from '../../styles';
+import { globalStyles } from '../../styles';
 
 import { closeRoutineAddListModal } from '../../redux/reducerSlices/modalSlice';
 

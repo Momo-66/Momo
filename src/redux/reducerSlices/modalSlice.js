@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   routineAddModal: false,
   routineAddListModal: false,
+  descriptionTypeModal: false,
 };
 
 export const modalSlice = createSlice({
@@ -21,6 +22,12 @@ export const modalSlice = createSlice({
     closeRoutineAddListModal: (state) => {
       state.routineAddListModal = false;
     },
+    openDescriptionTypeModal: (state) => {
+      state.descriptionTypeModal = true;
+    },
+    closeDescriptionTypeModal: (state) => {
+      state.descriptionTypeModal = false;
+    },
   },
 });
 
@@ -29,6 +36,8 @@ export const {
   closeRoutineAddModal,
   openRoutineAddListModal,
   closeRoutineAddListModal,
+  openDescriptionTypeModal,
+  closeDescriptionTypeModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
