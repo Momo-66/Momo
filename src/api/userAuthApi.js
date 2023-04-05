@@ -9,11 +9,8 @@ const signInAnonymously = async (callBack) => {
       `${API_URL}accounts:signUp?key=${API_KEY}`,
       {
         returnSecureToken: true,
-        email: 'anonymous@gmail.com',
-        password: '12341234',
       },
-    );    
-    await userDocumnetSetup(response.data.idToken)
+    );  
     await storeAuthToken(response.data.idToken).then(()=>{callBack(response.data.idToken)});
   } catch (error) {
     console.error(error);
