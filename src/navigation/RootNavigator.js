@@ -13,6 +13,7 @@ import ChallengeScreen from '../screens/ChallengeScreen';
 import ClosetScreen from '../screens/ClosetScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import LoginScreenAlpha from '../screens/LoginScreenAlpha';
+import MainTutorialScreen from '../screens/tutorials/MainTutorialScreen';
 
 import { HomeTab } from '../components/NavigatorComponent/HomeTab';
 import { RoutineTab } from '../components/NavigatorComponent/RoutineTab';
