@@ -4,6 +4,9 @@ const initialState = {
   routineAddModal: false,
   routineAddListModal: false,
   descriptionTypeModal: false,
+  routineOptionModal: false,
+  routineOptionModalPositionX: -1,
+  routineOptionModalPositionY: -1,
 };
 
 export const modalSlice = createSlice({
@@ -28,6 +31,14 @@ export const modalSlice = createSlice({
     closeDescriptionTypeModal: (state) => {
       state.descriptionTypeModal = false;
     },
+    openRoutineOptionModal: (state, action) => {
+      state.routineOptionModalPositionX = action.payload.x;
+      state.routineOptionModalPositionY = action.payload.y;
+      state.routineOptionModal = true;
+    },
+    closeRoutineOptionModal: (state) => {
+      state.routineOptionModal = false;
+    },
   },
 });
 
@@ -38,6 +49,8 @@ export const {
   closeRoutineAddListModal,
   openDescriptionTypeModal,
   closeDescriptionTypeModal,
+  openRoutineOptionModal,
+  closeRoutineOptionModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
