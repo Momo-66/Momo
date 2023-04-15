@@ -12,7 +12,6 @@ import {
 } from '../../redux/reducerSlices/tutorialSlice';
 
 const InitTutorialScreen = () => {
-  const textColor = useSelector((state) => state.tutorial.textColor);
   const step = useSelector((state) => state.tutorial.step);
   const isTutorialMomo = useSelector((state) => state.tutorial.isTutorialMomo);
 
@@ -112,7 +111,7 @@ const InitTutorialScreen = () => {
         </View>
         :
         <Animated.View style={{opacity: animation}}>
-          <TextContent content={tutorialContent} textColor={textColor}/>
+          <TextContent content={tutorialContent}/>
         </Animated.View>
       }
     </View>
