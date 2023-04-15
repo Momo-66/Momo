@@ -1,29 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {View, SafeAreaView, Animated} from 'react-native';
 import { BackgroundImgComponent } from '../../components/tutorials/BackgroundImgComponent';
 import { TutorialHeader } from '../../components/tutorials/TutorialHeader';
 import { InitTutorialScreen } from './InitTutorialScreen';
-import { BottomButtonComponent } from '../../components/tutorials/BottomButtonComponent';
 import { TimePickerScreen } from './TimePickerScreen';
+import { ButtonBottom } from '../../components/Buttons/ButtonBottom';
 import { Step } from '../../utils/tutorials/Step';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-    setEnableBottomBtn,
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
 export const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
     const isStepScreen = useSelector((state) => state.tutorial.isStepScreen);
+    const enableBottomBtn = useSelector((state) => state.tutorial.enableBottomBtn);
 
     const dispatch = useDispatch();
 
-    function setEnableBottomBtnfun(value) {
-        dispatch(setEnableBottomBtn({
-            enableBottomBtn: value,
-        }));
-    }
+    const opacityAnimation = useRef(new Animated.Value(0)).current;
+
+    const [buttonContent, setbuttonContent] = useState("");
 
     function setStepfun(value) {
         dispatch(setStep({
@@ -31,7 +29,17 @@ export const MainTutorialScreen = () => {
         }));
     }
 
-    const opacityAnimation = useRef(new Animated.Value(0)).current;
+    function clickBottomButton() {
+        if (step === Step.STEP_ONE){
+            setStepfun(Step.STEP_TWO);
+        }
+        else if(step === Step.STEP_TWO){
+            setStepfun(Step.MID_TUTORIAL);
+        }
+        else if(step === Step.STEP_THREE){
+            setStepfun(Step.ANIMATION_TUTORIAL);
+        }
+    }
 
     useEffect(() => {
         if(step === Step.INIT_TUTORIAL){
@@ -42,6 +50,13 @@ export const MainTutorialScreen = () => {
                 toValue: 1,
                 useNativeDriver: true,
             }).start();
+        }
+        
+        if(step === Step.END_TUTORIAL){
+            setbuttonContent("모모 시작하기!");
+        }
+        else{
+            setbuttonContent("다음");
         }
     }, [step]);
 
@@ -61,7 +76,9 @@ export const MainTutorialScreen = () => {
                     }
                 </View>
                 <View style={{height: 101}}>
-                    <BottomButtonComponent />
+                    {
+                        enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent}/> : null
+                    }
                 </View>
             </SafeAreaView>
         </View>
