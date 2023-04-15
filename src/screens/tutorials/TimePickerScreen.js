@@ -66,8 +66,16 @@ export const TimePickerScreen = () => {
               </View>
             </View>
           </View>
-        }
-      </View>
+            <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#D9D9D9", textAlign:'right'}}>루틴을 마칠 시간까지</PretendardedText>
+          <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
+            <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#3CE3AC"}}>NN분 더 </PretendardedText>
+            <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#D9D9D9"}}>여유있어요.</PretendardedText>
+          </View>
+          <View style={{marginTop:5}}>
+            <PretendardedText style={{fontWeight: 500, fontSize: 12, color:"#B3B3B3", textAlign:'right'}}>※ 루틴별 예상 소요시간은 나중에 수정할 수 있어요.</PretendardedText>
+          </View>
+        </View>
+      }
     </View>
   );
 };
