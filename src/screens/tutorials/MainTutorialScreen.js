@@ -14,7 +14,6 @@ import {
 
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-    setEnableBottomBtn,
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
