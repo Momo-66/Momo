@@ -24,6 +24,16 @@ export const InitTutorialScreen = () => {
 
   const dispatch = useDispatch();
 
+  const textAnimatedValue = useRef(new Animated.Value(0)).current;
+
+  const animateText = () => {
+    Animated.timing(textAnimatedValue, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+  };
+
   useEffect(() => {
     if (step === Step.INIT_TUTORIAL){
       setTimeout(() => {
@@ -94,7 +104,9 @@ export const InitTutorialScreen = () => {
       Animated.timing(opacityTutorialContent, {
         toValue: 1,
         useNativeDriver: true,
-      }).start();
+      }).start(() => {
+        animateText();
+      });
     }
   }, [step]);
 
@@ -107,6 +119,20 @@ export const InitTutorialScreen = () => {
             <Image source={TutorialMomoImage} style={{marginBottom:50}}/>
             <Animated.View style={{opacity: opacityTutorialContent}}>
               <Text style={{color:"white", textAlign:"center"}}>{tutorialContent}</Text>
+              <Animated.View
+                style={{
+                  backgroundColor: 'white',
+                  height: 2,
+                  transform: [
+                    {
+                      scaleX: textAnimatedValue.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [0, 1],
+                      }),
+                    },
+                  ],
+                }}
+              />
             </Animated.View>
           </Animated.View>
         </View>
