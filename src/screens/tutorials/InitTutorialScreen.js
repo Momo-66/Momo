@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {View, Animated, Text, Image} from 'react-native';
 import { TextContent } from '../../components/tutorials/TextContent';
+import PretendardedText from '../../components/CustomComponent/PretendardedText';
 
 import { Step } from '../../utils/tutorials/Step';
 import { useDispatch, useSelector } from 'react-redux';
@@ -118,7 +119,7 @@ export const InitTutorialScreen = () => {
           <Animated.View style={{opacity: opacityMomoImage, transform: [{translateY: translateYMomoImage}], justifyContent:"center", alignItems:"center"}}>
             <Image source={TutorialMomoImage} style={{marginBottom:50}}/>
             <Animated.View style={{opacity: opacityTutorialContent}}>
-              <Text style={{color:"white", textAlign:"center"}}>{tutorialContent}</Text>
+              <PretendardedText style={{color:"white", textAlign:"center"}}>{tutorialContent}</PretendardedText>
               <Animated.View
                 style={{
                   backgroundColor: 'white',

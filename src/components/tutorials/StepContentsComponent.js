@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import {useSelector} from 'react-redux';
+import PretendardedText from '../../components/CustomComponent/PretendardedText';
 
 export const StepContentsComponent = props => {
     const stepNumber = useSelector((state) => state.tutorial.stepNumber);
@@ -8,8 +9,8 @@ export const StepContentsComponent = props => {
 
     return (
         <View style={{height: 70, justifyContent:'flex-start'}}>
-            <Text style={{color:"#3CE3AC", fontSize: 17, fontWeight: 700}}>Step {stepNumber}.</Text>
-            <Text style={{color:props.textColor, fontSize: 17, fontWeight: 500}}>{stepText}</Text>
+            <PretendardedText style={{color:"#3CE3AC", fontSize: 17, fontWeight: 700}}>Step {stepNumber}.</PretendardedText>
+            <PretendardedText style={{color:props.textColor, fontSize: 17, fontWeight: 500}}>{stepText}</PretendardedText>
         </View>
     )
 }
