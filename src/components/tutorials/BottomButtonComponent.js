@@ -6,7 +6,7 @@ import {
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-const BottomButtonComponent = props => {
+export const BottomButtonComponent = props => {
     const dispatch = useDispatch();
 
     const enableBottomBtn = useSelector((state) => state.tutorial.enableBottomBtn);
@@ -47,5 +47,3 @@ const BottomButtonComponent = props => {
         </TouchableOpacity>
     )
 }
-
-export default BottomButtonComponent;
