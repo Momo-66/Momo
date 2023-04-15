@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {View, SafeAreaView, Animated} from 'react-native';
 import BackgroundImgComponent from '../../components/tutorials/BackgroundImgComponent';
 import TutorialHeader from '../../components/tutorials/TutorialHeader';
