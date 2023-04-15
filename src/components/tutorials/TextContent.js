@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
 
-const TextContent = props => {
+export const TextContent = props => {
   const enableBackgroundImg = useSelector((state) => state.tutorial.enableBackgroundImg);
 
   return (
@@ -11,5 +11,3 @@ const TextContent = props => {
     </View>
   )
 }
-
-export default TextContent;

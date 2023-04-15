@@ -11,7 +11,7 @@ import LeftBlackButtonImg from '../../assets/images/TutorialHeaderLeftBlackButto
 import RightWhiteButtonImg from '../../assets/images/TutorialHeaderRightWhiteButton.png';
 import LeftWhiteButtonImg from '../../assets/images/TutorialHeaderLeftWhiteButton.png';
 
-const TutorialHeader = (props) => {
+export const TutorialHeader = (props) => {
     const dispatch = useDispatch();
 
     const enableBackgroundImg = useSelector((state) => state.tutorial.enableBackgroundImg);
@@ -69,5 +69,3 @@ const TutorialHeader = (props) => {
     </View>
     )
 }
-
-export default TutorialHeader;

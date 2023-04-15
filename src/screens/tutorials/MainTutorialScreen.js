@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 import {View, SafeAreaView, Animated} from 'react-native';
-import BackgroundImgComponent from '../../components/tutorials/BackgroundImgComponent';
-import TutorialHeader from '../../components/tutorials/TutorialHeader';
-import InitTutorialScreen from './InitTutorialScreen';
-import BottomButtonComponent from '../../components/tutorials/BottomButtonComponent';
-import TimePickerScreen from './TimePickerScreen';
+import { BackgroundImgComponent } from '../../components/tutorials/BackgroundImgComponent';
+import { TutorialHeader } from '../../components/tutorials/TutorialHeader';
+import { InitTutorialScreen } from './InitTutorialScreen';
+import { BottomButtonComponent } from '../../components/tutorials/BottomButtonComponent';
+import { TimePickerScreen } from './TimePickerScreen';
 import { Step } from '../../utils/tutorials/Step';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +13,7 @@ import {
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-const MainTutorialScreen = () => {
+export const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
     const isStepScreen = useSelector((state) => state.tutorial.isStepScreen);
 
@@ -67,5 +67,3 @@ const MainTutorialScreen = () => {
         </View>
     );
 }
-
-export default MainTutorialScreen;

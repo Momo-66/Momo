@@ -8,10 +8,11 @@ import StepContentsComponent from '../../components/tutorials/StepContentsCompon
 import { asPickerFormat } from '../../utils/tutorials/TutorialUtils';
 import { BUTTON_HEIGHT, VIEW_WIDTH } from '../../utils/tutorials/Values';
 
-import GreenStarImage from '../../assets/images/GreenStar.png';
 import { Step } from '../../utils/tutorials/Step';
 
-const TimePickerScreen = () => {
+import GreenStarImage from '../../assets/images/GreenStar.png';
+
+export const TimePickerScreen = () => {
   const textColor = useSelector((state) => state.tutorial.textColor);
   const stepBottomContentOpacity = useSelector((state) => state.tutorial.stepBottomContentOpacity);
   const step = useSelector((state) => state.tutorial.step);
@@ -55,5 +56,3 @@ const TimePickerScreen = () => {
     </View>
   );
 };
-
-export default TimePickerScreen;

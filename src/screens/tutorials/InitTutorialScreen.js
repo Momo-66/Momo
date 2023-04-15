@@ -1,17 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {View, Animated, Text, Image} from 'react-native';
-import TextContent from '../../components/tutorials/TextContent';
+import { TextContent } from '../../components/tutorials/TextContent';
 
-import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 import { Step } from '../../utils/tutorials/Step';
 import { useDispatch, useSelector } from 'react-redux';
+
+import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 
 import { 
   useBackgroundImg,
   setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
-const InitTutorialScreen = () => {
+export const InitTutorialScreen = () => {
   const step = useSelector((state) => state.tutorial.step);
   const isTutorialMomo = useSelector((state) => state.tutorial.isTutorialMomo);
 
@@ -117,5 +118,3 @@ const InitTutorialScreen = () => {
     </View>
   );
 };
-
-export default InitTutorialScreen;

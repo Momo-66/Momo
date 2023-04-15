@@ -3,7 +3,7 @@ import { View, ImageBackground } from 'react-native';
 
 import {useSelector} from 'react-redux';
 
-const BackgroundImgComponent = () => {
+export const BackgroundImgComponent = () => {
   const enableBackgroundImg = useSelector((state) => state.tutorial.enableBackgroundImg);
 
   return (
@@ -18,5 +18,3 @@ const BackgroundImgComponent = () => {
     />
   )
 }
-
-export default BackgroundImgComponent;
