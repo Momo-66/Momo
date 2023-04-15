@@ -1,16 +1,21 @@
 import { useEffect } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Step } from '../../utils/tutorials/Step';
 import {useSelector, useDispatch} from 'react-redux';
 import { 
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
 
+import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
+import LeftBlackButtonImg from '../../assets/images/TutorialHeaderLeftBlackButton.png';
+import RightWhiteButtonImg from '../../assets/images/TutorialHeaderRightWhiteButton.png';
+import LeftWhiteButtonImg from '../../assets/images/TutorialHeaderLeftWhiteButton.png';
+
 const TutorialHeader = (props) => {
     const dispatch = useDispatch();
 
+    const enableBackgroundImg = useSelector((state) => state.tutorial.enableBackgroundImg);
     const step = useSelector((state) => state.tutorial.step);
-    const textColor = useSelector((state) => state.tutorial.textColor);
     const enableHeaderRightBtn = useSelector((state) => state.tutorial.enableHeaderRightBtn);
     const enableHeaderLeftBtn = useSelector((state) => state.tutorial.enableHeaderLeftBtn);
 
@@ -56,10 +61,10 @@ const TutorialHeader = (props) => {
     return (
     <View style={{flex: 1, margin:15, flexDirection:"row", justifyContent:"space-between"}}>
         <TouchableOpacity onPress={clickLeftButton} style={{opacity:enableHeaderLeftBtn ? 1 : 0}} disabled={!enableHeaderLeftBtn}>
-            <Text style={{color:textColor}}>이전으로</Text>
+            <Image source={enableBackgroundImg ? LeftWhiteButtonImg : LeftBlackButtonImg} />
         </TouchableOpacity>
         <TouchableOpacity onPress={clickRightButton} style={{opacity:enableHeaderRightBtn ? 1 : 0}} disabled={!enableHeaderRightBtn}>
-            <Text style={{color:textColor}}>건너뛰기</Text>
+            <Image source={enableBackgroundImg ? RightWhiteButtonImg : RightBlackButtonImg} />
         </TouchableOpacity>
     </View>
     )
