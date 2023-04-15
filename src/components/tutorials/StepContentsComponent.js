@@ -7,7 +7,7 @@ export const StepContentsComponent = props => {
     const stepText = useSelector((state) => state.tutorial.stepText);
 
     return (
-        <View style={{height: 100, justifyContent:'center'}}>
+        <View style={{height: 70, justifyContent:'flex-start'}}>
             <Text style={{color:"#3CE3AC", fontSize: 17, fontWeight: 700}}>Step {stepNumber}.</Text>
             <Text style={{color:props.textColor, fontSize: 17, fontWeight: 500}}>{stepText}</Text>
         </View>
