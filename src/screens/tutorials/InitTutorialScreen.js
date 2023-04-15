@@ -3,11 +3,6 @@ import {View, Animated, Text, Image} from 'react-native';
 import { TextContent } from '../../components/tutorials/TextContent';
 import PretendardedText from '../../components/CustomComponent/PretendardedText';
 
-import { Step } from '../../utils/tutorials/Step';
-import { useDispatch, useSelector } from 'react-redux';
-
-import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
-
 import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 import { Step } from '../../utils/tutorials/Step';
 import { useDispatch, useSelector } from 'react-redux';
