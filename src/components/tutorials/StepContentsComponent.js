@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import {useSelector} from 'react-redux';
 
-const StepContentsComponent = props => {
+export const StepContentsComponent = props => {
     const stepNumber = useSelector((state) => state.tutorial.stepNumber);
     const stepText = useSelector((state) => state.tutorial.stepText);
 
@@ -13,5 +13,3 @@ const StepContentsComponent = props => {
         </View>
     )
 }
-
-export default StepContentsComponent;

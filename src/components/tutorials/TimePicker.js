@@ -25,7 +25,7 @@ import {
 
 const isPM = (date) => date.getHours() >= 12;
 
-const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
+export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   if (visibleCount % 2 === 0) throw new Error('visibleCount must be odd');
   const dateString = value.toTimeString();
   const ITEMS = [
@@ -278,5 +278,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default TimePicker;

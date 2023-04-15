@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import {View, Text, Image} from 'react-native';
 import {useSelector} from 'react-redux';
 
-import TimePicker from '../../components/tutorials/TimePicker';
-import StepContentsComponent from '../../components/tutorials/StepContentsComponent';
+import { TimePicker } from '../../components/tutorials/TimePicker';
+import { StepContentsComponent } from '../../components/tutorials/StepContentsComponent';
 
 import { asPickerFormat } from '../../utils/tutorials/TutorialUtils';
 import { BUTTON_HEIGHT, VIEW_WIDTH } from '../../utils/tutorials/Values';
