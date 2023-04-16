@@ -6,6 +6,7 @@ import { InitTutorialScreen } from './InitTutorialScreen';
 import { TimePickerScreen } from './TimePickerScreen';
 import { ButtonBottom } from '../../components/Buttons/ButtonBottom';
 import { Step } from '../../utils/tutorials/Step';
+import { RoutineAddList } from '../../components/RoutineAddList/RoutineAddListModal';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { 
