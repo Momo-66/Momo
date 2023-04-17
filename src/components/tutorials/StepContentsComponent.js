@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import {useSelector} from 'react-redux';
 import PretendardedText from '../../components/CustomComponent/PretendardedText';
 
@@ -9,7 +9,7 @@ export const StepContentsComponent = props => {
     const enableBackgroundImg = useSelector((state) => state.tutorial.enableBackgroundImg);
 
     return (
-        <View style={{height: 70, justifyContent:'flex-start'}}>
+        <View style={{justifyContent:'flex-start'}}>
             <PretendardedText style={{color:"#3CE3AC", fontSize: 17, fontWeight: 700}}>Step {stepNumber}.</PretendardedText>
             <PretendardedText style={{color:enableBackgroundImg ? "white" : "black", fontSize: 17, fontWeight: 500}}>{stepText}</PretendardedText>
         </View>

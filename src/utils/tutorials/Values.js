@@ -1,4 +1,4 @@
-export const BUTTON_HEIGHT = 75;
+export const BUTTON_HEIGHT = 65;
 export const VIEW_WIDTH = 250;
 export const GAP = 12;
 export const MERIDIEM_ITEMS = ['오전', '오후'];
