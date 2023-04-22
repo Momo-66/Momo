@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { RootNavigator } from './src/navigation/RootNavigator';
 
 import LoadingScreen from './src/screens/LoadingScreen';
+import { MainTutorialScreen } from './src/screens/tutorials/MainTutorialScreen';
 
 import store from './src/redux/store';
 
