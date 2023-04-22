@@ -22,12 +22,47 @@ import {
   BUTTON_HEIGHT,
   GAP,
 } from '../../utils/tutorials/Values';
+import { useDispatch, useSelector } from 'react-redux';
+import { 
+  setStartTime,
+  setFinishTime,
+} from '../../redux/reducerSlices/tutorialSlice';
+import { Step } from '../../utils/tutorials/Step';
 
 const isPM = (date) => date.getHours() >= 12;
 
 export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
+  const dispatch = useDispatch();
+  const step = useSelector((state) => state.tutorial.step);
+
+  function setStartTimefun(picktime) {
+    dispatch(setStartTime({
+        startTime: picktime.toISOString(),
+    }));
+  }
+
+  function setFinishTimefun(picktime) {
+    dispatch(setFinishTime({
+        finishTime: picktime.toISOString(),
+    }));
+  }
+
+  const pickRoutineTime = (picktime) => {
+    console.log("시작시간!");
+    console.log(picktime.toTimeString());
+
+    if(step === Step.STEP_ONE){
+      setStartTimefun(picktime);
+    }
+    else if(step === Step.STEP_TWO){
+      setFinishTimefun(picktime);
+    }
+    
+  }
+
   if (visibleCount % 2 === 0) throw new Error('visibleCount must be odd');
   const dateString = value.toTimeString();
+  pickRoutineTime(value);
   const ITEMS = [
     {
       key: 'meridiem',

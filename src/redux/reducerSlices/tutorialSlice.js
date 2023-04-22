@@ -22,6 +22,8 @@ const initialState = {
     stepText: "",
     stepBottomContentOpacity: 0,
     isTutorialMomo: false,
+    startTime: null,
+    finishTime: null,
 };
 
 export const tutorialSlice = createSlice({
@@ -33,6 +35,12 @@ export const tutorialSlice = createSlice({
         },
         setEnableBottomBtn: (state, action) => {
             state.enableBottomBtn = action.payload.enableBottomBtn;
+        },
+        setStartTime: (state, action) => {
+            state.startTime = action.payload.startTime;
+        },
+        setFinishTime: (state, action) => {
+            state.finishTime = action.payload.finishTime;
         },
         setStep: (state, action) => {
             if(action.payload.step == Step.INIT_TUTORIAL){
@@ -114,6 +122,8 @@ export const tutorialSlice = createSlice({
 export const {
     useBackgroundImg,
     setEnableBottomBtn,
+    setStartTime,
+    setFinishTime,
     setStep,
 } = tutorialSlice.actions;
 

@@ -18,7 +18,26 @@ export const TimePickerScreen = () => {
   const textColor = useSelector((state) => state.tutorial.textColor);
   const stepBottomContentOpacity = useSelector((state) => state.tutorial.stepBottomContentOpacity);
   const step = useSelector((state) => state.tutorial.step);
-  const [time, setTime] = useState(asPickerFormat(new Date()));
+  const [time, setTime] = useState(asPickerFormat());
+  const [routineTime, setroutineTime] = useState(0);
+  const [isValid, setisValid] = useState(true);
+  const startTime = useSelector((state) => state.tutorial.startTime);
+  const finishTime = useSelector((state) => state.tutorial.finishTime);
+
+  useEffect(() => {
+      var tempStartTime = new Date(startTime);
+      var startMinutes = tempStartTime.getHours() * 60 + tempStartTime.getMinutes();
+      var tempFinishTime = new Date(finishTime);
+      var finishMinutes = tempFinishTime.getHours() * 60 + tempFinishTime.getMinutes();
+
+      if(finishMinutes >= startMinutes){
+        setisValid(true);
+      }else{
+        setisValid(false);
+      }
+
+      setroutineTime(finishMinutes - startMinutes);
+  }, [startTime, finishTime]);
 
   return (
     <View style={{flex: 1, margin:15, justifyContent:'space-between', flexDirection:'column'}}>
@@ -45,7 +64,8 @@ export const TimePickerScreen = () => {
             <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500}}>나에게 주어진 총 루틴 시간은</PretendardedText>
             <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500, textAlign:'right'}}>기상시간 기준</PretendardedText>
             <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
-              <PretendardedText style={{color:"#3CE3AC", fontSize: 15, fontWeight: 900}}>+43분</PretendardedText>
+              <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>{isValid ? "+" : ""}{routineTime}</PretendardedText>
+              <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>분</PretendardedText>
               <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500}}> 입니다.</PretendardedText>
             </View>
           </View>

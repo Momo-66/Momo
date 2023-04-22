@@ -6,11 +6,16 @@ import { PretendardedText } from '../CustomComponent/PretendardedText';
 export const ButtonBottom = (props) => {
   return (
     <Pressable
+      disabled={props.disabled}
       style={styles.nextButton}
       onPress={props.action}>
       <PretendardedText style={styles.nextButtonText}>{props.text}</PretendardedText>
     </Pressable>
   );
+};
+
+ButtonBottom.defaultProps = {
+  disabled: false,
 };
 
 const styles = StyleSheet.create({
