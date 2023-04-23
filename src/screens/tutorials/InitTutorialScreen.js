@@ -116,7 +116,7 @@ export const InitTutorialScreen = () => {
               <PretendardedText style={{color:"white", textAlign:"center"}}>{tutorialContent}</PretendardedText>
               <Animated.View
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: '#3CE3AC',
                   height: 2,
                   transform: [
                     {
