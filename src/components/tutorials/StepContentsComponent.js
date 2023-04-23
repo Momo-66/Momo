@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import {useSelector} from 'react-redux';
-import PretendardedText from '../../components/CustomComponent/PretendardedText';
+import { PretendardedText } from '../../components/CustomComponent/PretendardedText';
 
 export const StepContentsComponent = props => {
     const stepNumber = useSelector((state) => state.tutorial.stepNumber);

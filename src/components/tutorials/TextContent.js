@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useSelector } from 'react-redux';
-import PretendardedText from '../CustomComponent/PretendardedText';
+import { PretendardedText } from '../CustomComponent/PretendardedText';
 
 export const TextContent = props => {
   const enableBackgroundImg = useSelector((state) => state.tutorial.enableBackgroundImg);

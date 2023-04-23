@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {View, Animated, Text, Image} from 'react-native';
 import { TextContent } from '../../components/tutorials/TextContent';
-import PretendardedText from '../../components/CustomComponent/PretendardedText';
+import { PretendardedText } from '../../components/CustomComponent/PretendardedText';
 
 import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 import { Step } from '../../utils/tutorials/Step';

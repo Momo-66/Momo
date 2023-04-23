@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 
 import { modalStyles } from "../../styles";
 
-import PretendardedText from '../CustomComponent/PretendardedText';
+import { PretendardedText } from '../CustomComponent/PretendardedText';
 
 import AddRoutine from '../../assets/images/modals/addRoutine.svg';
 import DeleteRoutine from '../../assets/images/modals/deleteRoutine.svg';

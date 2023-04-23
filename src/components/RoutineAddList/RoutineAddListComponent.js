@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView, View, ScrollView } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { CategoryRoutineList } from './CategoryRoutineList';
-import PretendardedText from '../CustomComponent/PretendardedText';
+import { PretendardedText } from '../CustomComponent/PretendardedText';
 
 export const RoutineAddListComponent = (props) => {
     

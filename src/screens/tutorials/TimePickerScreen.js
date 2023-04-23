@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 
 import { TimePicker } from '../../components/tutorials/TimePicker';
 import { StepContentsComponent } from '../../components/tutorials/StepContentsComponent';
-import PretendardedText from '../../components/CustomComponent/PretendardedText';
+import { PretendardedText } from '../../components/CustomComponent/PretendardedText';
 import { RoutineAddListComponent } from '../../components/RoutineAddList/RoutineAddListComponent';
 
 import { asPickerFormat } from '../../utils/tutorials/TutorialUtils';
