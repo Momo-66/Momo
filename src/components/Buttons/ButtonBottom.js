@@ -30,5 +30,6 @@ const styles = StyleSheet.create({
   nextButtonText: {
     fontWeight: 700,
     fontSize: 20,
+    color: "#222222",
   },
 });
