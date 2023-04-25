@@ -10,7 +10,11 @@ const signInAnonymously = async (callBack) => {
       {
         returnSecureToken: true,
       },
-    );    
+    ).then(response => {
+      return response
+    }).catch( e => {
+      console.log(e);
+    });    
     await userDocumnetSetup(response.data.idToken);
     await storeAuthToken(response.data.idToken).then(()=>{callBack(response.data.idToken)});
   } catch (error) {
