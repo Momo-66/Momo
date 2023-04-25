@@ -2,7 +2,7 @@ import React from 'react';
 import {Modal, StyleSheet, View, Text, TouchableOpacity, Pressable} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
-import PretendardedText from '../CustomComponent/PretendardedText';
+import { PretendardedText } from '../CustomComponent/PretendardedText';
 import { closeRoutineOptionModal } from '../../redux/reducerSlices/modalSlice';
 
 
