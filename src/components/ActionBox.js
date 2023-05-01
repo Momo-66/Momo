@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { openRoutineOptionModal } from '../redux/reducerSlices/modalSlice';
 import RoutineOptionModal from './Modals/RoutineOptionModal';
+import { PairTypeModal } from './Modals/PairTypeModal';
 
 import actionImg from '../assets/images/action_img.png';
 import settingImg from '../assets/images/settingButton.png';
@@ -11,14 +12,18 @@ import settingImg from '../assets/images/settingButton.png';
 import DayList from './DayList';
 
 
-const Action = (props) => {
+const ActionBox = (props) => {
   const dispatch = useDispatch();
   const buttonRef = useRef(null);
 
 
   const popUpRoutineOptionModal = (action) => {
     buttonRef.current.measureInWindow((x, y, width,height) => {
-      dispatch(action({x, y}));
+      const id = props.id;
+      const name = props.name;
+      const limit_time = props.limit_time;
+      const active_day = props.active_day;
+      dispatch(action({x, y, id, name, limit_time, active_day}));
     })
   };
 
@@ -68,4 +73,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Action;
+export default ActionBox;
