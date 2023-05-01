@@ -1,15 +1,26 @@
 import { Modal, StyleSheet, View, Pressable, TouchableWithoutFeedback } from "react-native";
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { modalStyles } from "../../styles";
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
+import { closePairTypeModal } from "../../redux/reducerSlices/modalSlice";
 
 import AddRoutine from '../../assets/images/modals/addRoutine.svg';
 import DeleteRoutine from '../../assets/images/modals/deleteRoutine.svg';
 import EditRoutine from '../../assets/images/modals/editRoutine.svg';
 
+const DAYS_OF_WEEK = ['월', '화', '수', '목', '금', '토', '일']
+
 export const PairTypeModal = (props) => {
+
+  const dispatch = useDispatch();
+  const modalState = useSelector(state => state.modal);
+
+  const onClose = () => {
+    dispatch(closePairTypeModal())
+  }
 
   const renderKeyValues = (key, value) => (
     <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 }}>
@@ -30,34 +41,50 @@ export const PairTypeModal = (props) => {
     title: '다음과 같이 수정할게요.',
     hasCancel: true,
   };
-
+  
   const [currentModalState, setCurrentModalState] = useState({});
   // TO-DO: 선택된 루틴 정보로 set 되어야 함
   const [modalPairs, setModalPairs] = useState([
-    { key: '루틴명', value: '요가' },
-    { key: '소요시간', value: '10분' },
-    { key: '실행요일', value: '월,화,수,목,금,토,일' },
+    { key: '루틴명', value: '오류' },
+    { key: '소요시간', value: '오류' },
+    { key: '실행요일', value: '오류' },
   ]);
 
+  const decodeDays = (active_day) => {
+    const days = ["일", "토", "금", "목", "수", "화", "월"];
+    const activeDays = [];
+    for (let i = 0; i < days.length; i++) {
+      if ((active_day >> i) & 1) {
+        activeDays.push(days[i]);
+      }
+    }
+    return activeDays.reverse().join(",");
+  }
+
   useEffect(() => {
+    const active_day = decodeDays(modalState.selectedRoutineActiveDay);
     if (props.type === 'addRoutineModal') {
       setCurrentModalState(addRoutineModal);
     } else if (props.type === 'deleteRoutineModal') {
       setCurrentModalState(deleteRoutineModal);
+      setModalPairs([
+        { key: '루틴명', value: modalState.selectedRoutineName },
+        { key: '소요시간', value: modalState.selectedRoutineLimitTime },
+        { key: '실행요일', value: active_day },])
     } else {
       setCurrentModalState(editRoutineModal);
     }
-  }, []);
+  }, [modalState.pairTypeModal]);
 
   return (
     <Modal
       animationType="fade"
       transparent={true}
-      visible={props.visible}
+      visible={modalState.pairTypeModal}
     >
       <Pressable
         style={modalStyles.container}
-        onPressOut={() => props.setVisible(false)}>
+        onPressOut={onClose}>
         <TouchableWithoutFeedback>
           <View style={modalStyles.modalView}>
             <PretendardedText style={modalStyles.title}>{currentModalState.title}</PretendardedText>
@@ -70,12 +97,12 @@ export const PairTypeModal = (props) => {
             <View style={modalStyles.buttons}>
               <Pressable
                 style={[modalStyles.button, customSytles(currentModalState.hasCancel).leftButton]}
-                onPress={() => props.setVisible(false)}>
+                onPress={onClose}>
                 <PretendardedText style={customSytles(currentModalState.hasCancel).buttonText}>취소</PretendardedText>
               </Pressable>
               <Pressable
                 style={[modalStyles.button, modalStyles.rightButton]}
-                onPress={() => props.setVisible(false)}>
+                onPress={onClose}>
                 <PretendardedText style={modalStyles.buttonText}>확인</PretendardedText>
               </Pressable>
             </View>
