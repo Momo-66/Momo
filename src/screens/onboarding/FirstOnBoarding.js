@@ -10,10 +10,10 @@ import OnBoardingImg from '../../assets/images/FirstOnboarding.svg';
 import OnBoardingIndicatorImg from '../../assets/images/FirstOnboardingIndicator.svg';
 
 export const FirstOnBoarding = () => {
-  const navigation = useNavigation();
+	const navigation = useNavigation();
 
-  return (
-    <SafeAreaView>
+	return (
+		<SafeAreaView>
 			<View style={{ flex: 1, margin: 15, flexDirection: "row", justifyContent: "flex-end" }}>
 				<TouchableOpacity onPress={() => navigation.navigate('Third')}>
 					<Image source={RightBlackButtonImg} />
