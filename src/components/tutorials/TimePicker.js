@@ -24,9 +24,9 @@ import {
 } from '../../utils/tutorials/Values';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-  setStartTime,
-  setFinishTime,
-} from '../../redux/reducerSlices/tutorialSlice';
+  setWakeUpTime,
+  setCompleteTime,
+} from '../../redux/reducerSlices/userSlice';
 import { Step } from '../../utils/tutorials/Step';
 
 const isPM = (date) => date.getHours() >= 12;
@@ -35,15 +35,15 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   const dispatch = useDispatch();
   const step = useSelector((state) => state.tutorial.step);
 
-  function setStartTimefun(picktime) {
-    dispatch(setStartTime({
-        startTime: picktime.toISOString(),
+  function setWakeUpTimefun(picktime) {
+    dispatch(setWakeUpTime({
+      wakeUpTime: picktime.toISOString(),
     }));
   }
 
-  function setFinishTimefun(picktime) {
-    dispatch(setFinishTime({
-        finishTime: picktime.toISOString(),
+  function setCompleteTimefun(picktime) {
+    dispatch(setCompleteTime({
+      completeTime: picktime.toISOString(),
     }));
   }
 
@@ -52,10 +52,10 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
     console.log(picktime.toTimeString());
 
     if(step === Step.STEP_ONE){
-      setStartTimefun(picktime);
+      setWakeUpTimefun(picktime);
     }
     else if(step === Step.STEP_TWO){
-      setFinishTimefun(picktime);
+      setCompleteTimefun(picktime);
     }
     
   }

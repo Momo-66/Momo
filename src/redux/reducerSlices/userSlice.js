@@ -15,7 +15,7 @@ const initialState = {
     remainingPoint: 0,
     progress: 0,
     wakeUpTime: null,
-    CompleteTime: null,
+    completeTime: null,
 };
 
 export const fetchUserBasic = createAsyncThunk(
@@ -74,6 +74,12 @@ export const userSlice = createSlice({
                     state;
             }
         },
+        setWakeUpTime: (state, action) => {
+            state.wakeUpTime = action.payload.wakeUpTime;
+        },
+        setCompleteTime: (state, action) => {
+            state.completeTime = action.payload.completeTime;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -102,7 +108,7 @@ export const userSlice = createSlice({
                 state.remainingPoint = state.requiredPointToNextLevel - state.currentPoint;
                 state.progress = state.currentPoint / state.requiredPointToNextLevel;
                 state.wakeUpTime = Date.parse(data.wake_up_time.timestampValue) / 1000;
-                state.CompleteTime = Date.parse(data.routine_complete_time.timestampValue) / 1000;
+                state.completeTime = Date.parse(data.routine_complete_time.timestampValue) / 1000;
             })
             .addCase(fetchUserBasic.rejected, (state, action) => {
                 state.isApiLoading = false;
@@ -111,5 +117,5 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setLoading, login, logout, activateMomo, updateExp } = userSlice.actions;
+export const { setLoading, login, logout, activateMomo, updateExp, setWakeUpTime, setCompleteTime } = userSlice.actions;
 export default userSlice.reducer;

@@ -21,8 +21,8 @@ export const TimePickerScreen = () => {
   const [time, setTime] = useState(asPickerFormat());
   const [routineTime, setroutineTime] = useState(0);
   const [isValid, setisValid] = useState(true);
-  const startTime = useSelector((state) => state.tutorial.startTime);
-  const finishTime = useSelector((state) => state.tutorial.finishTime);
+  const startTime = useSelector((state) => state.user.wakeUpTime);
+  const finishTime = useSelector((state) => state.user.completeTime);
 
   useEffect(() => {
       var tempStartTime = new Date(startTime);
