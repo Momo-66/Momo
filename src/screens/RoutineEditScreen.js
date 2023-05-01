@@ -27,7 +27,7 @@ const RoutineScreen = () => {
     {id: 5, name: '영양제', type: 'living', limit_time: 1, active_day: 72},
   ]);
 
-  const renderActionList = action => (
+  const renderActionList = (action) => (
     <ActionBox
       id={action.id}
       name={action.name}
@@ -53,7 +53,7 @@ const RoutineScreen = () => {
           <RoutineAddButton/>
           <RoutineAddModal/>
           <RoutineAddListModal isTutorial={false}/>
-        </View>
+        </View>  
       </SafeAreaView>
     </View>
   );
