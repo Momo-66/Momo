@@ -51,11 +51,10 @@ export const PairTypeModal = (props) => {
   ]);
 
   const decodeDays = (active_day) => {
-    const days = ["일", "토", "금", "목", "수", "화", "월"];
     const activeDays = [];
-    for (let i = 0; i < days.length; i++) {
+    for (let i = 0; i < DAYS_OF_WEEK.length; i++) {
       if ((active_day >> i) & 1) {
-        activeDays.push(days[i]);
+        activeDays.push(DAYS_OF_WEEK[i]);
       }
     }
     return activeDays.reverse().join(",");
