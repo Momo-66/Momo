@@ -8,14 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
 
-import { Step } from '../../utils/tutorials/Step';
-import { useDispatch, useSelector } from 'react-redux';
-
-import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
-
-import TutorialMomoImage from '../../assets/images/TutorialMomo.png';
-import { Step } from '../../utils/tutorials/Step';
-import { useDispatch, useSelector } from 'react-redux';
+import { 
+  useBackgroundImg,
+  setStep,
+} from '../../redux/reducerSlices/tutorialSlice';
 
 export const InitTutorialScreen = () => {
   const step = useSelector((state) => state.tutorial.step);

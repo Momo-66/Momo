@@ -11,11 +11,6 @@ import LeftBlackButtonImg from '../../assets/images/TutorialHeaderLeftBlackButto
 import RightWhiteButtonImg from '../../assets/images/TutorialHeaderRightWhiteButton.png';
 import LeftWhiteButtonImg from '../../assets/images/TutorialHeaderLeftWhiteButton.png';
 
-import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
-import LeftBlackButtonImg from '../../assets/images/TutorialHeaderLeftBlackButton.png';
-import RightWhiteButtonImg from '../../assets/images/TutorialHeaderRightWhiteButton.png';
-import LeftWhiteButtonImg from '../../assets/images/TutorialHeaderLeftWhiteButton.png';
-
 export const TutorialHeader = (props) => {
     const dispatch = useDispatch();
 
