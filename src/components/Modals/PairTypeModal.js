@@ -92,13 +92,13 @@ const styles = StyleSheet.create({
     marginBottom: -8,
   },
   keys: {
-    fontWeight: 400,
+    fontWeight: '400',
     fontSize: 14,
     color: '#808080',
     marginRight: 30,
   },
   values: {
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 14,
     color: '#4C4C4C',
     textAlign: 'right',
@@ -111,7 +111,7 @@ const customSytles = (hasCancel) => StyleSheet.create({
     borderBottomLeftRadius: 8,
   },
   buttonText: {
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 14,
     color: !hasCancel ? '#595959' : '#FF6056',
   },

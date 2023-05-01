@@ -26,19 +26,19 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   text: {
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: 14,
     color:'#222222',
   },
   levelText: {
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: 14,
     color: '#FFEA2D',
   },
 });
 const tutorialStyle = StyleSheet.create({
   text: {
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: 14,
     color:'white',
   },

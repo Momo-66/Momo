@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 
 const customSytles = (name) => StyleSheet.create({
   textColor: {
-    fontWeight: 900,
+    fontWeight: '900',
     fontSize: 16,
     color: name === '건강' ? '#3CE3AC' : (name === '성장' ? '#FF6056' : '#6184FF'),
   },

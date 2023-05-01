@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     headerText: { flex: 1 },
     textFirstRow: { flex: 1, flexDirection: 'row' },
     textSecondRow: { flex: 1, fontSize: 24, alignItems: 'center', color: '#222222' },
-    firstRowBold: { fontWeight: 800, fontSize: 30, textDecorationLine: 'underline', color: '#3CE3AC', alignItems: 'center' },
+    firstRowBold: { fontWeight: '800', fontSize: 30, textDecorationLine: 'underline', color: '#3CE3AC', alignItems: 'center' },
     firstRowNormal: { fontSize: 24, lineHeight: 42, color: '#222222' },
     momo: { flex: this.momoActivated ? (Platform.OS === 'ios' ? 1 : 0.5) : (Platform.OS === 'ios' ? 4 : 3), justifyContent: 'center', alignItems: 'center' },
 });

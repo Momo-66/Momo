@@ -11,9 +11,9 @@ const Action = props => {
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <Image source={actionImg} style={{marginLeft: 14, marginRight: 15}} />
         <View>
-          <Text style={{fontWeight: 700, fontSize: 16, color: '#4C4C4C'}}>
+          <Text style={{fontWeight: '700', fontSize: 16, color: '#4C4C4C'}}>
             {props.name}
-            <Text style={{fontWeight: 600, fontSize: 16, color: '#808080'}}>
+            <Text style={{fontWeight: '600', fontSize: 16, color: '#808080'}}>
               {' '}
               +{props.limit_time}분
             </Text>

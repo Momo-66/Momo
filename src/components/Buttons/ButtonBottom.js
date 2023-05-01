@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   nextButtonText: {
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 20,
     color: "#222222",
   },

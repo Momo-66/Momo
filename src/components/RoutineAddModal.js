@@ -85,13 +85,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleTextBold: {
-    fontWeight: 600,
+    fontWeight: '600',
     fontSize: 24,
     color: '#222222',
     marginTop: 25,
   },
   titleText: {
-    fontWeight: 500,
+    fontWeight: '500',
     color: '#4C4C4C',
   },
   routineOptions: {
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
   },
   momoOptionTitle: {
     color: '#222222',
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 20,
   },
   optionDescription: {
     color: '#B3B3B3',
-    fontWeight: 500,
+    fontWeight: '500',
     fontSize: 12,
     marginTop: 8,
     lineHeight: 18,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   },
   customOptionTitle: {
     color: '#4C4C4C',
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 20,
     marginRight: 8,
   },

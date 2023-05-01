@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   point: {
     fontSize: 21,
-    fontWeight: 700,
+    fontWeight: '700',
     color: '#FF6056',
     marginRight: 3,
   },

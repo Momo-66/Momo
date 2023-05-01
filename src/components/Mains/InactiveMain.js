@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
     activateBtn: { alignItems: 'center', justifyContent: 'center', marginBottom: 22 },
     activateBtnShadow: { shadowColor: '#3CE3AC', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.5, elevation: 9, backgroundColor: 'none' },
     linearGradient: { alignItems: 'center', justifyContent: 'center', borderRadius: 12, height: 90, width: '90%' },
-    activateText: { fontWeight: 700, fontSize: 16, color: 'white' },
-    todayRoutine: { fontWeight: 600, fontSize: 16, marginLeft: 30, marginBottom: 14 },
+    activateText: { fontWeight: '700', fontSize: 16, color: 'white' },
+    todayRoutine: { fontWeight: '600', fontSize: 16, marginLeft: 30, marginBottom: 14 },
 });
 
 const customStyles = (momoActivated) => StyleSheet.create({

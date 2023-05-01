@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   comingSoonText: {
     color: '#6184FF',
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 7,
   },
 });

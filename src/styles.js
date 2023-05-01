@@ -25,7 +25,7 @@ export const modalStyles = StyleSheet.create({
         borderWidth: 1.5,
     },
     title: {
-        fontWeight: 700,
+        fontWeight: '700',
         fontSize: 20,
         color: '#222222',
         marginTop: 30,
@@ -45,7 +45,7 @@ export const modalStyles = StyleSheet.create({
         borderBottomRightRadius: 8,
     },
     buttonText: {
-        fontWeight: 700,
+        fontWeight: '700',
         fontSize: 14,
     },
 });

@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 
 const customStyles = (focused) => StyleSheet.create({
   text: {
-    fontWeight: focused ? 700 : 500,
+    fontWeight: focused ? '700' : '500',
     color: focused ? '#3CE3AC' : '#B3B3B3',
   },
 });

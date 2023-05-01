@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     todayRoutineContainer: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 14 },
     todayRoutine: { fontWeight: 600, fontSize: 16, color: '#4C4C4C' },
     remainingTimeContainer: { flexDirection: 'row', alignItems: 'center' },
-    remainingTimeText: { fontSize: 14, color: '#808080', fontWeight: 500 },
+    remainingTimeText: { fontSize: 14, color: '#808080', fontWeight: '500' },
     remainingTime: { fontSize: 14, color: '#3CE3AC', fontWeight: 600 },
     remainingPoint: { fontWeight: 400, fontSize: 12, color: '#B3B3B3' },
     actionsList: { flex: 1, alignItems: 'center', justifyContent: 'center' },
