@@ -284,6 +284,7 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
     flexDirection: 'row',
+    marginTop: 30,
   },
   scrollView: {
     left: 0,

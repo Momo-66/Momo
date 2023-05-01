@@ -49,40 +49,21 @@ export const TimePickerScreen = () => {
           step === Step.STEP_THREE ?
             <RoutineAddListComponent isTutorial={true}/>
           :
+          <View style={{position:'relative', width:'100%', height:'100%'}}>
             <TimePicker
               value={time}
               onChange={setTime}
               buttonHeight={BUTTON_HEIGHT}
               visibleCount={5}
             />
-        }
-      </View>
-      <View style={{height:130}}>
-        {
-          step === Step.STEP_TWO ?
-          <View style={{height: 130, alignItems:'flex-end', justifyContent:'center', opacity:stepBottomContentOpacity}}>
-            <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500}}>나에게 주어진 총 루틴 시간은</PretendardedText>
-            <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500, textAlign:'right'}}>기상시간 기준</PretendardedText>
-            <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
-              <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>{isValid ? "+" : ""}{routineTime}</PretendardedText>
-              <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>분</PretendardedText>
-              <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500}}> 입니다.</PretendardedText>
-            </View>
-          </View>
-          :
-          <View style={{height:130, alignItems:'flex-end', justifyContent:'flex-start', opacity:stepBottomContentOpacity}}>
-            <View style={{flexDirection:'row', alignItems:'baseline', justifyContent:'flex-end'}}>
-              <PretendardedText style={{fontWeight: 700, fontSize: 30, color:"#3CE3AC"}}>N</PretendardedText>
-              <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#FFFFFF"}}>/28</PretendardedText>
-              <Image source={GreenStarImage}/>
-            </View>
-              <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#D9D9D9", textAlign:'right'}}>루틴을 마칠 시간까지</PretendardedText>
-            <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
-              <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#3CE3AC"}}>NN분 더 </PretendardedText>
-              <PretendardedText style={{fontWeight: 500, fontSize: 16, color:"#D9D9D9"}}>여유있어요.</PretendardedText>
-            </View>
-            <View style={{marginTop:5}}>
-              <PretendardedText style={{fontWeight: 500, fontSize: 12, color:"#B3B3B3", textAlign:'right'}}>※ 루틴별 예상 소요시간은 나중에 수정할 수 있어요.</PretendardedText>
+            <View style={{height: 100, alignItems:'flex-end', justifyContent:'center', opacity:stepBottomContentOpacity, position:'absolute', right:0, bottom:0}}>
+              <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500}}>나에게 주어진 총 루틴 시간은</PretendardedText>
+              <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500, textAlign:'right'}}>기상시간 기준</PretendardedText>
+              <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
+                <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>{isValid ? "+" : ""}{routineTime}</PretendardedText>
+                <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>분</PretendardedText>
+                <PretendardedText style={{color:textColor, fontSize: 15, fontWeight: 500}}> 입니다.</PretendardedText>
+              </View>
             </View>
           </View>
         }
