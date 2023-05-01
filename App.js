@@ -6,6 +6,7 @@ import { RootNavigator } from './src/navigation/RootNavigator';
 
 import LoadingScreen from './src/screens/LoadingScreen';
 import { MainTutorialScreen } from './src/screens/tutorials/MainTutorialScreen';
+import { OnBoardingNavigator } from './src/screens/onboarding/OnBoardingNavigator';
 
 import store from './src/redux/store';
 
