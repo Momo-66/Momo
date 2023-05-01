@@ -35,7 +35,7 @@ export const RoutineAddListModal = (props) => {
             <PretendardedText style={styles.headerText}>루틴 추가하기</PretendardedText>
           </View>
         </Pressable>
-        <View style={{marginLeft:15}}>
+        <View style={{marginLeft:15, marginRight:15, flex:1}}>
           <RoutineAddListComponent isTutorial={false}/>
         </View>
       </SafeAreaView>
