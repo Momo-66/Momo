@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
   },
   title: {
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 20,
     color: '#222222',
     marginTop: 30,
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   },
   boldText: {
     textAlign: 'center',
-    fontWeight: 900,
+    fontWeight: '900',
   },
   buttons: {
     flexDirection: 'row',
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 8,
   },
   buttonText: {
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 14,
   },
 });
@@ -163,7 +163,7 @@ const customSytles = (hasCancel) => StyleSheet.create({
     borderBottomLeftRadius: 8,
   },
   buttonText: {
-    fontWeight: 700,
+    fontWeight: '700',
     fontSize: 14,
     color: !hasCancel ? '#595959' : '#FF6056',
   },
