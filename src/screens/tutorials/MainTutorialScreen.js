@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import {View, SafeAreaView, Animated} from 'react-native';
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import {View, Animated, Platform } from 'react-native';
 import { BackgroundImgComponent } from '../../components/tutorials/BackgroundImgComponent';
 import { TutorialHeader } from '../../components/tutorials/TutorialHeader';
 import { InitTutorialScreen } from './InitTutorialScreen';
@@ -13,6 +14,8 @@ import {
 } from '../../redux/reducerSlices/tutorialSlice';
 
 export const MainTutorialScreen = () => {
+    const statusBarHeight = getStatusBarHeight(true);
+
     const step = useSelector((state) => state.tutorial.step);
     const isStepScreen = useSelector((state) => state.tutorial.isStepScreen);
     const enableBottomBtn = useSelector((state) => state.tutorial.enableBottomBtn);
@@ -63,7 +66,7 @@ export const MainTutorialScreen = () => {
     return(
         <View style={{flex:1}}>
             <BackgroundImgComponent />
-            <SafeAreaView style={{flex:1, flexDirection:"column", justifyContent:"space-between", position:"relative"}}>
+            <View style={{flex:1, flexDirection:"column", justifyContent:"space-between", position:"relative", paddingTop: Platform.OS === 'ios' ? statusBarHeight : 0}}>
                 <View style={{height: 50}}>
                     <TutorialHeader/>
                 </View>
@@ -80,7 +83,7 @@ export const MainTutorialScreen = () => {
                         enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent}/> : null
                     }
                 </View>
-            </SafeAreaView>
+            </View>
         </View>
     );
 }
