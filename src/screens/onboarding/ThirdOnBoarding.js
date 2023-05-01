@@ -10,29 +10,29 @@ import OnBoardingImg from '../../assets/images/ThirdOnboarding.svg';
 import OnBoardingIndicatorImg from '../../assets/images/ThirdOnboardingIndicator.svg';
 
 export const ThirdOnBoarding = () => {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
 
-    return (
-        <SafeAreaView>
-            <View style={{flex: 1, margin:15, flexDirection:"row", justifyContent:"flex-end", opacity:0}}>
-                <Image source={RightBlackButtonImg} />
-            </View>
-            <View style={{alignItems:'center'}}>
-                <OnBoardingImg/>
-            </View>
-            <View style={{alignItems:'center'}}>
-                <OnBoardingIndicatorImg/>
-            </View>
-            <View style={{alignItems:'center', marginTop:52}}>
-                <PretendardedText style={{fontWeight:'800', fontSize:24, color:'#222222'}}>갓생 뽐내기</PretendardedText>
-            </View>
-            <View style={{alignItems:'center', marginTop:20}}>
-                <PretendardedText style={{fontWeight:'400', fontSize:16, color:'#4C4C4C'}}>나의 모모를 SNS에 공유해</PretendardedText>
-                <PretendardedText style={{fontWeight:'400', fontSize:16, color:'#4C4C4C'}}>갓생 사는 스스로를 자랑해 봐요</PretendardedText>
-            </View>
-            <View style={{alignItems:'center', marginTop:52}}>
-                <ButtonLarge type={'default'} text={'시작하기'} icon={false} action={()=>navigation.navigate('Login')}/>
-            </View>
-        </SafeAreaView>
-    );
+  return (
+    <SafeAreaView>
+      <View style={{flex: 1, margin:15, flexDirection:"row", justifyContent:"flex-end", opacity:0}}>
+        <Image source={RightBlackButtonImg} />
+      </View>
+      <View style={{alignItems:'center'}}>
+        <OnBoardingImg/>
+      </View>
+      <View style={{alignItems:'center'}}>
+        <OnBoardingIndicatorImg/>
+      </View>
+      <View style={{alignItems:'center', marginTop:52}}>
+        <PretendardedText style={{fontWeight:'800', fontSize:24, color:'#222222'}}>갓생 뽐내기</PretendardedText>
+      </View>
+      <View style={{alignItems:'center', marginTop:20}}>
+        <PretendardedText style={{fontWeight:'400', fontSize:16, color:'#4C4C4C'}}>나의 모모를 SNS에 공유해</PretendardedText>
+        <PretendardedText style={{fontWeight:'400', fontSize:16, color:'#4C4C4C'}}>갓생 사는 스스로를 자랑해 봐요</PretendardedText>
+      </View>
+      <View style={{alignItems:'center', marginTop:52}}>
+        <ButtonLarge type={'default'} text={'시작하기'} icon={false} action={()=>navigation.navigate('Login')}/>
+      </View>
+    </SafeAreaView>
+  );
 }
