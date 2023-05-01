@@ -4,9 +4,14 @@ const initialState = {
   routineAddModal: false,
   routineAddListModal: false,
   descriptionTypeModal: false,
+  pairTypeModal: false,
   routineOptionModal: false,
   routineOptionModalPositionX: -1,
   routineOptionModalPositionY: -1,
+  selectedRoutineId: '',
+  selectedRoutineName: '',
+  selectedRoutineLimitTime: 0,
+  selectedRoutineActiveDay: 0,
 };
 
 export const modalSlice = createSlice({
@@ -35,9 +40,19 @@ export const modalSlice = createSlice({
       state.routineOptionModalPositionX = action.payload.x;
       state.routineOptionModalPositionY = action.payload.y;
       state.routineOptionModal = true;
+      state.selectedRoutineId = action.payload.id;
+      state.selectedRoutineName = action.payload.name;
+      state.selectedRoutineLimitTime = action.payload.limit_time;
+      state.selectedRoutineActiveDay = action.payload.active_day;
     },
     closeRoutineOptionModal: (state) => {
       state.routineOptionModal = false;
+    },
+    openPairTypeModal: (state) => {
+      state.pairTypeModal = true;
+    },
+    closePairTypeModal: (state) => {
+      state.pairTypeModal = false;
     },
   },
 });
@@ -51,6 +66,8 @@ export const {
   closeDescriptionTypeModal,
   openRoutineOptionModal,
   closeRoutineOptionModal,
+  openPairTypeModal,
+  closePairTypeModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
