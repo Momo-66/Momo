@@ -57,7 +57,7 @@ export const PairTypeModal = (props) => {
         activeDays.push(DAYS_OF_WEEK[i]);
       }
     }
-    return activeDays.reverse().join(",");
+    return activeDays.join(",");
   }
 
   useEffect(() => {
