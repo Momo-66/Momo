@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Modal, StyleSheet, View, Text, TouchableOpacity, Pressable} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
-import { closeRoutineOptionModal } from '../../redux/reducerSlices/modalSlice';
-
+import { closeRoutineOptionModal, openPairTypeModal } from '../../redux/reducerSlices/modalSlice';
+import { PairTypeModal } from './PairTypeModal';
 
 const RoutineOptionModal = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,10 @@ const RoutineOptionModal = () => {
 
   const onColose = () => {
     dispatch(closeRoutineOptionModal())
+  }
+
+  const openDeleteRoutineModal = () => {
+    dispatch(openPairTypeModal())
   }
 
   return (
@@ -26,12 +30,15 @@ const RoutineOptionModal = () => {
             </TouchableOpacity>
           </View>
           <View style={{flex: 1, alignItems: 'center'}}>
-            <TouchableOpacity style={[styles.button, styles.deleteButton]}>
+            <TouchableOpacity style={[styles.button, styles.deleteButton]} onPress={openDeleteRoutineModal}>
                 <PretendardedText style={{color: '#FF6056', fontWeight: '600', fontSize: 14}}>삭제하기</PretendardedText>
             </TouchableOpacity>
           </View>
         </View>
       </Pressable>
+      <View>
+        <PairTypeModal type='deleteRoutineModal'/>
+      </View>
     </Modal>
   );
 };
