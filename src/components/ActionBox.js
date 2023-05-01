@@ -1,10 +1,9 @@
 import React, {useRef} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, findNodeHandle, UIManager } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { openRoutineOptionModal } from '../redux/reducerSlices/modalSlice';
 import RoutineOptionModal from './Modals/RoutineOptionModal';
-import { PairTypeModal } from './Modals/PairTypeModal';
 
 import actionImg from '../assets/images/action_img.png';
 import settingImg from '../assets/images/settingButton.png';
@@ -12,7 +11,7 @@ import settingImg from '../assets/images/settingButton.png';
 import DayList from './DayList';
 
 
-const ActionBox = (props) => {
+export const ActionBox = (props) => {
   const dispatch = useDispatch();
   const buttonRef = useRef(null);
 
@@ -73,4 +72,3 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ActionBox;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
 
-import ActionBox from '../components/ActionBox';
+import { ActionBox } from '../components/ActionBox';
 import RoutineAddButton from '../components/RoutineAddButton';
 import TotalRoutineBox from '../components/TotalRoutineBox';
 import { DescriptionTypeModal } from '../components/Modals/DescriptionTypeModal';
