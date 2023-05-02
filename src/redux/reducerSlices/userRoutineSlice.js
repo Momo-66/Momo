@@ -21,7 +21,8 @@ function routineSerializer(payload) {
   let userRoutineActionList = [];
   for (let i = 0; i < data.length; i++) {
     const routine = data[i];
-    const id = routine.name.match(/(r\w+)/g).at(-1);
+    const tmp_id = routine.name.match(/(r\w+)/g);
+    const id = tmp_id[(tmp_id.length - 1)];
     const fields = routine.fields;
     const duration = fields.duration.integerValue;
     const category = fields.category.stringValue;
