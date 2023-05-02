@@ -3,84 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { CategoryRoutineList } from './CategoryRoutineList';
 import { PretendardedText } from '../CustomComponent/PretendardedText';
 
+import { getRoutine } from '../../api/routineApi';
+
 export const RoutineAddListComponent = (props) => {
     
-    // could this be in a slice?
-    const routineCollection = {
-        'documents': [
-        {
-            'name': 'projects/momo-89849/databases/(default)/documents/routine_collection/r1',
-            'fields': {
-            'category': {
-                'stringValue': '건강',
-            },
-            'duration': {
-                'integerValue': '5',
-            },
-            'image_url': {
-                'stringValue': 'leaf',
-            },
-            'routine_name': {
-                'stringValue': '기지개',
-            },
-            'difficulty': {
-                'integerValue': '1',
-            },
-            },
-            'createTime': '2023-03-21T14:16:25.460169Z',
-            'updateTime': '2023-03-21T14:16:25.460169Z',
-        },
-        {
-            'name': 'projects/momo-89849/databases/(default)/documents/routine_collection/r2',
-            'fields': {
-            'routine_name': {
-                'stringValue': '스트레칭',
-            },
-            'category': {
-                'stringValue': '성장',
-            },
-            'duration': {
-                'integerValue': '5',
-            },
-            'image_url': {
-                'stringValue': 'band',
-            },
-            'difficulty': {
-                'integerValue': '1',
-            },
-            },
-            'createTime': '2023-03-21T14:18:39.549800Z',
-            'updateTime': '2023-03-21T14:18:39.549800Z',
-        },
-        {
-            'name': 'projects/momo-89849/databases/(default)/documents/routine_collection/r3',
-            'fields': {
-            'difficulty': {
-                'integerValue': '2',
-            },
-            'image_url': {
-                'stringValue': 'scale',
-            },
-            'duration': {
-                'integerValue': '5',
-            },
-            'category': {
-                'stringValue': '생활',
-            },
-            'routine_name': {
-                'stringValue': '체중재기',
-            },
-            },
-            'createTime': '2023-03-21T14:20:03.999249Z',
-            'updateTime': '2023-03-21T14:20:03.999249Z',
-        },
-        ],
-    };
     const [healthRoutines, sethealthRoutines] = useState([]);
     const [selfHelpRoutines, setSelfHelpRoutines] = useState([]);
     const [livingRoutines, setLivingRoutines] = useState([]);
 
-    useEffect(() => {
+    useEffect(async () => {
+        const routineCollection = await getRoutine();
         sethealthRoutines([]);
         setSelfHelpRoutines([]);
         setLivingRoutines([]);
@@ -90,30 +22,25 @@ export const RoutineAddListComponent = (props) => {
             const name = routine.fields.routine_name.stringValue;
             const duration = routine.fields.duration.integerValue;
             const difficulty = routine.fields.difficulty.integerValue;
+            
             if (category === '건강') {
-                for (let j = 0; j < 5; j++) {
-                    sethealthRoutines(routines => [...routines, {
-                        'name': name,
-                        'duration': duration,
-                        'difficulty': difficulty,
-                    }]);
-                }
+                sethealthRoutines(routines => [...routines, {
+                    'name': name,
+                    'duration': duration,
+                    'difficulty': difficulty,
+                }]);
             } else if (category === '성장') {
-                for (let j = 0; j < 10; j++) {
-                    setSelfHelpRoutines(routines => [...routines, {
-                        'name': name,
-                        'duration': duration,
-                        'difficulty': difficulty,
-                    }]);
-                }
+                setSelfHelpRoutines(routines => [...routines, {
+                    'name': name,
+                    'duration': duration,
+                    'difficulty': difficulty,
+                }]);
             } else {
-                for (let j = 0; j < 5; j++) {
-                    setLivingRoutines(routines => [...routines, {
-                        'name': name,
-                        'duration': duration,
-                        'difficulty': difficulty,
-                    }]);
-                }
+                setLivingRoutines(routines => [...routines, {
+                    'name': name,
+                    'duration': duration,
+                    'difficulty': difficulty,
+                }]);
             }
         }
     }, []);
