@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Platform } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch  } from 'react-redux';
 
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -13,7 +13,8 @@ import ChallengeScreen from '../screens/ChallengeScreen';
 import ClosetScreen from '../screens/ClosetScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
 import LoginScreenAlpha from '../screens/LoginScreenAlpha';
-import MainTutorialScreen from '../screens/tutorials/MainTutorialScreen';
+import { MainTutorialScreen } from '../screens/tutorials/MainTutorialScreen';
+import { OnBoardingNavigator } from '../screens/onboarding/OnBoardingNavigator';
 
 import { HomeTab } from '../components/NavigatorComponent/HomeTab';
 import { RoutineTab } from '../components/NavigatorComponent/RoutineTab';
@@ -21,6 +22,9 @@ import { ChallengeTab } from '../components/NavigatorComponent/ChallengeTab';
 import { ClosetTab } from '../components/NavigatorComponent/ClosetTab';
 import { SettingsTab } from '../components/NavigatorComponent/SettingsTab';
 
+import { logout } from '../redux/reducerSlices/userSlice';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getData, storeData } from '../utils/AsyncStorageUtils';
 
 const AuthStack = createStackNavigator();
 const MainScreenTab = createBottomTabNavigator();
@@ -97,6 +101,44 @@ const TabComponent = () => {
 export const RootNavigator = () => {
 
   const isAuthUser = useSelector((state) => state.user.signedIn);
+  const isTutorialFinished = useSelector((state) => state.user.isTutorialFinished);
+  const dispatch = useDispatch();
+  
+  function setIsTutorialFinishedfun(value) {
+    dispatch(setIsTutorialFinished({
+        isTutorialFinished: value,
+    }));
+  }
+
+  const getDataFromStorage = async () => {
+    try {
+      const result = await getData('IsTutorialFinished'); 
+      if (result === '-1') {
+        setIsTutorialFinishedfun(false);
+      }
+      else if (result === '1') {
+        setIsTutorialFinishedfun(true);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  functions = () => {
+    dispatch(logout());
+    AsyncStorage.clear();
+  };
+
+  useEffect(() => {
+    // functions();
+    getDataFromStorage();
+  }, []);
+
+  useEffect(() => {
+    console.log("루트 로드");
+    console.log(isTutorialFinished);
+    console.log(isAuthUser);
+  }, [isTutorialFinished, isAuthUser]);
 
   return (
     <AuthStack.Navigator
@@ -108,14 +150,14 @@ export const RootNavigator = () => {
         },
       }}
     >
-      {isAuthUser? (
+      {isTutorialFinished && isAuthUser? (
         <AuthStack.Screen name="Tabs" component={TabComponent}
           options={{
             gestureEnabled: false,
           }}
           />
-      ) : (
-        <AuthStack.Screen name="Login" component={LoginScreenAlpha}/>)
+      ) : !isTutorialFinished && isAuthUser ? (<AuthStack.Screen name="Tutorial" component={MainTutorialScreen}/>) 
+      : (<AuthStack.Screen name="Onboarding" component={OnBoardingNavigator}/>)
       }
     </AuthStack.Navigator>
   );

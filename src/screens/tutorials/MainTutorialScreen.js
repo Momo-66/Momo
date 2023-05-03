@@ -12,6 +12,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { 
     setStep,
 } from '../../redux/reducerSlices/tutorialSlice';
+import {
+    setIsTutorialFinished,
+} from '../../redux/reducerSlices/userSlice';
+
+import { storeData } from '../../utils/AsyncStorageUtils';
 
 export const MainTutorialScreen = () => {
     const statusBarHeight = getStatusBarHeight(true);
@@ -26,9 +31,19 @@ export const MainTutorialScreen = () => {
 
     const [buttonContent, setbuttonContent] = useState("");
 
+    const setDataFromStorage = async () => {
+        storeData('IsTutorialFinished', '1');    
+    };
+
     function setStepfun(value) {
         dispatch(setStep({
             step: value,
+        }));
+    }
+
+    function setIsTutorialFinishedfun(value) {
+        dispatch(setIsTutorialFinished({
+            isTutorialFinished: value,
         }));
     }
 
@@ -42,11 +57,16 @@ export const MainTutorialScreen = () => {
         else if(step === Step.STEP_THREE){
             setStepfun(Step.ANIMATION_TUTORIAL);
         }
+        else if(step === Step.END_TUTORIAL){
+            setDataFromStorage();
+            setIsTutorialFinishedfun(true);
+        }
     }
 
     useEffect(() => {
         if(step === Step.INIT_TUTORIAL){
             setStepfun(Step.INIT_TUTORIAL);
+            console.log("시작하기");
         }
         else if(step === Step.STEP_ONE){
             Animated.timing(opacityAnimation, {

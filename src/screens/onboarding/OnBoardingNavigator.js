@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import { FirstOnBoarding } from './FirstOnBoarding';
@@ -11,16 +10,14 @@ export const OnBoardingNavigator = () => {
   const Stack = createStackNavigator();
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          unmountInactiveRoutes: true,
-        }}>
-        <Stack.Screen name="First" component={FirstOnBoarding} options={{ headerShown: false }}/>
-        <Stack.Screen name="Second" component={SecondOnBoarding} options={{ headerShown: false }}/>
-        <Stack.Screen name="Third" component={ThirdOnBoarding} options={{ headerShown: false }}/>
-        <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      screenOptions={{
+        unmountInactiveRoutes: true,
+      }}>
+      <Stack.Screen name="First" component={FirstOnBoarding} options={{ headerShown: false }}/>
+      <Stack.Screen name="Second" component={SecondOnBoarding} options={{ headerShown: false }}/>
+      <Stack.Screen name="Third" component={ThirdOnBoarding} options={{ headerShown: false }}/>
+      <Stack.Screen name="Login" component={LoginScreen} options={{ headerShown: false }}/>
+    </Stack.Navigator>
   );
 }

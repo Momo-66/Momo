@@ -13,7 +13,6 @@ const LoadingScreen = () => {
   const checkAuthUser = async () => {
     getAuthToken((token) => {
       if(token) {
-        console.log(token)
         dispatch(login());
       } else {
         dispatch(logout());

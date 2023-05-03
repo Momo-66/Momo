@@ -16,6 +16,7 @@ const initialState = {
     progress: 0,
     wakeUpTime: null,
     completeTime: null,
+    isTutorialFinished: false,
 };
 
 export const fetchUserBasic = createAsyncThunk(
@@ -80,6 +81,9 @@ export const userSlice = createSlice({
         setCompleteTime: (state, action) => {
             state.completeTime = action.payload.completeTime;
         },
+        setIsTutorialFinished: (state, action) => {
+            state.isTutorialFinished = action.payload.isTutorialFinished;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -116,5 +120,5 @@ export const userSlice = createSlice({
     },
 });
 
-export const { setLoading, login, logout, activateMomo, updateExp, setWakeUpTime, setCompleteTime } = userSlice.actions;
+export const { setLoading, login, logout, activateMomo, updateExp, setWakeUpTime, setCompleteTime, setIsTutorialFinished } = userSlice.actions;
 export default userSlice.reducer;
