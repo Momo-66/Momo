@@ -1,19 +1,32 @@
-import { StyleSheet, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
+import { toggleClick } from '../../redux/reducerSlices/routineSlice';
 
 import Difficulty from '../../assets/images/difficultyStar.svg';
 
 export const Routine = (props) => {
+  const dispatch = useDispatch();
+  const clickedButtonId = useSelector((state) => state.routineSlice.clickedButtonId);
+
+  const toggleButton = () => {
+    dispatch(toggleClick(props.id));
+  }
+
   return (
-    <View style={styles.container}>
-      <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.name} (+{props.duration}분) </PretendardedText>
-      <View style={{ justifyContent: 'center' }}>
-        <Difficulty />
+      <View style={styles.container}>
+        <TouchableOpacity onPress={toggleButton}>
+          <View style={[styles.button, {backgroundColor: clickedButtonId === props.id ? '#3CE3AC' : 'white'}]}>
+            <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.name} (+{props.duration}분) </PretendardedText>
+              <View style={{ justifyContent: 'center' }}>
+                <Difficulty />
+              </View>
+            <PretendardedText style={styles.levelText}> {props.difficulty}</PretendardedText>
+          </View>
+        </TouchableOpacity>
       </View>
-      <PretendardedText style={styles.levelText}> {props.difficulty}</PretendardedText>
-    </View>
   );
 };
 
@@ -24,6 +37,14 @@ const styles = StyleSheet.create({
     height: 25,
     alignItems: 'center',
     marginBottom: 5,
+  },
+  button: {
+    flexDirection: 'row',
+    // backgroundColor: '#3CE3AC',
+    alignItems: 'center',
+    height:25,
+    paddingHorizontal: 5,
+    borderRadius: 5,
   },
   text: {
     fontWeight: '500',
