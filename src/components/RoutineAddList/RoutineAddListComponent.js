@@ -6,43 +6,43 @@ import { PretendardedText } from '../CustomComponent/PretendardedText';
 import { getRoutine } from '../../api/routineApi';
 
 export const RoutineAddListComponent = (props) => {
-    
-    const [healthRoutines, sethealthRoutines] = useState([]);
+    const [healthRoutines, setHealthRoutines] = useState([]);
     const [selfHelpRoutines, setSelfHelpRoutines] = useState([]);
     const [livingRoutines, setLivingRoutines] = useState([]);
 
-    useEffect(async () => {
-        const routineCollection = await getRoutine();
-        sethealthRoutines([]);
-        setSelfHelpRoutines([]);
-        setLivingRoutines([]);
-        for (let i = 0; i < routineCollection.documents.length; i++) {
-            const routine = routineCollection.documents[i];
-            const category = routine.fields.category.stringValue;
-            const name = routine.fields.routine_name.stringValue;
-            const duration = routine.fields.duration.integerValue;
-            const difficulty = routine.fields.difficulty.integerValue;
-            
-            if (category === '건강') {
-                sethealthRoutines(routines => [...routines, {
-                    'name': name,
-                    'duration': duration,
-                    'difficulty': difficulty,
-                }]);
-            } else if (category === '성장') {
-                setSelfHelpRoutines(routines => [...routines, {
-                    'name': name,
-                    'duration': duration,
-                    'difficulty': difficulty,
-                }]);
-            } else {
-                setLivingRoutines(routines => [...routines, {
-                    'name': name,
-                    'duration': duration,
-                    'difficulty': difficulty,
-                }]);
+    const fetchData = async () => {
+        try {
+            const routineCollection = await getRoutine();
+            const healthRoutines = [];
+            const selfHelpRoutines = [];
+            const livingRoutines = [];
+
+            for (const routine of routineCollection.documents) {
+                const { category, routine_name, duration, difficulty } = routine.fields;
+                const routineData = { name: routine_name.stringValue, duration: duration.integerValue, difficulty: difficulty.integerValue };
+                switch (category.stringValue) {
+                    case '건강':
+                        healthRoutines.push(routineData);
+                        break;
+                    case '성장':
+                        selfHelpRoutines.push(routineData);
+                        break;
+                    default:
+                        livingRoutines.push(routineData);
+                        break;
+                }
             }
+
+            setHealthRoutines(prevRoutines => [...prevRoutines, ...healthRoutines]);
+            setSelfHelpRoutines(prevRoutines => [...prevRoutines, ...selfHelpRoutines]);
+            setLivingRoutines(prevRoutines => [...prevRoutines, ...livingRoutines]);
+        } catch (err) {
+            console.error(err);
         }
+    };
+
+    useEffect(() => {
+        fetchData();
     }, []);
 
     return(
