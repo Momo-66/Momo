@@ -16,11 +16,8 @@ export const ActionBox = (props) => {
 
   const popUpRoutineOptionModal = (action) => {
     buttonRef.current.measureInWindow((x, y, width,height) => {
-      const id = props.id;
-      const name = props.name;
-      const limit_time = props.limit_time;
-      const active_day = props.active_day;
-      dispatch(action({x, y, id, name, limit_time, active_day}));
+      const {id, name, emoji, limit_time, active_day} = props
+      dispatch(action({x, y, id, name, emoji, limit_time, active_day}));
     })
   };
 

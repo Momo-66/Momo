@@ -11,6 +11,7 @@ export const CategoryRoutineList = (props) => {
       isTutorial={routine.isTutorial}
       id={routine.id}
       name={routine.name}
+      emoji={routine.emoji}
       duration={routine.duration}
       difficulty={routine.difficulty}/>
   );
