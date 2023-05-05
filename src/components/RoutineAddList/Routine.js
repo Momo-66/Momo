@@ -9,17 +9,18 @@ import Difficulty from '../../assets/images/difficultyStar.svg';
 
 export const Routine = (props) => {
   const dispatch = useDispatch();
-  const clickedButtonId = useSelector((state) => state.routineSlice.clickedButtonId);
+  const clickedRoutineId = useSelector((state) => state.routineSlice.clickedRoutineId);
 
   const toggleButton = () => {
-    dispatch(toggleClick(props.id));
+    const {id, name, emoji, duration, difficulty} = props
+    dispatch(toggleClick({id, name, emoji, duration, difficulty}));
   }
 
   return (
       <View style={styles.container}>
         <TouchableOpacity onPress={toggleButton}>
-          <View style={[styles.button, {backgroundColor: clickedButtonId === props.id ? '#3CE3AC' : 'white'}]}>
-            <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.name} (+{props.duration}분) </PretendardedText>
+          <View style={[styles.button, {backgroundColor: clickedRoutineId === props.id ? '#3CE3AC' : 'white'}]}>
+            <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.emoji}  {props.name} (+{props.duration}분) </PretendardedText>
               <View style={{ justifyContent: 'center' }}>
                 <Difficulty />
               </View>
