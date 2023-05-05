@@ -1,7 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  clickedButtonId: null,
+  clickedRoutineId: null,
+  clickedRoutineName: null,
+  clickedRoutineEmoji: null,
+  clickedRoutineDuration: 0,
+  clickedRoutineDifficulty: 0,
+  clickedActiveDay: Array(7).fill(false),
 };
 
 const routineSlice = createSlice({
@@ -10,14 +15,22 @@ const routineSlice = createSlice({
   reducers: {
     resetToggle: () => initialState,
     toggleClick(state, action) {
-      console.log(action)
-      state.clickedButtonId = action.payload;
+      state.clickedRoutineId = action.payload.id;
+      state.clickedRoutineName = action.payload.name;
+      state.clickedRoutineEmoji = action.payload.emoji;
+      state.clickedRoutineDuration = action.payload.duration;
+      state.clickedRoutineDifficulty = action.payload.difficulty;
     },
+    toggleDayClick(state, action) {
+      const index = action.payload;
+      state.clickedActiveDay[index] = !state.clickedActiveDay[index];
+    }
   },
 });
 
 export const { 
   resetToggle, 
-  toggleClick 
+  toggleClick,
+  toggleDayClick,
 } = routineSlice.actions;
 export default routineSlice.reducer;
