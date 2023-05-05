@@ -8,6 +8,7 @@ import { PretendardedText } from '../CustomComponent/PretendardedText';
 import { CategoryRoutineList } from './CategoryRoutineList';
 import { ButtonBottom } from '../Buttons/ButtonBottom';
 import { RoutineAddListComponent } from './RoutineAddListComponent';
+import { resetToggle } from '../../redux/reducerSlices/routineSlice';
 
 import BackIcon from '../../assets/icons/light/backIcon.svg';
 
@@ -16,6 +17,7 @@ export const RoutineAddListModal = (props) => {
   const modalState = useSelector(state => state.modal);
 
   function handleModal(action) {
+    dispatch(resetToggle())
     dispatch(action());
   }
 

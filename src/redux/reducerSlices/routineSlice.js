@@ -8,6 +8,7 @@ const routineSlice = createSlice({
   name: 'routineSlice',
   initialState,
   reducers: {
+    resetToggle: () => initialState,
     toggleClick(state, action) {
       console.log(action)
       state.clickedButtonId = action.payload;
@@ -15,5 +16,8 @@ const routineSlice = createSlice({
   },
 });
 
-export const { toggleClick } = routineSlice.actions;
+export const { 
+  resetToggle, 
+  toggleClick 
+} = routineSlice.actions;
 export default routineSlice.reducer;
