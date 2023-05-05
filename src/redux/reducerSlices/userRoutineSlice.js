@@ -92,6 +92,10 @@ export const userRoutineSlice = createSlice({
       };
       patchIndividualUserRoutine(newArray[index].id, dataBody, ['finished','streak']);
     },
+    deleteRoutine: (state, action) => {
+      const routineId = action.payload;
+      state.userRoutineActionList = state.userRoutineActionList.filter(routine => routine.id !== routineId);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -110,5 +114,8 @@ export const userRoutineSlice = createSlice({
   },
 });
 
-export const { updateRoutineStatus } = userRoutineSlice.actions;
+export const { 
+  updateRoutineStatus,
+  deleteRoutine, 
+} = userRoutineSlice.actions;
 export default userRoutineSlice.reducer;
