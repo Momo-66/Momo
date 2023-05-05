@@ -66,7 +66,6 @@ export const MainTutorialScreen = () => {
     useEffect(() => {
         if(step === Step.INIT_TUTORIAL){
             setStepfun(Step.INIT_TUTORIAL);
-            console.log("시작하기");
         }
         else if(step === Step.STEP_ONE){
             Animated.timing(opacityAnimation, {

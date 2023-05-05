@@ -36,11 +36,9 @@ export const TutorialHeader = (props) => {
 
     function clickLeftButton() {
         if (step === Step.STEP_ONE){
-            console.log("스텝1");
             setStepfun(Step.INIT_TUTORIAL);
         }
         else if(step === Step.STEP_TWO){
-            console.log("스텝2");
             setStepfun(Step.STEP_ONE);
         }
         else if(step === Step.STEP_THREE){
@@ -55,7 +53,6 @@ export const TutorialHeader = (props) => {
     }
 
     useEffect(() => {
-        console.log("헤더창 로드");
     }, []);
 
     return (

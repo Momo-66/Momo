@@ -124,21 +124,15 @@ export const RootNavigator = () => {
     }
   };
 
-  functions = () => {
-    dispatch(logout());
-    AsyncStorage.clear();
-  };
+  // cosnt test_logout = () => {
+  //   dispatch(logout());
+  //   AsyncStorage.clear();
+  // };
 
   useEffect(() => {
-    // functions();
+    // test_logout();
     getDataFromStorage();
   }, []);
-
-  useEffect(() => {
-    console.log("루트 로드");
-    console.log(isTutorialFinished);
-    console.log(isAuthUser);
-  }, [isTutorialFinished, isAuthUser]);
 
   return (
     <AuthStack.Navigator

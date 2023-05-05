@@ -48,8 +48,6 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   }
 
   const pickRoutineTime = (picktime) => {
-    console.log("시작시간!");
-    console.log(picktime.toTimeString());
 
     if(step === Step.STEP_ONE){
       setWakeUpTimefun(picktime);

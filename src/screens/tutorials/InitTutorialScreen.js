@@ -43,7 +43,6 @@ export const InitTutorialScreen = () => {
           toValue: 1,
           useNativeDriver: true,
         }).start();
-        console.log("First Step");
       }, 1500);
       setTimeout(() => {
         dispatch(setStep({
@@ -58,7 +57,6 @@ export const InitTutorialScreen = () => {
           toValue: 1,
           useNativeDriver: true,
         }).start();
-        console.log("First Step");
       }, 1500);
       setTimeout(() => {
         Animated.timing(animation, {
