@@ -19,9 +19,9 @@ export const RoutineAddListComponent = (props) => {
 
             for (const routine of routineCollection.documents) {
                 const tmp_id = routine.name.match(/(r\w+)/g);
-                const { category, routine_name, duration, difficulty } = routine.fields;
-                const routineData = { id: tmp_id[(tmp_id.length - 1)], name: routine_name.stringValue, duration: duration.integerValue, difficulty: difficulty.integerValue };
-                
+                const { category, routine_name, emoji, duration, difficulty } = routine.fields;
+                const routineData = { id: tmp_id[(tmp_id.length - 1)], name: routine_name.stringValue, duration: duration.integerValue, difficulty: difficulty.integerValue, emoji: emoji.stringValue };
+
                 switch (category.stringValue) {
                     case '건강':
                         healthRoutines.push(routineData);
