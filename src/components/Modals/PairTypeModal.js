@@ -6,6 +6,9 @@ import { modalStyles } from "../../styles";
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
 import { closePairTypeModal } from "../../redux/reducerSlices/modalSlice";
+import { deleteRoutineApi } from "../../api/routineApi";
+import { deleteRoutine } from "../../redux/reducerSlices/userRoutineSlice";
+import { closeRoutineOptionModal } from "../../redux/reducerSlices/modalSlice";
 
 import AddRoutine from '../../assets/images/modals/addRoutine.svg';
 import DeleteRoutine from '../../assets/images/modals/deleteRoutine.svg';
@@ -18,7 +21,20 @@ export const PairTypeModal = (props) => {
   const dispatch = useDispatch();
   const modalState = useSelector(state => state.modal);
 
-  const onClose = () => {
+  const onCloseCancel = () => {
+    dispatch(closePairTypeModal())
+  }
+
+  const onCloseConfirm = () => {
+    if (props.type === 'addRoutineModal') {
+
+    } else if (props.type === 'deleteRoutineModal') {
+      deleteRoutineApi(modalState.selectedRoutineId);
+      dispatch(closeRoutineOptionModal());
+      dispatch(deleteRoutine(modalState.selectedRoutineId));
+    } else {
+
+    }
     dispatch(closePairTypeModal())
   }
 
@@ -83,7 +99,7 @@ export const PairTypeModal = (props) => {
     >
       <Pressable
         style={modalStyles.container}
-        onPressOut={onClose}>
+        onPressOut={onCloseCancel}>
         <TouchableWithoutFeedback>
           <View style={modalStyles.modalView}>
             <PretendardedText style={modalStyles.title}>{currentModalState.title}</PretendardedText>
@@ -96,12 +112,12 @@ export const PairTypeModal = (props) => {
             <View style={modalStyles.buttons}>
               <Pressable
                 style={[modalStyles.button, customSytles(currentModalState.hasCancel).leftButton]}
-                onPress={onClose}>
+                onPress={onCloseCancel}>
                 <PretendardedText style={customSytles(currentModalState.hasCancel).buttonText}>취소</PretendardedText>
               </Pressable>
               <Pressable
                 style={[modalStyles.button, modalStyles.rightButton]}
-                onPress={onClose}>
+                onPress={onCloseConfirm}>
                 <PretendardedText style={modalStyles.buttonText}>확인</PretendardedText>
               </Pressable>
             </View>
