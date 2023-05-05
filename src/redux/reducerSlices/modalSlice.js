@@ -7,6 +7,7 @@ const initialState = {
   descriptionTypeModal: false,
   pairTypeModal: false,
   routineOptionModal: false,
+  routineTimePickerModal: false,
   routineOptionModalPositionX: -1,
   routineOptionModalPositionY: -1,
   selectedRoutineId: '',
@@ -61,6 +62,12 @@ export const modalSlice = createSlice({
     closePairTypeModal: (state) => {
       state.pairTypeModal = false;
     },
+    openTimePicekrModal: (state) => {
+      state.routineTimePickerModal = true;
+    },
+    closeTimePickerModal: (state) => {
+      state.routineTimePickerModal = false;
+    },
   },
 });
 
@@ -75,6 +82,8 @@ export const {
   closeRoutineOptionModal,
   openPairTypeModal,
   closePairTypeModal,
+  openTimePicekrModal,
+  closeTimePickerModal,
   nextStepRoutineAddList,
   backStepRoutineAddList,
 } = modalSlice.actions;

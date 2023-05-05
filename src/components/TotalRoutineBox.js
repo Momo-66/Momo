@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { PretendardedText } from './CustomComponent/PretendardedText';
 import Timer from '../assets/images/timer.svg';
 import RightArrow from '../assets/images/right_arrow.svg';
 
+import { openTimePicekrModal } from '../redux/reducerSlices/modalSlice';
+
 const RoutineAddButton = () => {
+  const dispatch = useDispatch();
   const userState = useSelector(state => state.user);
   const [wakeUpHour, setWakeUpHour] = useState();
   const [wakeUpMin, setWakeUpMin] = useState();
   const [completeHour, setCompleteHour] = useState();
   const [completeMin, setCompleteMin] = useState();
+
+  function handleModal(action) {
+    dispatch(action());
+  }
 
   useEffect(() => {
     const wakeUpTime = (userState.wakeUpTime * 1000) + (9 * 60 * 60 * 1000);
@@ -90,7 +97,7 @@ const RoutineAddButton = () => {
           <View style={{ flex: 1 }}>
             <Timer width='100%' height='100%'/>
             <View style={{ position: 'absolute', bottom: 15, right: 15, }}>
-              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <TouchableOpacity onPress={() => handleModal(openTimePicekrModal)} style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                 <PretendardedText style={{ fontWeight: '600', fontSize: 12, marginRight: 3 }}>
                   수정하기
                 </PretendardedText>

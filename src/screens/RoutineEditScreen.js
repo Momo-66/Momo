@@ -9,6 +9,7 @@ import { PretendardedText } from '../components/CustomComponent/PretendardedText
 
 import { RoutineAddModal } from '../components/RoutineAddModal';
 import { RoutineAddListModal } from '../components/RoutineAddList/RoutineAddListModal';
+import { RoutineTimePickerModal } from '../components/Modals/RoutineTimePickerModal';
 
 const RoutineScreen = () => {
 
@@ -43,7 +44,8 @@ const RoutineScreen = () => {
           <RoutineAddButton/>
           <RoutineAddModal/>
           <RoutineAddListModal isTutorial={false}/>
-        </View>
+          <RoutineTimePickerModal/>
+        </View>  
       </SafeAreaView>
     </View>
   );

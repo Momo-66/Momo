@@ -19,6 +19,7 @@ const initialState = {
     completeTime: null,
     remainingTime: null,
     isTutorialFinished: false,
+    isWakeUpStep: true,
 };
 
 const requiredPointDict = {
@@ -134,6 +135,9 @@ export const userSlice = createSlice({
         },
         setIsTutorialFinished: (state, action) => {
             state.isTutorialFinished = action.payload.isTutorialFinished;
+        },
+        setIsWakeUpStep: (state, action) => {
+            state.isWakeUpStep = action.payload.isWakeUpStep;
         },
     },
     extraReducers: (builder) => {
