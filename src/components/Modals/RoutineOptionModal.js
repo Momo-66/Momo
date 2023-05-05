@@ -13,11 +13,11 @@ const RoutineOptionModal = () => {
   const posY = useSelector(state => state.modal.routineOptionModalPositionY);
 
   const onColose = () => {
-    dispatch(closeRoutineOptionModal())
+    dispatch(closeRoutineOptionModal());
   }
 
   const openDeleteRoutineModal = () => {
-    dispatch(openPairTypeModal())
+    dispatch(openPairTypeModal());
   }
 
   return (
