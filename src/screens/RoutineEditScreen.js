@@ -18,6 +18,7 @@ const RoutineScreen = () => {
 
   const renderActionList = (action) => (
     <ActionBox
+      key={action.id}
       id={action.id}
       name={action.name}
       emoji={action.emoji}

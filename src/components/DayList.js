@@ -28,7 +28,7 @@ const DayList = (props) => {
   return (
     <View style={{flexDirection: 'row'}}>
       {DAYS_OF_WEEK.map((day, index) => (
-        <View style={getContainerStyles(activeDays[index], index + 1)}>
+        <View key={index} style={getContainerStyles(activeDays[index], index + 1)}>
           <Text style={{fontSize: 11.67, fontWeight: '600', color: activeDays[index] ? '#FFFFFF' : '#B3B3B3' }}>
             {day}
           </Text>

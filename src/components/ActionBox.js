@@ -25,7 +25,7 @@ export const ActionBox = (props) => {
   };
 
   return (
-    <View key={String(props.id)} style={styles.actionBoxContainer}>
+    <View key={props.id} style={styles.actionBoxContainer}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={{ marginLeft: 15 }}>
           <Text style={{fontWeight: '700', fontSize: 16, color: '#4C4C4C'}}>
@@ -36,7 +36,7 @@ export const ActionBox = (props) => {
             </Text>
           </Text>
           <View style={{ flexDirection: 'row', paddingTop: 5 }}>
-            <DayList id={props.id} active_day={props.active_day} />
+            <DayList key={props.id} id={props.id} active_day={props.active_day} />
           </View>
         </View>
       </View>
