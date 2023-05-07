@@ -1,11 +1,11 @@
-import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { globalStyles } from '../../styles';
+import { useState, useRef } from 'react';
 
 import { closeRoutineAddListModal } from '../../redux/reducerSlices/modalSlice';
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
-import { CategoryRoutineList } from './CategoryRoutineList';
 import { ButtonBottom } from '../Buttons/ButtonBottom';
 import { RoutineAddListComponent } from './RoutineAddListComponent';
 import { resetToggle, toggleClick } from '../../redux/reducerSlices/routineSlice';
@@ -25,6 +25,7 @@ export const RoutineAddListModal = (props) => {
   const routineState = useSelector(state => state.routineSlice);
   const clickedRoutineId = routineState.clickedRoutineId;
   const clickedRoutineName = routineState.clickedRoutineName;
+  const clickedRoutineDuration = routineState.clickedRoutineDuration;
   const clickedActiveDay = routineState.clickedActiveDay;
   
 
@@ -112,9 +113,9 @@ export const RoutineAddListModal = (props) => {
               <PretendardedText style={styles.textStyle}>
                 루틴명
               </PretendardedText>
-              <View style={{alignItems: 'center', paddingTop: '4%'}}>
+              <View style={styles.userInputContainer}>
                 <TextInput
-                  style={styles.input}
+                  style={styles.inputStyle}
                   placeholder={clickedRoutineName}
                   placeholderTextColor='#808080'
                   autoCapitalize='none'
@@ -127,6 +128,18 @@ export const RoutineAddListModal = (props) => {
                 소요시간
               </PretendardedText>
             </View>
+              <View style={{flexDirection: 'row', paddingTop: '4%', paddingLeft: '5%', alignItems: 'center'}}>
+                <TextInput
+                  style={{width: 122.2, height: 78, borderRadius: 15, borderColor: '#EEEEEE', borderWidth: 2, textAlign: 'center'}}
+                  placeholderTextColor='#222222'
+                  autoCapitalize='none'
+                  editable={false}>
+                    <PretendardedText style={{fontSize: 40, fontWeight: '700'}}>{clickedRoutineDuration}</PretendardedText>
+                  </TextInput>
+                  <PretendardedText style={{fontSize: 30, fontWeight: '700', marginLeft: '3%'}}>
+                    분
+                  </PretendardedText>
+              </View>
             <View>
               <PretendardedText style={styles.textStyle}>
                 실행요일
@@ -173,7 +186,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#222222',
   },
-  input: {
+  inputStyle: {
     width: 329,
     height: 53,
     borderWidth: 1.5,
@@ -189,5 +202,5 @@ const styles = StyleSheet.create({
     color: '#4C4C4C',
     paddingTop: '4.5%',
     marginLeft: '6%',
-  }
+  },
 });
