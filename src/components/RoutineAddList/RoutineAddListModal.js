@@ -203,4 +203,8 @@ const styles = StyleSheet.create({
     paddingTop: '4.5%',
     marginLeft: '6%',
   },
+  userInputContainer: {
+    marginLeft: '6%',
+    paddingTop: '4%',
+  }
 });
