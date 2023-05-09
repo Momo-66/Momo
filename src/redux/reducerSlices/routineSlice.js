@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   clickedRoutineId: null,
+  clickedRoutineCategory: null,
   clickedRoutineName: null,
   clickedRoutineEmoji: null,
   clickedRoutineDuration: 0,
@@ -16,6 +17,7 @@ const routineSlice = createSlice({
     resetToggle: () => initialState,
     toggleClick(state, action) {
       state.clickedRoutineId = action.payload.id;
+      state.clickedRoutineCategory = action.payload.category;
       state.clickedRoutineName = action.payload.name;
       state.clickedRoutineEmoji = action.payload.emoji;
       state.clickedRoutineDuration = action.payload.duration;

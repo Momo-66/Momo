@@ -10,6 +10,7 @@ export const CategoryRoutineList = (props) => {
     <Routine
       isTutorial={routine.isTutorial}
       id={routine.id}
+      category={routine.category}
       name={routine.name}
       emoji={routine.emoji}
       duration={routine.duration}

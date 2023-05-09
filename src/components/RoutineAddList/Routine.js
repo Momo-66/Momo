@@ -12,8 +12,8 @@ export const Routine = (props) => {
   const clickedRoutineId = useSelector((state) => state.routineSlice.clickedRoutineId);
 
   const toggleButton = () => {
-    const {id, name, emoji, duration, difficulty} = props
-    dispatch(toggleClick({id, name, emoji, duration, difficulty}));
+    const {id, category, name, emoji, duration, difficulty} = props;
+    dispatch(toggleClick({id, category, name, emoji, duration, difficulty}));
   }
 
   return (
