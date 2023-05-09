@@ -1,7 +1,6 @@
 import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { globalStyles } from '../../styles';
-import { useState, useRef } from 'react';
 
 import { closeRoutineAddListModal } from '../../redux/reducerSlices/modalSlice';
 
@@ -12,9 +11,12 @@ import { resetToggle, toggleClick } from '../../redux/reducerSlices/routineSlice
 import { nextStepRoutineAddList } from '../../redux/reducerSlices/modalSlice';
 import { backStepRoutineAddList } from '../../redux/reducerSlices/modalSlice';
 import { toggleDayClick } from '../../redux/reducerSlices/routineSlice';
+import { patchNewUserRoutine } from '../../api/userApi';
+import { fetchUserRoutine } from '../../redux/reducerSlices/userRoutineSlice';
 
 import BackIcon from '../../assets/icons/light/backIcon.svg';
 
+const WEIGHT_OF_ACTIVE_DAY = [64, 32, 16, 8, 4, 2, 1];
 const DAYS_OF_WEEK = ['월', '화', '수', '목', '금', '토', '일'];
 
 export const RoutineAddListModal = (props) => {
@@ -24,7 +26,9 @@ export const RoutineAddListModal = (props) => {
 
   const routineState = useSelector(state => state.routineSlice);
   const clickedRoutineId = routineState.clickedRoutineId;
+  const clickedRoutineCategory = routineState.clickedRoutineCategory;
   const clickedRoutineName = routineState.clickedRoutineName;
+  const clickedRoutineEmoji = routineState.clickedRoutineEmoji;
   const clickedRoutineDuration = routineState.clickedRoutineDuration;
   const clickedActiveDay = routineState.clickedActiveDay;
   
@@ -51,11 +55,52 @@ export const RoutineAddListModal = (props) => {
     dispatch(nextStepRoutineAddList());
   }
 
+  function calcActiveDayBinary2Octal() {
+    let octal = 0;
+
+    for (let i = 0; i < clickedActiveDay.length; i++) {
+      if (clickedActiveDay[i]){
+        octal += WEIGHT_OF_ACTIVE_DAY[i];
+      }
+    }
+
+    return octal;
+  }
+
+  function routineDataJsonify() {
+    
+    const active_day = calcActiveDayBinary2Octal();
+
+    const data = {
+      fields:{
+        active_day: { integerValue: active_day },
+        category: { stringValue: clickedRoutineCategory},
+        difficulty: { integerValue: 1 },
+        duration: { integerValue: clickedRoutineDuration },
+        emoji: { stringValue: clickedRoutineEmoji},
+        finished: { booleanValue: false },
+        image_path: { stringValue: "" },
+        routine_id: { stringValue: clickedRoutineId },
+        routine_name: { stringValue: clickedRoutineName},
+        streak: { integerValue: 0 },
+      }
+    }
+    return data
+  }
+
+  function existRoutine(routineId) {
+    // TODO: 이미 존재하는 routine이라면 등록 불가 알림
+  }
+
   function confirmAddRoutineOnPress() {
     // TODO: API 날리기
+    const data = routineDataJsonify();
+    patchNewUserRoutine(clickedRoutineId, data);
+
     dispatch(closeRoutineAddListModal());
     dispatch(backStepRoutineAddList());
     dispatch(resetToggle());
+    dispatch(fetchUserRoutine())
   }
 
   const getContainerStyles = (isActive, position) => {
