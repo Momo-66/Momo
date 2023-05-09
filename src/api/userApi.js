@@ -68,3 +68,20 @@ export const patchIndividualUserRoutine = async (routineId, data, updateMask) =>
   });
   return response;
 };
+
+export const patchNewUserRoutine = async(routineId, data) => {
+  const response = await axios.patch(
+    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/user1/Routine_Collection/${routineId}`,
+    data,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }
+  ).then((res) => {
+    return res;
+  }).catch((error) => {
+    console.log(error);
+  });
+  return response;
+}
