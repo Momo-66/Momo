@@ -2,19 +2,20 @@ import React from 'react';
 import {StyleSheet,Text,View,Image,SafeAreaView,TouchableOpacity,} from 'react-native';
 import {useDispatch} from 'react-redux';
 
-import {login} from '../redux/reducerSlices/userSlice';
+import {login,setUUID} from '../redux/reducerSlices/userSlice';
 import LogoImage from '../assets/images/Logo.png';
-import {signInAnonymously} from '../api/userAuthApi';
+import {signUpAnonymously, userDocumnetSetup} from '../api/userAuthApi';
 
-import axios from 'axios';
 
 const LoginScreen = () => {
   const dispatch = useDispatch();
 
   const handleAnonymousLoginPress = async () => {
-    await signInAnonymously(async() => {
+    const uuid = await signUpAnonymously(async() => {
       dispatch(login());
     });
+    dispatch(setUUID(uuid));
+    userDocumnetSetup(uuid)
   };
 
 
