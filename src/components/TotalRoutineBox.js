@@ -3,7 +3,8 @@ import { StyleSheet, Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector } from 'react-redux';
 
-import TimerImage from '../assets/images/Timer.png';
+import { PretendardedText } from './CustomComponent/PretendardedText';
+import Timer from '../assets/images/timer.svg';
 
 const RoutineAddButton = () => {
   const userState = useSelector(state => state.user);
@@ -46,47 +47,47 @@ const RoutineAddButton = () => {
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <View style={{ flex: 1 }}>
             <View style={{ flex: 1 }}>
-              <Text
+              <PretendardedText
                 style={{ marginLeft: 20, marginTop: 25, fontSize: 16, fontWeight: '500', color: '#4C4C4C' }}>
                 총 루틴 시간
-              </Text>
+              </PretendardedText>
             </View>
             <View style={{ flex: 1 }}>
-              <Text
+              <PretendardedText
                 style={{ marginLeft: 20, fontSize: 40, fontWeight: '900', color: '#3CE3AC' }}>
                 +{Math.round((Date.parse(userState.completeTime) - Date.parse(userState.wakeUpTime)) / 1000 / 60)}
-                <Text
+                <PretendardedText
                   style={{ marginLeft: 20, fontSize: 40, fontWeight: '500', color: '#222222' }}>
                   분
-                </Text>
-              </Text>
+                </PretendardedText>
+              </PretendardedText>
             </View>
             <View style={{ flex: 1 }}>
-              <Text
+              <PretendardedText
                 style={{ marginBottom: 3, marginLeft: 20, fontSize: 12, fontWeight: '700', color: '#808080' }}>
-                <Text style={{ fontWeight: '900', color: '#595959' }}>
+                <PretendardedText style={{ fontWeight: '900', color: '#595959' }}>
                   {wakeUpHour}시{' '}
-                </Text>
-                <Text style={{ fontWeight: '900', color: '#595959' }}>
+                </PretendardedText>
+                <PretendardedText style={{ fontWeight: '900', color: '#595959' }}>
                   {wakeUpMin}분
-                </Text>
+                </PretendardedText>
                 에 일어나서
-              </Text>
-              <Text
+              </PretendardedText>
+              <PretendardedText
                 style={{ marginLeft: 20, fontSize: 12, fontWeight: '700', color: '#808080' }}>
-                <Text style={{ fontWeight: '900', color: '#595959' }}>
+                <PretendardedText style={{ fontWeight: '900', color: '#595959' }}>
                   {completeHour}시{' '}
-                </Text>
-                <Text style={{ fontWeight: '900', color: '#595959' }}>
+                </PretendardedText>
+                <PretendardedText style={{ fontWeight: '900', color: '#595959' }}>
                   {completeMin}분
-                </Text>
+                </PretendardedText>
                 에 마쳐요.
-              </Text>
+              </PretendardedText>
             </View>
           </View>
 
-          <View style={{ flex: 1, paddingRight: 25 }}>
-            <Image source={TimerImage} />
+          <View style={{ flex: 1}}>
+            <Timer width='100%' height='100%'/>
             <View style={{ position: 'absolute', bottom: 10, right: 20 }}>
               <TouchableOpacity>
                 <Text style={{ fontWeight: '600', fontSize: 12 }}>
@@ -103,7 +104,7 @@ const RoutineAddButton = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0.4,
+    flex: 0.48,
     backgroundColor: '#F9F9F9',
   },
   totalbox: {

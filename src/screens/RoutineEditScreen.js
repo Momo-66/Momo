@@ -5,8 +5,7 @@ import { useSelector } from 'react-redux';
 import { ActionBox } from '../components/ActionBox';
 import RoutineAddButton from '../components/RoutineAddButton';
 import TotalRoutineBox from '../components/TotalRoutineBox';
-import { DescriptionTypeModal } from '../components/Modals/DescriptionTypeModal';
-import { PairTypeModal } from '../components/Modals/PairTypeModal';
+import { PretendardedText } from '../components/CustomComponent/PretendardedText';
 
 import { RoutineAddModal } from '../components/RoutineAddModal';
 import { RoutineAddListModal } from '../components/RoutineAddList/RoutineAddListModal';
@@ -32,7 +31,7 @@ const RoutineScreen = () => {
       <SafeAreaView
         style={{flex: 1, backgroundColor: '#F9F9F9', width: '100%'}}>
         <View style={styles.headerContainer}>
-          <Text style={{fontSize: 16, fontWeight: '700'}}>마이 루틴</Text>
+          <PretendardedText style={{fontSize: 16, fontWeight: '700'}}>마이 루틴</PretendardedText>
         </View>
 
         <TotalRoutineBox/>
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   headerContainer: {
-    flex: 0.13,
+    flex: 0.1,
     backgroundColor: '#F9F9F9',
     justifyContent: 'center',
     alignItems: 'center',
