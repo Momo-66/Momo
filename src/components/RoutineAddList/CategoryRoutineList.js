@@ -8,7 +8,7 @@ export const CategoryRoutineList = (props) => {
   
   const renderRoutineList = routine => (
     <Routine
-      isTutorial={routine.isTutorial}
+      isTutorial={props.isTutorial}
       id={routine.id}
       category={routine.category}
       name={routine.name}

@@ -14,12 +14,13 @@ export const Routine = (props) => {
   const toggleButton = () => {
     const {id, category, name, emoji, duration, difficulty} = props;
     dispatch(toggleClick({id, category, name, emoji, duration, difficulty}));
+    console.log(props.isTutorial)
   }
 
   return (
       <View style={styles.container}>
         <TouchableOpacity onPress={toggleButton}>
-          <View style={[styles.button, {backgroundColor: clickedRoutineId === props.id ? '#3CE3AC' : 'white'}]}>
+          <View style={[styles.button, {backgroundColor: clickedRoutineId === props.id ? '#3CE3AC' : 'transparent'}]}>
             <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.emoji}  {props.name} (+{props.duration}분) </PretendardedText>
               <View style={{ justifyContent: 'center' }}>
                 <Difficulty />
