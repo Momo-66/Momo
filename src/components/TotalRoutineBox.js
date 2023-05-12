@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 import { PretendardedText } from './CustomComponent/PretendardedText';
 import Timer from '../assets/images/timer.svg';
+import RightArrow from '../assets/images/right_arrow.svg';
 
 const RoutineAddButton = () => {
   const userState = useSelector(state => state.user);
@@ -86,13 +87,14 @@ const RoutineAddButton = () => {
             </View>
           </View>
 
-          <View style={{ flex: 1}}>
+          <View style={{ flex: 1 }}>
             <Timer width='100%' height='100%'/>
-            <View style={{ position: 'absolute', bottom: 10, right: 20 }}>
-              <TouchableOpacity>
-                <Text style={{ fontWeight: '600', fontSize: 12 }}>
+            <View style={{ position: 'absolute', bottom: 15, right: 15, }}>
+              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+                <PretendardedText style={{ fontWeight: '600', fontSize: 12, marginRight: 3 }}>
                   수정하기
-                </Text>
+                </PretendardedText>
+                <RightArrow/>
               </TouchableOpacity>
             </View>
           </View>
