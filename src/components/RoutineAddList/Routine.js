@@ -18,7 +18,7 @@ export const Routine = (props) => {
   return (
       <View style={styles.container}>
         <TouchableOpacity onPress={toggleButton}>
-          <View style={[styles.button, {backgroundColor: clickedButtonId === props.id ? '#3CE3AC' : 'white'}]}>
+          <View style={[styles.button, {backgroundColor: clickedButtonId === props.id ? '#3CE3AC' : (props.isTutorial ? 'transparent' : 'white')}]}>
             <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.name} (+{props.duration}분) </PretendardedText>
               <View style={{ justifyContent: 'center' }}>
                 <Difficulty />
