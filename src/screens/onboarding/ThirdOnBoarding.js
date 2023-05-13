@@ -14,10 +14,7 @@ export const ThirdOnBoarding = () => {
 
   return (
     <SafeAreaView>
-      <View style={{flex: 1, margin:15, flexDirection:"row", justifyContent:"flex-end", opacity:0}}>
-        <Image source={RightBlackButtonImg} />
-      </View>
-      <View style={{alignItems:'center'}}>
+      <View style={{alignItems:'center', marginTop: 50}}>
         <Image source={OnBoardingImg} style={{width:350, height:350}}/>
       </View>
       <View style={{alignItems:'center'}}>
