@@ -25,6 +25,7 @@ import { SettingsTab } from '../components/NavigatorComponent/SettingsTab';
 import { logout } from '../redux/reducerSlices/userSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getData, storeData } from '../utils/AsyncStorageUtils';
+import { setIsTutorialFinished } from '../redux/reducerSlices/userSlice';
 
 const AuthStack = createStackNavigator();
 const MainScreenTab = createBottomTabNavigator();
@@ -113,21 +114,22 @@ export const RootNavigator = () => {
   const getDataFromStorage = async () => {
     try {
       const result = await getData('IsTutorialFinished'); 
-      if (result === '-1') {
-        setIsTutorialFinishedfun(false);
-      }
-      else if (result === '1') {
+      console.log(result);
+      if (result === '1') {
         setIsTutorialFinishedfun(true);
+      }
+      else {
+        setIsTutorialFinishedfun(false);
       }
     } catch (e) {
       console.log(e);
     }
   };
 
-  // cosnt test_logout = () => {
-  //   dispatch(logout());
-  //   AsyncStorage.clear();
-  // };
+  const test_logout = () => {
+    dispatch(logout());
+    AsyncStorage.clear();
+  };
 
   useEffect(() => {
     // test_logout();
