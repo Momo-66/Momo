@@ -6,7 +6,7 @@ import { PretendardedText } from '../../components/CustomComponent/PretendardedT
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 
 import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
-import OnBoardingImg from '../../assets/images/ThirdOnboarding.svg';
+import OnBoardingImg from '../../assets/images/ThirdOnboarding.gif';
 import OnBoardingIndicatorImg from '../../assets/images/ThirdOnboardingIndicator.svg';
 
 export const ThirdOnBoarding = () => {
@@ -18,7 +18,7 @@ export const ThirdOnBoarding = () => {
         <Image source={RightBlackButtonImg} />
       </View>
       <View style={{alignItems:'center'}}>
-        <OnBoardingImg/>
+        <Image source={OnBoardingImg} style={{width:350, height:350}}/>
       </View>
       <View style={{alignItems:'center'}}>
         <OnBoardingIndicatorImg/>

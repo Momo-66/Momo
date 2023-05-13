@@ -6,7 +6,7 @@ import { PretendardedText } from '../../components/CustomComponent/PretendardedT
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 
 import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
-import OnBoardingImg from '../../assets/images/SecondOnboarding.svg';
+import OnBoardingImg from '../../assets/images/SecondOnboarding.gif';
 import OnBoardingIndicatorImg from '../../assets/images/SecondOnboardingIndicator.svg';
 
 export const SecondOnBoarding = () => {
@@ -20,7 +20,7 @@ export const SecondOnBoarding = () => {
         </TouchableOpacity>
       </View>
       <View style={{alignItems:'center'}}>
-        <OnBoardingImg/>
+        <Image source={OnBoardingImg} style={{width:350, height:350}}/>
       </View>
       <View style={{alignItems:'center'}}>
         <OnBoardingIndicatorImg/>
