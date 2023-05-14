@@ -36,14 +36,18 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   const step = useSelector((state) => state.tutorial.step);
 
   function setWakeUpTimefun(picktime) {
+    const utcDate = new Date(picktime.getTime() - (9 * 60 * 60 * 1000));
+    
     dispatch(setWakeUpTime({
-      wakeUpTime: picktime.toISOString(),
+      wakeUpTime: utcDate.toISOString(),
     }));
   }
 
   function setCompleteTimefun(picktime) {
+    const utcDate = new Date(picktime.getTime() - (9 * 60 * 60 * 1000));
+
     dispatch(setCompleteTime({
-      completeTime: picktime.toISOString(),
+      completeTime: utcDate.toISOString(),
     }));
   }
 
