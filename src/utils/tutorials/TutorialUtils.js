@@ -11,9 +11,16 @@ export const getIndexFromOffset = (offsetY) => {
 };
 export const fillEmpty = (visibleCount, [...values]) => {
   const fillCount = (visibleCount - 1) / 2;
+  var head = '';
+  var tail = ' ';
   for (let i = 0; i < fillCount; i++) {
-    values.unshift('');
-    values.push('');
+    for (var j = 0; j < i; j++) {
+      head += '  ';
+      tail += '  ';
+    }
+    
+    values.unshift(tail);
+    values.push(head);
   }
   return values;
 };
