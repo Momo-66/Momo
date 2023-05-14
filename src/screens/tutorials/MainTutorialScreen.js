@@ -7,6 +7,7 @@ import { InitTutorialScreen } from './InitTutorialScreen';
 import { TimePickerScreen } from './TimePickerScreen';
 import { ButtonBottom } from '../../components/Buttons/ButtonBottom';
 import { Step } from '../../utils/tutorials/Step';
+import { patchUser } from '../../api/userApi';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { 
@@ -24,6 +25,8 @@ export const MainTutorialScreen = () => {
     const step = useSelector((state) => state.tutorial.step);
     const isStepScreen = useSelector((state) => state.tutorial.isStepScreen);
     const enableBottomBtn = useSelector((state) => state.tutorial.enableBottomBtn);
+    const wakeUpTime = useSelector((state) => state.user.wakeUpTime);
+    const completeTime = useSelector((state) => state.user.completeTime);
 
     const dispatch = useDispatch();
 
@@ -47,6 +50,23 @@ export const MainTutorialScreen = () => {
         }));
     }
 
+    function updateTutorialUserInfo(){
+        const dataBody = {
+            fields: {
+                wake_up_time: {
+                    timestampValue: wakeUpTime,
+                },
+                routine_complete_time: {
+                    timestampValue: completeTime,
+                },
+            },
+        };
+
+        console.log(wakeUpTime);
+        console.log(completeTime);
+        patchUser(dataBody, ['wake_up_time', 'routine_complete_time']);
+    }
+
     function clickBottomButton() {
         if (step === Step.STEP_ONE){
             setStepfun(Step.STEP_TWO);
@@ -60,6 +80,7 @@ export const MainTutorialScreen = () => {
         else if(step === Step.END_TUTORIAL){
             setDataFromStorage();
             setIsTutorialFinishedfun(true);
+            updateTutorialUserInfo();
         }
     }
 
