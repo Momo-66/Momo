@@ -69,11 +69,13 @@ export const PairTypeModal = (props) => {
   const decodeDays = (active_day) => {
     const activeDays = [];
     for (let i = 0; i < DAYS_OF_WEEK.length; i++) {
-      if ((active_day >> i) & 1) {
+      if (active_day[i] === true) {
         activeDays.push(DAYS_OF_WEEK[i]);
       }
     }
     return activeDays.join(",");
+
+    
   }
 
   useEffect(() => {
