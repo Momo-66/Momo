@@ -3,7 +3,7 @@ export const VIEW_WIDTH = 250;
 export const GAP = 12;
 export const MERIDIEM_ITEMS = ['오전', '오후'];
 export const HOUR_ITEMS = [
-  '12',
+  '00',
   '01',
   '02',
   '03',
