@@ -13,7 +13,8 @@ const RoutineAddButton = () => {
   const [completeMin, setCompleteMin] = useState();
 
   useEffect(() => {
-    const wakeUp = userState.wakeUpTime;
+    const wakeUpTime = (userState.wakeUpTime * 1000) + (9 * 60 * 60 * 1000);
+    const wakeUp = new Date(wakeUpTime);
     if (wakeUp.getHours() < 10) {
       setWakeUpHour('0'.concat(wakeUp.getHours()));
     } else {
@@ -24,7 +25,8 @@ const RoutineAddButton = () => {
     } else {
       setWakeUpMin(wakeUp.getMinutes());
     }
-    const complete = userState.completeTime;
+    const completeTime = (userState.completeTime * 1000) + (9 * 60 * 60 * 1000);
+    const complete = new Date(completeTime);
     if (complete.getHours() < 10) {
       setCompleteHour('0'.concat(complete.getHours()));
     } else {
