@@ -1,4 +1,4 @@
-import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput } from 'react-native';
+import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput, KeyboardAvoidingView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { globalStyles } from '../../styles';
 
@@ -13,6 +13,7 @@ import { backStepRoutineAddList } from '../../redux/reducerSlices/modalSlice';
 import { toggleDayClick } from '../../redux/reducerSlices/routineSlice';
 import { patchNewUserRoutine } from '../../api/userApi';
 import { fetchUserRoutine } from '../../redux/reducerSlices/userRoutineSlice';
+import { changeClickedRoutineDuration } from '../../redux/reducerSlices/routineSlice';
 
 import BackIcon from '../../assets/icons/light/backIcon.svg';
 
@@ -47,7 +48,6 @@ export const RoutineAddListModal = (props) => {
 
   function addButtonOnPress() {
     if (clickedRoutineId == null) {
-      console.log(clickedRoutineId)
       console.warn('Should Select a Routine');
       alert('루틴을 선택해주세요.');
       return null;
@@ -90,6 +90,10 @@ export const RoutineAddListModal = (props) => {
 
   function existRoutine(routineId) {
     // TODO: 이미 존재하는 routine이라면 등록 불가 알림
+  }
+
+  function handleTimeChange(duration) {
+    dispatch(changeClickedRoutineDuration(duration));
   }
 
   function confirmAddRoutineOnPress() {
@@ -153,38 +157,26 @@ export const RoutineAddListModal = (props) => {
               <PretendardedText style={styles.headerText}>루틴 추가하기</PretendardedText>
             </View>
           </Pressable>
-          <View>
+
+          <View style={{flex: 1, marginHorizontal: 20}}>
+
             <View>
               <PretendardedText style={styles.textStyle}>
                 루틴명
               </PretendardedText>
-              <View style={styles.userInputContainer}>
+              <View>
                 <TextInput
                   style={styles.inputStyle}
-                  placeholder={clickedRoutineName}
-                  placeholderTextColor='#808080'
-                  autoCapitalize='none'
-                  editable={false}
-                />
-              </View>
-            </View>
-            <View>
-              <PretendardedText style={styles.textStyle}>
-                소요시간
-              </PretendardedText>
-            </View>
-              <View style={{flexDirection: 'row', paddingTop: '4%', paddingLeft: '5%', alignItems: 'center'}}>
-                <TextInput
-                  style={{width: 122.2, height: 78, borderRadius: 15, borderColor: '#EEEEEE', borderWidth: 2, textAlign: 'center'}}
-                  placeholderTextColor='#222222'
+                  placeholderTextColor='#F2F2F2'
                   autoCapitalize='none'
                   editable={false}>
-                    <PretendardedText style={{fontSize: 40, fontWeight: '700'}}>{clickedRoutineDuration}</PretendardedText>
-                  </TextInput>
-                  <PretendardedText style={{fontSize: 30, fontWeight: '700', marginLeft: '3%'}}>
-                    분
-                  </PretendardedText>
+                    <PretendardedText style={{fontSize: 14, fontWeight: '700', fontFamily: ''}}>
+                      {clickedRoutineName}
+                    </PretendardedText> 
+                </TextInput>
               </View>
+            </View>
+
             <View>
               <PretendardedText style={styles.textStyle}>
                 실행요일
@@ -203,7 +195,26 @@ export const RoutineAddListModal = (props) => {
                 </View>
               </View>
             </View>
+            
+            <View>
+              <PretendardedText style={styles.textStyle}>
+                소요시간
+              </PretendardedText>
+            </View>
+              <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end'}}>
+                <TextInput
+                  style={{width: 122.2, height: 78, borderRadius: 15, borderColor: '#EEEEEE', borderWidth: 2, textAlign: 'center'}}
+                  onChangeText={handleTimeChange}
+                  autoCapitalize='none'
+                  keyboardType='numeric'>
+                    <PretendardedText style={{fontSize: 40, fontWeight: '700'}}>{clickedRoutineDuration}</PretendardedText>
+                  </TextInput>
+                  <PretendardedText style={{fontSize: 30, fontWeight: '700', marginLeft: '3%'}}>
+                    분
+                  </PretendardedText>
+              </View>
           </View>
+          
         </SafeAreaView><ButtonBottom
             text="완료"
             action={confirmAddRoutineOnPress}
@@ -232,7 +243,7 @@ const styles = StyleSheet.create({
     color: '#222222',
   },
   inputStyle: {
-    width: 329,
+    width: '100%',
     height: 53,
     borderWidth: 1.5,
     borderRadius: 12,
@@ -240,13 +251,14 @@ const styles = StyleSheet.create({
     borderColor: '#EEEEEE',
     marginBottom: 10,
     paddingLeft: 15,
+    backgroundColor: '#EEEEEE',
   },
   textStyle: {
     fontWeight: '700',
     fontSize: 12,
     color: '#4C4C4C',
     paddingTop: '4.5%',
-    marginLeft: '6%',
+    paddingBottom: '4%'
   },
   userInputContainer: {
     marginLeft: '6%',
