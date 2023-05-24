@@ -170,34 +170,7 @@ export const userSlice = createSlice({
     setIsTutorialFinished: (state, action) => {
       state.isTutorialFinished = action.payload.isTutorialFinished;
     },
-  },
-  extraReducers: builder => {
-    builder
-      .addCase(fetchUserBasic.pending, state => {
-        state.isApiLoading = true;
-      })
-      .addCase(fetchUserBasic.fulfilled, (state, action) => {
-        state.isApiLoading = false;
-        const data = action.payload.fields;
-        state.exp = parseInt(data.momo_exp.integerValue);
-        state.level = updateLevel(state.exp);
-        state.requiredPointToNextLevel = updateRequiredPointToNextLevel(
-          state.level,
-        );
-        state.currentPoint = updateCurrentPoint(state.level, state.exp);
-        state.remainingPoint =
-          state.requiredPointToNextLevel - state.currentPoint;
-        state.progress = state.currentPoint / state.requiredPointToNextLevel;
-        state.wakeUpTime = Date.parse(data.wake_up_time.timestampValue) / 1000;
-        state.completeTime =
-          Date.parse(data.routine_complete_time.timestampValue) / 1000;
-      })
-      .addCase(fetchUserBasic.rejected, (state, action) => {
-        state.isApiLoading = false;
-        state.error = action.error.message;
-      });
-  },
-});
+  },);
 
 export const {
   setUUID,
