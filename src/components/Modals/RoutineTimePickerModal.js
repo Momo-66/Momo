@@ -11,6 +11,7 @@ import { ButtonBottom } from '../Buttons/ButtonBottom';
 
 import BackIcon from '../../assets/icons/light/backIcon.svg';
 import { asPickerFormat } from '../../utils/tutorials/TutorialUtils';
+import { getFromUtcDateState } from '../../utils/TimeStateUtils';
 import { BUTTON_HEIGHT, VIEW_WIDTH } from '../../utils/tutorials/Values';
 
 export const RoutineTimePickerModal = () => {
@@ -63,11 +64,11 @@ export const RoutineTimePickerModal = () => {
   useEffect(() => {
     if (modalState.routineTimePickerModal){
       if (isWakeUpStep) {
-        setTime(new Date(startTime));
+        setTime(getFromUtcDateState(startTime));
         setStepOne();
       }
       else {
-        setTime(new Date(finishTime));
+        setTime(getFromUtcDateState(finishTime));
         setStepTwo();
       }
     }
