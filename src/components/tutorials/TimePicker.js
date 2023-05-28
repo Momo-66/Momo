@@ -28,6 +28,7 @@ import {
   setCompleteTime,
 } from '../../redux/reducerSlices/userSlice';
 import { Step } from '../../utils/tutorials/Step';
+import { getToUtcDateState } from '../../utils/TimeStateUtils';
 
 const isPM = (date) => date.getHours() >= 12;
 
@@ -36,7 +37,7 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   const step = useSelector((state) => state.tutorial.step);
 
   function setWakeUpTimefun(picktime) {
-    const utcDate = new Date(picktime.getTime() - (9 * 60 * 60 * 1000));
+    const utcDate = getToUtcDateState(picktime);
     
     dispatch(setWakeUpTime({
       wakeUpTime: utcDate.toISOString(),
@@ -44,7 +45,7 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   }
 
   function setCompleteTimefun(picktime) {
-    const utcDate = new Date(picktime.getTime() - (9 * 60 * 60 * 1000));
+    const utcDate = getToUtcDateState(picktime);
 
     dispatch(setCompleteTime({
       completeTime: utcDate.toISOString(),

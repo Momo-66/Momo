@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { PretendardedText } from './CustomComponent/PretendardedText';
+import { getFromUtcDateState } from '../utils/TimeStateUtils';
 import Timer from '../assets/images/timer.svg';
 import RightArrow from '../assets/images/right_arrow.svg';
 
@@ -22,8 +23,7 @@ const RoutineAddButton = () => {
   }
 
   useEffect(() => {
-    const wakeUpTime = (userState.wakeUpTime * 1000) + (9 * 60 * 60 * 1000);
-    const wakeUp = new Date(wakeUpTime);
+    const wakeUp = getFromUtcDateState(userState.wakeUpTime);
     if (wakeUp.getHours() < 10) {
       setWakeUpHour('0'.concat(wakeUp.getHours()));
     } else {
@@ -34,8 +34,7 @@ const RoutineAddButton = () => {
     } else {
       setWakeUpMin(wakeUp.getMinutes());
     }
-    const completeTime = (userState.completeTime * 1000) + (9 * 60 * 60 * 1000);
-    const complete = new Date(completeTime);
+    const complete = getFromUtcDateState(userState.completeTime);
     if (complete.getHours() < 10) {
       setCompleteHour('0'.concat(complete.getHours()));
     } else {
