@@ -61,13 +61,17 @@ export const RoutineTimePickerModal = () => {
   }
 
   useEffect(() => {
-    if (isWakeUpStep) {
-      setStepOne();
+    if (modalState.routineTimePickerModal){
+      if (isWakeUpStep) {
+        setTime(new Date(startTime));
+        setStepOne();
+      }
+      else {
+        setTime(new Date(finishTime));
+        setStepTwo();
+      }
     }
-    else {
-      setStepTwo();
-    }
-  }, [isWakeUpStep]);
+  }, [isWakeUpStep, modalState.routineTimePickerModal]);
 
   useEffect(() => {
     var tempStartTime = new Date(startTime);
@@ -82,7 +86,7 @@ export const RoutineTimePickerModal = () => {
     }
 
     setroutineTime(finishMinutes - startMinutes);
-}, [startTime, finishTime]);
+  }, [startTime, finishTime]);
 
   return (
     <Modal
