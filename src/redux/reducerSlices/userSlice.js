@@ -154,8 +154,8 @@ export const userSlice = createSlice({
                 state.currentPoint = updateCurrentPoint(state.level, state.exp);
                 state.remainingPoint = state.requiredPointToNextLevel - state.currentPoint;
                 state.progress = state.currentPoint / state.requiredPointToNextLevel;
-                state.wakeUpTime = new Date(data.wake_up_time.timestampValue);
-                state.completeTime = new Date(data.routine_complete_time.timestampValue);
+                state.wakeUpTime = data.wake_up_time.timestampValue;
+                state.completeTime = data.routine_complete_time.timestampValue;
                 const completeTime = new Date(state.completeTime);
                 const currentTime = new Date();
                 currentTime.setFullYear(completeTime.getFullYear());
