@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getUserBasic, patchUser } from '../../api/userApi';
 
+import { WakeUpStep } from '../../utils/WakeUpStep';
+
 const initialState = {
   UUID: '',
   isLoading: true,
@@ -125,7 +127,6 @@ export const userSlice = createSlice({
     setIsWakeUpStep: (state, action) => {
         state.isWakeUpStep = action.payload.isWakeUpStep;
     },
-    },
     setCompleteTime: (state, action) => {
       state.completeTime = action.payload.completeTime;
     },
@@ -174,22 +175,7 @@ export const userSlice = createSlice({
         state.error = action.error.message;
       });
   },
-  setCompleteTime: (state, action) => {
-    state.completeTime = action.payload.completeTime;
-  },
-  setRemainingTime: (state) => {
-    const completeTime = new Date(state.completeTime);
-    const currentTime = new Date();
-    currentTime.setFullYear(completeTime.getFullYear());
-    currentTime.setMonth(completeTime.getMonth());
-    currentTime.setDate(completeTime.getDate());
-    state.remainingTime = Math.round((Date.parse(completeTime) - Date.parse(currentTime)) / 1000 / 60);
-  },
-  setIsTutorialFinished: (state, action) => {
-    state.isTutorialFinished = action.payload.isTutorialFinished;
-  },
-},
-);
+});
 
 export const {
   setUUID,
