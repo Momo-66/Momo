@@ -3,41 +3,24 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
-import { toggleClick, addRoutine, removeRoutine } from '../../redux/reducerSlices/routineSlice';
+import { toggleClick } from '../../redux/reducerSlices/routineSlice';
 
 import Difficulty from '../../assets/images/difficultyStar.svg';
 
 export const Routine = (props) => {
   const dispatch = useDispatch();
   const clickedRoutineId = useSelector((state) => state.routineSlice.clickedRoutineId);
-  const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
 
   const toggleButton = () => {
     const {id, category, name, emoji, duration, difficulty} = props;
-    const routineIdx = clickedRoutineList.findIndex(routine => routine.id === id);
-    if (props.isTutorial === true) {
-      if (routineIdx !== -1) {
-        dispatch(removeRoutine(id))
-      } else {
-        dispatch(addRoutine({id, category, name, emoji, duration, difficulty}))
-      }
-    } else {
-      dispatch(toggleClick({id, category, name, emoji, duration, difficulty}));
-    }
-  }
-
-  const changeClickedRoutineBackgroundColor = () => {
-    if (props.isTutorial === true){
-      return clickedRoutineList.some(routine => routine.id === props.id) ? '#3CE3AC' : 'transparent';
-    } else {
-      return clickedRoutineId === props.id ? '#3CE3AC' : 'transparent'; 
-    }
+    dispatch(toggleClick({id, category, name, emoji, duration, difficulty}));
+    console.log(props.isTutorial)
   }
 
   return (
       <View style={styles.container}>
         <TouchableOpacity onPress={toggleButton}>
-          <View style={[styles.button, {backgroundColor: changeClickedRoutineBackgroundColor()}]}>
+          <View style={[styles.button, {backgroundColor: clickedRoutineId === props.id ? '#3CE3AC' : 'transparent'}]}>
             <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.emoji}  {props.name} (+{props.duration}분) </PretendardedText>
               <View style={{ justifyContent: 'center' }}>
                 <Difficulty />
@@ -59,6 +42,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flexDirection: 'row',
+    // backgroundColor: '#3CE3AC',
     alignItems: 'center',
     height:25,
     paddingHorizontal: 5,
