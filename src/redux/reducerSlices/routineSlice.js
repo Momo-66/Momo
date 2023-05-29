@@ -8,6 +8,7 @@ const initialState = {
   clickedRoutineDuration: 0,
   clickedRoutineDifficulty: 0,
   clickedActiveDay: Array(7).fill(true),
+  clickedRoutineList: [],
 };
 
 const routineSlice = createSlice({
@@ -15,7 +16,7 @@ const routineSlice = createSlice({
   initialState,
   reducers: {
     resetToggle: () => initialState,
-    toggleClick(state, action) {
+    toggleClick: (state, action) => {
       state.clickedRoutineId = action.payload.id;
       state.clickedRoutineCategory = action.payload.category;
       state.clickedRoutineName = action.payload.name;
@@ -23,12 +24,22 @@ const routineSlice = createSlice({
       state.clickedRoutineDuration = action.payload.duration;
       state.clickedRoutineDifficulty = action.payload.difficulty;
     },
-    toggleDayClick(state, action) {
+    toggleDayClick: (state, action) => {
       const index = action.payload;
       state.clickedActiveDay[index] = !state.clickedActiveDay[index];
     },
-    changeClickedRoutineDuration(state, action) {
+    changeClickedRoutineDuration: (state, action) => {
       state.clickedRoutineDuration = action.payload;
+    },
+    addRoutine: (state, action) => {
+      state.clickedRoutineList.push(action.payload);      
+    },
+    removeRoutine: (state, action) => {
+      const routine_id = action.payload;
+      state.clickedRoutineList = state.clickedRoutineList.filter(routine => routine.id !== routine_id);
+    },
+    clearRoutine: (state) => {
+      state.clickedRoutineList = [];
     }
   },
 });
@@ -38,5 +49,8 @@ export const {
   toggleClick,
   toggleDayClick,
   changeClickedRoutineDuration,
+  addRoutine,
+  removeRoutine,
+  clearRoutine,
 } = routineSlice.actions;
 export default routineSlice.reducer;
