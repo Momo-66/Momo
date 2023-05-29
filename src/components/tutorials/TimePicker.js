@@ -56,17 +56,17 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
 
   const pickRoutineTime = (picktime) => {
 
-    if (step === Step.STEP_ONE) {
+    if (isWakeUpStep === WakeUpStep.STEP_ONE) {
       setWakeUpTimefun(picktime);
     }
-    else if (step === Step.STEP_TWO) {
+    else if (isWakeUpStep === WakeUpStep.STEP_TWO) {
       setCompleteTimefun(picktime);
     }
     else {
-      if (isWakeUpStep === WakeUpStep.STEP_ONE) {
+      if (step === Step.STEP_ONE) {
         setWakeUpTimefun(picktime);
       }
-      else if (isWakeUpStep === WakeUpStep.STEP_TWO) {
+      else if (step === Step.STEP_TWO) {
         setCompleteTimefun(picktime);
       }
     }

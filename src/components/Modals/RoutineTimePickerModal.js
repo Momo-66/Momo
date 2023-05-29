@@ -134,7 +134,8 @@ export const RoutineTimePickerModal = () => {
 
   return (
     <Modal
-      animationType="fade"
+      animationType="slide"
+      transparent={false}
       visible={modalState.routineTimePickerModal}
     >
       <SafeAreaView style={styles.container}>
@@ -170,11 +171,11 @@ export const RoutineTimePickerModal = () => {
               <PretendardedText style={{color:'#808080', fontSize: 15, fontWeight: 500}}> 입니다.</PretendardedText>
             </View>
           </View>
-          <View style={{height: 101}}>
-            <ButtonBottom action={onClickButton} text={buttonText}/>
-          </View>
         </View>
       </SafeAreaView>
+      <View style={{height: 101}}>
+        <ButtonBottom action={onClickButton} text={buttonText}/>
+      </View>
     </Modal>
   );
 }
