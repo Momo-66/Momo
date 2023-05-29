@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {getUserBasic, patchUser} from '../../api/userApi';
+import { WakeUpStep } from '../../utils/WakeUpStep';
 
 const initialState = {
   UUID: '',
@@ -19,7 +20,7 @@ const initialState = {
     completeTime: null,
     remainingTime: null,
     isTutorialFinished: false,
-    isWakeUpStep: true,
+    isWakeUpStep: WakeUpStep.NONE,
 };
 
 const requiredPointDict = {

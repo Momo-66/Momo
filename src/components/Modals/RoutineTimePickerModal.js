@@ -4,15 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { globalStyles } from '../../styles';
 
 import { closeTimePickerModal } from '../../redux/reducerSlices/modalSlice';
-import { setIsWakeUpStep } from '../../redux/reducerSlices/userSlice';
+import { setWakeUpTime, setCompleteTime, setIsWakeUpStep } from '../../redux/reducerSlices/userSlice';
 import { PretendardedText } from '../CustomComponent/PretendardedText';
 import { TimePicker } from '../tutorials/TimePicker';
 import { ButtonBottom } from '../Buttons/ButtonBottom';
 
 import BackIcon from '../../assets/icons/light/backIcon.svg';
 import { asPickerFormat } from '../../utils/tutorials/TutorialUtils';
-import { getFromUtcDateState } from '../../utils/TimeStateUtils';
+import { getToUtcDateState, getFromUtcDateState } from '../../utils/TimeStateUtils';
 import { BUTTON_HEIGHT, VIEW_WIDTH } from '../../utils/tutorials/Values';
+import { WakeUpStep } from '../../utils/WakeUpStep';
 
 export const RoutineTimePickerModal = () => {
   const dispatch = useDispatch();
@@ -26,23 +27,45 @@ export const RoutineTimePickerModal = () => {
   const [stepContent, setstepContent] = useState("");
   const [routineTime, setroutineTime] = useState(0);
   const [isValid, setisValid] = useState(true);
+  const [cloneOriginStartTime, setcloneOriginStartTime] = useState(new Date());
+  const [cloneOriginFinishTime, setcloneOriginFinishTime] = useState(new Date());
 
   function handleModal(action) {
+    if (isWakeUpStep === WakeUpStep.STEP_ONE) {
+      const utcStartDate = getToUtcDateState(cloneOriginStartTime);
+      const utcFinishDate = getToUtcDateState(cloneOriginFinishTime);
+      setWakeUpTimeFun(utcStartDate.toISOString());
+      setCompleteTimeFun(utcFinishDate.toISOString());
+      setIsWakeUpStepFun(WakeUpStep.NONE);
+    }
+
     dispatch(action());
+  }
+
+  function setWakeUpTimeFun(value) {
+    dispatch(setWakeUpTime({
+      wakeUpTime: value,
+    }));
+  }
+
+  function setCompleteTimeFun(value) {
+    dispatch(setCompleteTime({
+      completeTime: value,
+    }));
   }
 
   function setIsWakeUpStepFun(value) {
     dispatch(setIsWakeUpStep({
       isWakeUpStep: value,
     }));
-}
+  }
 
   function onClickButton() {
-    if (isWakeUpStep) {
-      setIsWakeUpStepFun(false);
+    if (isWakeUpStep === WakeUpStep.STEP_ONE) {
+      setStepTwo();
     }
-    else {
-      setStepOne();
+    else if (isWakeUpStep === WakeUpStep.STEP_TWO) {
+      setIsWakeUpStepFun(WakeUpStep.NONE);
       handleModal(closeTimePickerModal);
     }
   }
@@ -51,28 +74,28 @@ export const RoutineTimePickerModal = () => {
     setbuttonText("다음");
     setstepNum("1");
     setstepContent("새로운 기상 시간을 설정해주세요.");
-    setIsWakeUpStepFun(true);
+    setIsWakeUpStepFun(WakeUpStep.STEP_ONE);
+    setTime(getFromUtcDateState(startTime));
   }
 
   function setStepTwo() {
     setbuttonText("저장");
     setstepNum("2");
     setstepContent("모든 루틴을 마칠 시간을\n설정해주세요.");
-    setIsWakeUpStepFun(false);
+    setIsWakeUpStepFun(WakeUpStep.STEP_TWO);
+    setTime(getFromUtcDateState(finishTime));
   }
 
   useEffect(() => {
-    if (modalState.routineTimePickerModal){
-      if (isWakeUpStep) {
-        setTime(getFromUtcDateState(startTime));
+    if (modalState.routineTimePickerModal) {
+      setcloneOriginStartTime(getFromUtcDateState(startTime));
+      setcloneOriginFinishTime(getFromUtcDateState(finishTime));
+
+      if (isWakeUpStep === WakeUpStep.NONE) {
         setStepOne();
       }
-      else {
-        setTime(getFromUtcDateState(finishTime));
-        setStepTwo();
-      }
     }
-  }, [isWakeUpStep, modalState.routineTimePickerModal]);
+  }, [modalState.routineTimePickerModal]);
 
   useEffect(() => {
     var tempStartTime = new Date(startTime);
@@ -80,9 +103,9 @@ export const RoutineTimePickerModal = () => {
     var tempFinishTime = new Date(finishTime);
     var finishMinutes = tempFinishTime.getHours() * 60 + tempFinishTime.getMinutes();
 
-    if(finishMinutes >= startMinutes){
+    if (finishMinutes >= startMinutes) {
       setisValid(true);
-    }else{
+    } else {
       setisValid(false);
     }
 
@@ -97,7 +120,7 @@ export const RoutineTimePickerModal = () => {
       <SafeAreaView style={styles.container}>
         <Pressable style={globalStyles.rowFlex}>
           <Pressable
-            onPress={() => isWakeUpStep ? handleModal(closeTimePickerModal) : setStepOne()}
+            onPress={() => isWakeUpStep === WakeUpStep.STEP_ONE ? handleModal(closeTimePickerModal) : setStepOne()}
             style={styles.backButton}>
             <BackIcon />
           </Pressable>
