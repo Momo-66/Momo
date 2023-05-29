@@ -141,7 +141,7 @@ export const RoutineTimePickerModal = () => {
               visibleCount={5}
             />
           </View>
-          <View style={{height:100, alignItems:'flex-end', justifyContent:'center', opacity: isWakeUpStep ? 0 : 1, marginRight: 15}}>
+          <View style={{height:100, alignItems:'flex-end', justifyContent:'center', opacity: isWakeUpStep === WakeUpStep.STEP_TWO ? 1 : 0, marginRight: 15}}>
             <PretendardedText style={{color:'#808080', fontSize: 15, fontWeight: 500}}>나에게 주어진 총 루틴 시간은</PretendardedText>
             <PretendardedText style={{color:'#808080', fontSize: 15, fontWeight: 500, textAlign:'right'}}>기상시간 기준</PretendardedText>
             <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
