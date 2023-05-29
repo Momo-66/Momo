@@ -175,8 +175,7 @@ export const userSlice = createSlice({
         state.error = action.error.message;
       });
   },
-},
-);
+});
 
 export const {
   setUUID,
@@ -189,7 +188,6 @@ export const {
   setCompleteTime,
   setRemainingTime,
   setIsTutorialFinished,
-  setIsWakeUpStep,
   finishRoutine,
 } = userSlice.actions;
 export default userSlice.reducer;

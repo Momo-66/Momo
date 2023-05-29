@@ -28,18 +28,15 @@ import {
   setCompleteTime,
 } from '../../redux/reducerSlices/userSlice';
 import { Step } from '../../utils/tutorials/Step';
-import { getToUtcDateState } from '../../utils/TimeStateUtils';
-import { WakeUpStep } from '../../utils/WakeUpStep';
 
 const isPM = (date) => date.getHours() >= 12;
 
 export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   const dispatch = useDispatch();
   const step = useSelector((state) => state.tutorial.step);
-  const isWakeUpStep = useSelector(state => state.user.isWakeUpStep);
 
   function setWakeUpTimefun(picktime) {
-    const utcDate = getToUtcDateState(picktime);
+    const utcDate = new Date(picktime.getTime() - (9 * 60 * 60 * 1000));
     
     dispatch(setWakeUpTime({
       wakeUpTime: utcDate.toISOString(),
@@ -47,7 +44,7 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
   }
 
   function setCompleteTimefun(picktime) {
-    const utcDate = getToUtcDateState(picktime);
+    const utcDate = new Date(picktime.getTime() - (9 * 60 * 60 * 1000));
 
     dispatch(setCompleteTime({
       completeTime: utcDate.toISOString(),
@@ -56,20 +53,13 @@ export const TimePicker = ({ value, onChange, buttonHeight, visibleCount }) => {
 
   const pickRoutineTime = (picktime) => {
 
-    if (isWakeUpStep === WakeUpStep.STEP_ONE) {
+    if(step === Step.STEP_ONE){
       setWakeUpTimefun(picktime);
     }
-    else if (isWakeUpStep === WakeUpStep.STEP_TWO) {
+    else if(step === Step.STEP_TWO){
       setCompleteTimefun(picktime);
     }
-    else {
-      if (step === Step.STEP_ONE) {
-        setWakeUpTimefun(picktime);
-      }
-      else if (step === Step.STEP_TWO) {
-        setCompleteTimefun(picktime);
-      }
-    }
+    
   }
 
   if (visibleCount % 2 === 0) throw new Error('visibleCount must be odd');

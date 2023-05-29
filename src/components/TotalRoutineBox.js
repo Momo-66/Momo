@@ -1,31 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Image, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { PretendardedText } from './CustomComponent/PretendardedText';
-import { getFromUtcDateState } from '../utils/TimeStateUtils';
 import Timer from '../assets/images/timer.svg';
 import RightArrow from '../assets/images/right_arrow.svg';
 
-import { openTimePicekrModal } from '../redux/reducerSlices/modalSlice';
-
 const RoutineAddButton = () => {
-  const dispatch = useDispatch();
   const userState = useSelector(state => state.user);
-  const startTime = useSelector((state) => state.user.wakeUpTime);
-  const finishTime = useSelector((state) => state.user.completeTime);
   const [wakeUpHour, setWakeUpHour] = useState();
   const [wakeUpMin, setWakeUpMin] = useState();
   const [completeHour, setCompleteHour] = useState();
   const [completeMin, setCompleteMin] = useState();
 
-  function handleModal(action) {
-    dispatch(action());
-  }
-
   useEffect(() => {
-    const wakeUp = getFromUtcDateState(userState.wakeUpTime);
+    const wakeUpTime = (userState.wakeUpTime * 1000) + (9 * 60 * 60 * 1000);
+    const wakeUp = new Date(wakeUpTime);
     if (wakeUp.getHours() < 10) {
       setWakeUpHour('0'.concat(wakeUp.getHours()));
     } else {
@@ -36,7 +27,8 @@ const RoutineAddButton = () => {
     } else {
       setWakeUpMin(wakeUp.getMinutes());
     }
-    const complete = getFromUtcDateState(userState.completeTime);
+    const completeTime = (userState.completeTime * 1000) + (9 * 60 * 60 * 1000);
+    const complete = new Date(completeTime);
     if (complete.getHours() < 10) {
       setCompleteHour('0'.concat(complete.getHours()));
     } else {
@@ -47,7 +39,7 @@ const RoutineAddButton = () => {
     } else {
       setCompleteMin(complete.getMinutes());
     }
-  }, [startTime, finishTime]);
+  }, []);
 
 
   return (
@@ -98,7 +90,7 @@ const RoutineAddButton = () => {
           <View style={{ flex: 1 }}>
             <Timer width='100%' height='100%'/>
             <View style={{ position: 'absolute', bottom: 15, right: 15, }}>
-              <TouchableOpacity onPress={() => handleModal(openTimePicekrModal)} style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
+              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                 <PretendardedText style={{ fontWeight: '600', fontSize: 12, marginRight: 3 }}>
                   수정하기
                 </PretendardedText>
