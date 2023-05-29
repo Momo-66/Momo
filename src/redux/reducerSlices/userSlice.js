@@ -189,7 +189,6 @@ export const {
   setCompleteTime,
   setRemainingTime,
   setIsTutorialFinished,
-  setIsWakeUpStep,
   finishRoutine,
 } = userSlice.actions;
 export default userSlice.reducer;
