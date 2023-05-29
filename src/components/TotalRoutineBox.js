@@ -13,6 +13,8 @@ import { openTimePicekrModal } from '../redux/reducerSlices/modalSlice';
 const RoutineAddButton = () => {
   const dispatch = useDispatch();
   const userState = useSelector(state => state.user);
+  const startTime = useSelector((state) => state.user.wakeUpTime);
+  const finishTime = useSelector((state) => state.user.completeTime);
   const [wakeUpHour, setWakeUpHour] = useState();
   const [wakeUpMin, setWakeUpMin] = useState();
   const [completeHour, setCompleteHour] = useState();
@@ -45,7 +47,7 @@ const RoutineAddButton = () => {
     } else {
       setCompleteMin(complete.getMinutes());
     }
-  }, []);
+  }, [startTime, finishTime]);
 
 
   return (
