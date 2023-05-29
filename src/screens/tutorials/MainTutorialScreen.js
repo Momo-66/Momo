@@ -7,7 +7,7 @@ import { InitTutorialScreen } from './InitTutorialScreen';
 import { TimePickerScreen } from './TimePickerScreen';
 import { ButtonBottom } from '../../components/Buttons/ButtonBottom';
 import { Step } from '../../utils/tutorials/Step';
-import { patchUser } from '../../api/userApi';
+import { patchUser, patchNewUserRoutine } from '../../api/userApi';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { 
@@ -27,6 +27,7 @@ export const MainTutorialScreen = () => {
     const enableBottomBtn = useSelector((state) => state.tutorial.enableBottomBtn);
     const wakeUpTime = useSelector((state) => state.user.wakeUpTime);
     const completeTime = useSelector((state) => state.user.completeTime);
+    const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
 
     const dispatch = useDispatch();
 
@@ -51,6 +52,7 @@ export const MainTutorialScreen = () => {
     }
 
     function updateTutorialUserInfo(){
+        // 루틴 시작 시간 / 루틴 마치는 시간 추가
         const dataBody = {
             fields: {
                 wake_up_time: {
@@ -62,9 +64,27 @@ export const MainTutorialScreen = () => {
             },
         };
 
-        console.log(wakeUpTime);
-        console.log(completeTime);
         patchUser(dataBody, ['wake_up_time', 'routine_complete_time']);
+
+        // 루틴 추가
+        clickedRoutineList.forEach((item) => {
+            const data = {
+                fields:{
+                    active_day: { integerValue: 127 },
+                    category: { stringValue: item.category},
+                    difficulty: { integerValue: item.difficulty },
+                    duration: { integerValue: item.duration },
+                    emoji: { stringValue: item.emoji },
+                    finished: { booleanValue: false },
+                    image_path: { stringValue: "" },
+                    routine_id: { stringValue: item.id },
+                    routine_name: { stringValue: item.name },
+                    streak: { integerValue: 0 },
+                }
+            }
+
+            patchNewUserRoutine(item.id, data);
+        });
     }
 
     function clickBottomButton() {
