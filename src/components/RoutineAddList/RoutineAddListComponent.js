@@ -1,12 +1,9 @@
 import {StyleSheet, SafeAreaView, View, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import {CategoryRoutineList} from './CategoryRoutineList';
 import {PretendardedText} from '../CustomComponent/PretendardedText';
 import {getRoutine} from '../../api/routineApi';
 import GreenStar from '../../assets/images/green_star.svg';
-import RedStar from '../../assets/images/red_star.svg';
-import { setremainTime, setTotalDifficulty } from '../../redux/reducerSlices/tutorialSlice';
 
 export const RoutineAddListComponent = props => {
   const dispatch = useDispatch();
@@ -41,6 +38,30 @@ export const RoutineAddListComponent = props => {
   const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
   const startTime = useSelector((state) => state.user.wakeUpTime);
   const finishTime = useSelector((state) => state.user.completeTime);
+
+  const userState = useSelector(state => state.user);
+  const userRoutineState = useSelector(state => state.userRoutineSlice);
+  const clickedState = useSelector(state => state.routineSlice);
+
+  const [totalDifficulty, setTotalDifficulty] = useState();
+  const [remainTime, setRemainTime] = useState();
+
+
+  useEffect(() => {
+    const clickedDifficulty = clickedState.clickedRoutineDifficulty;
+    const clickedDuration = clickedState.clickedRoutineDuration;
+    const wakeUpTime = userState.wakeUpTime;
+    const completeTime = userState.completeTime;
+
+    let tmpTotalDifficulty = 0;
+    for(let i = 0; i < userRoutineState.userRoutineActionList.length; i++){
+      tmpTotalDifficulty += parseInt(userRoutineState.userRoutineActionList[i].difficulty);
+    }
+    setTotalDifficulty(tmpTotalDifficulty + parseInt(clickedDifficulty));
+
+    let tmpRemainTime = Math.round((Date.parse(completeTime) - Date.parse(wakeUpTime)) / 1000 / 60) - clickedDuration;
+    setRemainTime(tmpRemainTime);
+  }, [totalDifficulty, remainTime, clickedState])
 
   const fetchData = async () => {
     try {
@@ -136,7 +157,7 @@ export const RoutineAddListComponent = props => {
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', }}>
           {validDifficulty ? <GreenStar/> : <RedStar/>}
           <PretendardedText style={{fontWeight: '700', fontSize: 30, color: validDifficulty ? '#3CE3AC' : '#FF6056'}}>
-            {sumdifficulty}
+            {props.isTutorial ? sumdifficulty : totalDifficulty}
           </PretendardedText>
           <PretendardedText style={{ fontWeight: '500', fontSize: 16, color: props.isTutorial ? '#FFFFFF' : '#22222', }}>
             /28{' '}
@@ -147,7 +168,7 @@ export const RoutineAddListComponent = props => {
         </PretendardedText>
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
           <PretendardedText style={{fontWeight: '500', fontSize: 16, color: validraminingTime ? '#3CE3AC' : "#FF6056"}}>
-            {remainingtime}분 더{' '}
+            {props.isTutorial ? remainingtime : remainTime}분 더{' '}
           </PretendardedText>
           <PretendardedText style={{ fontWeight: '500', fontSize: 16, color: props.isTutorial ? '#D9D9D9' : '#4C4C4C', }}>
             {validraminingTime ? "여유있어요." : "늦게끝나요."}
