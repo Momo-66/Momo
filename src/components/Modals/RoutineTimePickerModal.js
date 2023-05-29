@@ -15,6 +15,8 @@ import { getToUtcDateState, getFromUtcDateState } from '../../utils/TimeStateUti
 import { BUTTON_HEIGHT, VIEW_WIDTH } from '../../utils/tutorials/Values';
 import { WakeUpStep } from '../../utils/WakeUpStep';
 
+import { patchUser } from '../../api/userApi';
+
 export const RoutineTimePickerModal = () => {
   const dispatch = useDispatch();
   const modalState = useSelector(state => state.modal);
@@ -66,9 +68,27 @@ export const RoutineTimePickerModal = () => {
     }
     else if (isWakeUpStep === WakeUpStep.STEP_TWO) {
       setIsWakeUpStepFun(WakeUpStep.NONE);
+      updateRoutineTime();
       handleModal(closeTimePickerModal);
     }
   }
+
+  function updateRoutineTime(){
+    const dataBody = {
+        fields: {
+            wake_up_time: {
+                timestampValue: startTime,
+            },
+            routine_complete_time: {
+                timestampValue: finishTime,
+            },
+        },
+    };
+
+    console.log(startTime);
+    console.log(finishTime);
+    patchUser(dataBody, ['wake_up_time', 'routine_complete_time']);
+}
 
   function setStepOne() {
     setbuttonText("다음");
