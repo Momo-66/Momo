@@ -48,19 +48,23 @@ export const RoutineAddListComponent = props => {
 
 
   useEffect(() => {
-    const clickedDifficulty = clickedState.clickedRoutineDifficulty;
-    const clickedDuration = clickedState.clickedRoutineDuration;
-    const wakeUpTime = userState.wakeUpTime;
-    const completeTime = userState.completeTime;
-
-    let tmpTotalDifficulty = 0;
-    for(let i = 0; i < userRoutineState.userRoutineActionList.length; i++){
-      tmpTotalDifficulty += parseInt(userRoutineState.userRoutineActionList[i].difficulty);
+    if (props.isTutorial === true) {
+      // TODO: 튜토리얼 로직 추가 (khlee)
+    } else {
+      const clickedDifficulty = clickedState.clickedRoutineDifficulty;
+      const clickedDuration = clickedState.clickedRoutineDuration;
+      const wakeUpTime = userState.wakeUpTime;
+      const completeTime = userState.completeTime;
+  
+      let tmpTotalDifficulty = 0;
+      for(let i = 0; i < userRoutineState.userRoutineActionList.length; i++){
+        tmpTotalDifficulty += parseInt(userRoutineState.userRoutineActionList[i].difficulty);
+      }
+      setTotalDifficulty(tmpTotalDifficulty + parseInt(clickedDifficulty));
+  
+      let tmpRemainTime = Math.round((Date.parse(completeTime) - Date.parse(wakeUpTime)) / 1000 / 60) - clickedDuration;
+      setRemainTime(tmpRemainTime);
     }
-    setTotalDifficulty(tmpTotalDifficulty + parseInt(clickedDifficulty));
-
-    let tmpRemainTime = Math.round((Date.parse(completeTime) - Date.parse(wakeUpTime)) / 1000 / 60) - clickedDuration;
-    setRemainTime(tmpRemainTime);
   }, [totalDifficulty, remainTime, clickedState])
 
   const fetchData = async () => {
