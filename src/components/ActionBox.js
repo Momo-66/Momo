@@ -1,11 +1,12 @@
 import React, {useRef} from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { openRoutineOptionModal } from '../redux/reducerSlices/modalSlice';
 import RoutineOptionModal from './Modals/RoutineOptionModal';
 
-import settingImg from '../assets/images/settingButton.png';
+// import settingImg from '../assets/images/settingButton.png';
+import SettingButton from '../assets/images/setting_button.svg';
 
 import DayList from './DayList';
 
@@ -17,6 +18,7 @@ export const ActionBox = (props) => {
   const popUpRoutineOptionModal = (action) => {
     buttonRef.current.measureInWindow((x, y, width,height) => {
       const {id, name, emoji, limit_time, active_day} = props
+      x += 10;
       dispatch(action({x, y, id, name, emoji, limit_time, active_day}));
     })
   };
@@ -37,14 +39,14 @@ export const ActionBox = (props) => {
           </View>
         </View>
       </View>
-      <View ref={buttonRef} style={{height: '100%', paddingTop: 15, paddingRight: 10}}>
-        <TouchableOpacity
+      <View ref={buttonRef} style={{height: '100%',}}>
+        <Pressable
           onPress={() => popUpRoutineOptionModal(openRoutineOptionModal)}
           activeOpacity={1}
           hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
           >
-          <Image source={settingImg} />
-        </TouchableOpacity>
+          <SettingButton/>
+        </Pressable>
         <RoutineOptionModal/>
       </View>
     </View>

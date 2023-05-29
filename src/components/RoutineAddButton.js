@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import { openRoutineAddModal } from '../redux/reducerSlices/modalSlice';
 
-import AddButton from '../assets/images/add.png';
+// import AddButton from '../assets/images/add.png';
+import AddButton from '../assets/images/add.svg';
 
 const RoutineAddButton = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const RoutineAddButton = () => {
   return (
     <View style={styles.container} >
       <Pressable onPress={() => handleModal(openRoutineAddModal)}>
-        <Image source={AddButton}/>
+        <AddButton/>
       </Pressable>
     </View>
   );
