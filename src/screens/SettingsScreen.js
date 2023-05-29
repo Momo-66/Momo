@@ -1,5 +1,6 @@
 import {StyleSheet, View, SafeAreaView, Linking} from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import {PretendardedText} from '../components/CustomComponent/PretendardedText';
 import {ButtonLarge} from '../components/Buttons/ButtonLarge';
@@ -8,13 +9,17 @@ export const SettingsScreen = () => {
   // const [isEnabled, setIsEnabled] = useState(false);
   // const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const navigation = useNavigation();
+
   const open66TeamStory = () => {};
 
   const openMomoStory = () => {};
 
   const openImmediateFeedback = () => {};
 
-  const openVersionInfoScreen = () => {};
+  const openVersionInfoScreen = () => {
+    navigation.navigate('Version')
+  };
 
   const openReleaseNotification = () => {
     Linking.openURL('https://docs.google.com/forms/d/e/1FAIpQLSfSquNhinU_Unhq11ZVacTFjRzimSut-Y8KjZm2xi_nB4bSSA/viewform?usp=sf_link');
