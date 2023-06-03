@@ -31,6 +31,7 @@ export const RoutineTimePickerModal = () => {
   const [isValid, setisValid] = useState(true);
   const [cloneOriginStartTime, setcloneOriginStartTime] = useState(new Date());
   const [cloneOriginFinishTime, setcloneOriginFinishTime] = useState(new Date());
+  const [enableButton, setenableButton] = useState(true);
 
   function handleModal(action) {
     if (isWakeUpStep === WakeUpStep.STEP_ONE) {
@@ -123,7 +124,7 @@ export const RoutineTimePickerModal = () => {
     var tempFinishTime = new Date(finishTime);
     var finishMinutes = tempFinishTime.getHours() * 60 + tempFinishTime.getMinutes();
 
-    if (finishMinutes >= startMinutes) {
+    if (finishMinutes > startMinutes) {
       setisValid(true);
     } else {
       setisValid(false);
@@ -131,6 +132,16 @@ export const RoutineTimePickerModal = () => {
 
     setroutineTime(finishMinutes - startMinutes);
   }, [startTime, finishTime]);
+
+  useEffect(() => {
+    if (!isValid && isWakeUpStep === WakeUpStep.STEP_TWO) {
+        setenableButton(false);
+    }
+    else {
+        setenableButton(true);
+    }
+    
+  }, [isWakeUpStep, isValid]);
 
   return (
     <Modal
@@ -166,7 +177,7 @@ export const RoutineTimePickerModal = () => {
             <PretendardedText style={{color:'#808080', fontSize: 15, fontWeight: 500}}>나에게 주어진 총 루틴 시간은</PretendardedText>
             <PretendardedText style={{color:'#808080', fontSize: 15, fontWeight: 500, textAlign:'right'}}>기상시간 기준</PretendardedText>
             <View style={{flexDirection:'row', justifyContent:'flex-end'}}>
-              <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>{isValid ? "+" : ""}{routineTime}</PretendardedText>
+              <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>+{isValid ? routineTime : "0"}</PretendardedText>
               <PretendardedText style={{color:isValid ? "#3CE3AC" : "#FF6056", fontSize: 15, fontWeight: 900}}>분</PretendardedText>
               <PretendardedText style={{color:'#808080', fontSize: 15, fontWeight: 500}}> 입니다.</PretendardedText>
             </View>
@@ -174,7 +185,7 @@ export const RoutineTimePickerModal = () => {
         </View>
       </SafeAreaView>
       <View style={{height: 101}}>
-        <ButtonBottom action={onClickButton} text={buttonText}/>
+        <ButtonBottom action={onClickButton} text={buttonText} disabled={!enableButton} backgroundColor={enableButton ? null : '#EEEEEE'}/>
       </View>
     </Modal>
   );

@@ -35,7 +35,7 @@ export const MainTutorialScreen = () => {
     const opacityAnimation = useRef(new Animated.Value(0)).current;
 
     const [buttonContent, setbuttonContent] = useState("");
-    const [enableButton, setenableButton] = useState("");
+    const [enableButton, setenableButton] = useState(true);
 
     const setDataFromStorage = async () => {
         storeData('IsTutorialFinished', '1');    
