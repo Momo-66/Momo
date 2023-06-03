@@ -129,11 +129,14 @@ export const MainTutorialScreen = () => {
         if (!isValidTime && step === Step.STEP_TWO) {
             setenableButton(false);
         }
+        else if (clickedRoutineList.length === 0 && step === Step.STEP_THREE) {
+            setenableButton(false);
+        }
         else {
             setenableButton(true);
         }
         
-    }, [step, isValidTime]);
+    }, [step, isValidTime, clickedRoutineList]);
 
     return(
         <View style={{flex:1}}>
