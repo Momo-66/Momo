@@ -35,6 +35,7 @@ export const MainTutorialScreen = () => {
     const opacityAnimation = useRef(new Animated.Value(0)).current;
 
     const [buttonContent, setbuttonContent] = useState("");
+    const [enableButton, setenableButton] = useState("");
 
     const setDataFromStorage = async () => {
         storeData('IsTutorialFinished', '1');    
@@ -124,6 +125,16 @@ export const MainTutorialScreen = () => {
         }
     }, [step]);
 
+    useEffect(() => {
+        if (!isValidTime && step === Step.STEP_TWO) {
+            setenableButton(false);
+        }
+        else {
+            setenableButton(true);
+        }
+        
+    }, [step, isValidTime]);
+
     return(
         <View style={{flex:1}}>
             <BackgroundImgComponent />
@@ -141,7 +152,7 @@ export const MainTutorialScreen = () => {
                 </View>
                 <View style={{height: 101}}>
                     {
-                        enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent} disabled={!isValidTime && step === Step.STEP_TWO} backgroundColor={!isValidTime && step === Step.STEP_TWO ? '#EEEEEE' : null}/> : null
+                        enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent} disabled={!enableButton} backgroundColor={enableButton ? null : '#EEEEEE'}/> : null
                     }
                 </View>
             </View>
