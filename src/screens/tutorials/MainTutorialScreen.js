@@ -28,6 +28,7 @@ export const MainTutorialScreen = () => {
     const wakeUpTime = useSelector((state) => state.user.wakeUpTime);
     const completeTime = useSelector((state) => state.user.completeTime);
     const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
+    const isValidTime = useSelector((state) => state.tutorial.isValidTime);
 
     const dispatch = useDispatch();
 
@@ -140,7 +141,7 @@ export const MainTutorialScreen = () => {
                 </View>
                 <View style={{height: 101}}>
                     {
-                        enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent}/> : null
+                        enableBottomBtn ? <ButtonBottom action={clickBottomButton} text={buttonContent} disabled={!isValidTime && step === Step.STEP_TWO} backgroundColor={!isValidTime && step === Step.STEP_TWO ? '#EEEEEE' : null}/> : null
                     }
                 </View>
             </View>

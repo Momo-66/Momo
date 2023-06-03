@@ -7,7 +7,7 @@ export const ButtonBottom = (props) => {
   return (
     <Pressable
       disabled={props.disabled}
-      style={styles.nextButton}
+      style={[styles.nextButton, { backgroundColor: props.backgroundColor || '#3CE3AC' }]}
       onPress={props.action}>
       <PretendardedText style={styles.nextButtonText}>{props.text}</PretendardedText>
     </Pressable>
