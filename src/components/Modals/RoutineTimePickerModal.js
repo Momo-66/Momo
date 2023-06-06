@@ -120,17 +120,18 @@ export const RoutineTimePickerModal = () => {
 
   useEffect(() => {
     var tempStartTime = new Date(startTime);
-    var startMinutes = tempStartTime.getHours() * 60 + tempStartTime.getMinutes();
     var tempFinishTime = new Date(finishTime);
-    var finishMinutes = tempFinishTime.getHours() * 60 + tempFinishTime.getMinutes();
 
-    if (finishMinutes > startMinutes) {
+    if (tempFinishTime > tempStartTime) {
       setisValid(true);
     } else {
       setisValid(false);
     }
 
-    setroutineTime(finishMinutes - startMinutes);
+    var diff = tempFinishTime - tempStartTime;
+    var diffMin = diff / (1000 * 60);
+
+    setroutineTime(diffMin);
   }, [startTime, finishTime]);
 
   useEffect(() => {
