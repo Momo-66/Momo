@@ -34,11 +34,19 @@ export const Routine = (props) => {
     }
   }
 
+  const changeClickedRoutineColor = () => {
+    if (props.isTutorial){
+      return clickedRoutineList.some(routine => routine.id === props.id) ? '#222222' : 'white';
+    } else {
+      return '#222222'; 
+    }
+  }
+
   return (
       <View style={styles.container}>
         <TouchableOpacity onPress={toggleButton}>
           <View style={[styles.button, {backgroundColor: changeClickedRoutineBackgroundColor()}]}>
-            <PretendardedText style={props.isTutorial ? tutorialStyle.text : styles.text }>{props.emoji}  {props.name} (+{props.duration}분) </PretendardedText>
+            <PretendardedText style={{fontWeight: '500', fontSize: 14, color: changeClickedRoutineColor()}}>{props.emoji}  {props.name} (+{props.duration}분) </PretendardedText>
               <View style={{ justifyContent: 'center' }}>
                 <Difficulty />
               </View>
