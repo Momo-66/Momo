@@ -63,6 +63,7 @@ export const DescriptionTypeModal = (props) => {
   useEffect(() => {
     if (props.type === 'overTimeModal') {
       setCurrentModalState(overTimeModal);
+      setDelayedTime(props.delayTime);
     } else if (props.type === 'photoModal') {
       setCurrentModalState(photoModal);
     } else if (props.type === 'breakModal') {
@@ -71,6 +72,12 @@ export const DescriptionTypeModal = (props) => {
       setCurrentModalState(routineStartModal);
     }
   }, []);
+
+  useEffect(() => {
+    if (props.type === 'overTimeModal') {
+      setDelayedTime(props.delayTime);
+    } 
+  }, [props.delayTime]);
 
   return (
     <Modal

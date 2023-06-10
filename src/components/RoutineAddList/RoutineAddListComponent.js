@@ -1,15 +1,46 @@
 import {StyleSheet, SafeAreaView, View, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import {CategoryRoutineList} from './CategoryRoutineList';
 import {PretendardedText} from '../CustomComponent/PretendardedText';
-
 import {getRoutine} from '../../api/routineApi';
 import GreenStar from '../../assets/images/green_star.svg';
+import RedStar from '../../assets/images/red_star.svg';
+import { setremainTime, setTotalDifficulty } from '../../redux/reducerSlices/tutorialSlice';
 
 export const RoutineAddListComponent = props => {
+  const dispatch = useDispatch();
+
+  function setremainTimeFun(value) {
+    dispatch(setremainTime({
+      remainingTime: value,
+    }));
+  }
+
+  function setTotalDifficultyFun(value) {
+    dispatch(setTotalDifficulty({
+      totalDifficulty: value,
+    }));
+  }
+
+  const CalcDiffTime = () => {
+    var tempStartTime = new Date(startTime);
+    var tempFinishTime = new Date(finishTime);
+    var diff = tempFinishTime - tempStartTime;
+    var diffMin = diff / (1000 * 60);
+    return diffMin;
+  }
+
   const [healthRoutines, setHealthRoutines] = useState([]);
   const [selfHelpRoutines, setSelfHelpRoutines] = useState([]);
   const [livingRoutines, setLivingRoutines] = useState([]);
+  const [sumdifficulty, setsumdifficulty] = useState(0);
+  const [remainingtime, setremainingtime] = useState(CalcDiffTime());
+  const [validDifficulty, setvalidDifficulty] = useState(true);
+  const [validraminingTime, setvalidraminingTime] = useState(true);
+  const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
+  const startTime = useSelector((state) => state.user.wakeUpTime);
+  const finishTime = useSelector((state) => state.user.completeTime);
 
   const fetchData = async () => {
     try {
@@ -56,6 +87,32 @@ export const RoutineAddListComponent = props => {
   };
 
   useEffect(() => {
+    const sumOfDifficulty = clickedRoutineList.reduce((sum, item) => sum + Number(item.difficulty), 0);
+    setsumdifficulty(sumOfDifficulty);
+    setTotalDifficultyFun(sumOfDifficulty);
+
+    const diffTime = CalcDiffTime();
+    const sumOfTime = clickedRoutineList.reduce((sum, item) => sum + Number(item.duration), 0);
+    setremainingtime(Math.abs(diffTime - sumOfTime));
+    setremainTimeFun(diffTime - sumOfTime);
+
+    if (sumOfDifficulty > 28) {
+      setvalidDifficulty(false);
+    }
+    else {
+      setvalidDifficulty(true);
+    }
+
+    if (diffTime - sumOfTime < 0) {
+      setvalidraminingTime(false);
+    }
+    else {
+      setvalidraminingTime(true);
+    }
+    
+  }, [clickedRoutineList]);
+
+  useEffect(() => {
     fetchData();
   }, []);
 
@@ -77,9 +134,9 @@ export const RoutineAddListComponent = props => {
       </ScrollView>
       <View style={{ height: props.isTutorial ? 110 : 90, alignItems: 'flex-end', justifyContent: 'flex-start', position: 'absolute', right: 0, bottom: 0, width: '100%', }} pointerEvents="none">
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', }}>
-          <GreenStar/>
-          <PretendardedText style={{fontWeight: '700', fontSize: 30, color: '#3CE3AC'}}>
-            N
+          {validDifficulty ? <GreenStar/> : <RedStar/>}
+          <PretendardedText style={{fontWeight: '700', fontSize: 30, color: validDifficulty ? '#3CE3AC' : '#FF6056'}}>
+            {sumdifficulty}
           </PretendardedText>
           <PretendardedText style={{ fontWeight: '500', fontSize: 16, color: props.isTutorial ? '#FFFFFF' : '#22222', }}>
             /28{' '}
@@ -89,11 +146,11 @@ export const RoutineAddListComponent = props => {
           루틴을 마칠 시간까지
         </PretendardedText>
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <PretendardedText style={{fontWeight: '500', fontSize: 16, color: '#3CE3AC'}}>
-            NN분 더{' '}
+          <PretendardedText style={{fontWeight: '500', fontSize: 16, color: validraminingTime ? '#3CE3AC' : "#FF6056"}}>
+            {remainingtime}분 더{' '}
           </PretendardedText>
           <PretendardedText style={{ fontWeight: '500', fontSize: 16, color: props.isTutorial ? '#D9D9D9' : '#4C4C4C', }}>
-            여유있어요.
+            {validraminingTime ? "여유있어요." : "늦게끝나요."}
           </PretendardedText>
         </View>
         {props.isTutorial ? (

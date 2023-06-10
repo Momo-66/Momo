@@ -16,6 +16,8 @@ const initialState = {
     startTime: null,
     finishTime: null,
     isValidTime: true,
+    totalDifficulty: 0,
+    remainingTime: 0,
 };
 
 export const tutorialSlice = createSlice({
@@ -114,6 +116,12 @@ export const tutorialSlice = createSlice({
         setisValidTime: (state, action) => {
             state.isValidTime = action.payload.isValidTime;
         },
+        setTotalDifficulty: (state, action) => {
+            state.totalDifficulty = action.payload.totalDifficulty;
+        },
+        setremainTime: (state, action) => {
+            state.remainingTime = action.payload.remainingTime;
+        },
     },
 });
 
@@ -124,6 +132,8 @@ export const {
     setFinishTime,
     setStep,
     setisValidTime,
+    setTotalDifficulty,
+    setremainTime,
 } = tutorialSlice.actions;
 
 export default tutorialSlice.reducer;

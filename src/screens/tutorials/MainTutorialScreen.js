@@ -6,8 +6,10 @@ import { TutorialHeader } from '../../components/tutorials/TutorialHeader';
 import { InitTutorialScreen } from './InitTutorialScreen';
 import { TimePickerScreen } from './TimePickerScreen';
 import { ButtonBottom } from '../../components/Buttons/ButtonBottom';
+import { DescriptionTypeModal } from '../../components/Modals/DescriptionTypeModal';
 import { Step } from '../../utils/tutorials/Step';
 import { patchUser, patchNewUserRoutine } from '../../api/userApi';
+import { openDescriptionTypeModal } from '../../redux/reducerSlices/modalSlice';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { 
@@ -29,6 +31,8 @@ export const MainTutorialScreen = () => {
     const completeTime = useSelector((state) => state.user.completeTime);
     const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
     const isValidTime = useSelector((state) => state.tutorial.isValidTime);
+    const remainingTime = useSelector((state) => state.tutorial.remainingTime);
+    const totalDifficulty = useSelector((state) => state.tutorial.totalDifficulty);
 
     const dispatch = useDispatch();
 
@@ -36,10 +40,22 @@ export const MainTutorialScreen = () => {
 
     const [buttonContent, setbuttonContent] = useState("");
     const [enableButton, setenableButton] = useState(true);
+    const [delayTime, setdelayTime] = useState(0);
+    const [useoverTimeModal, setuseoverTimeModal] = useState(false);
 
     const setDataFromStorage = async () => {
         storeData('IsTutorialFinished', '1');    
     };
+
+    function openModal() {
+        dispatch(openDescriptionTypeModal());
+    }
+
+    function SetAnimationStep() {
+        if (step === Step.STEP_THREE) {
+            setStepfun(Step.ANIMATION_TUTORIAL);
+        }
+    }
 
     function setStepfun(value) {
         dispatch(setStep({
@@ -97,7 +113,12 @@ export const MainTutorialScreen = () => {
             setStepfun(Step.MID_TUTORIAL);
         }
         else if(step === Step.STEP_THREE){
-            setStepfun(Step.ANIMATION_TUTORIAL);
+            if (useoverTimeModal) {
+                openModal();
+            }
+            else {
+                setStepfun(Step.ANIMATION_TUTORIAL);
+            }
         }
         else if(step === Step.END_TUTORIAL){
             setDataFromStorage();
@@ -132,11 +153,24 @@ export const MainTutorialScreen = () => {
         else if (clickedRoutineList.length === 0 && step === Step.STEP_THREE) {
             setenableButton(false);
         }
+        else if (totalDifficulty > 28 && step === Step.STEP_THREE) {
+            setenableButton(false);
+        }
         else {
             setenableButton(true);
         }
-        
-    }, [step, isValidTime, clickedRoutineList]);
+    }, [step, isValidTime, clickedRoutineList, totalDifficulty]);
+
+    useEffect(() => {
+        if (remainingTime < 0) {
+            setdelayTime(Math.abs(remainingTime));
+            setuseoverTimeModal(true);
+        }
+        else {
+            setdelayTime(Math.abs(remainingTime));
+            setuseoverTimeModal(false);
+        }
+    }, [remainingTime]);
 
     return(
         <View style={{flex:1}}>
@@ -159,6 +193,7 @@ export const MainTutorialScreen = () => {
                     }
                 </View>
             </View>
+            <DescriptionTypeModal type={'overTimeModal'} rightButtonAction={SetAnimationStep} delayTime={delayTime}/>
         </View>
     );
 }
