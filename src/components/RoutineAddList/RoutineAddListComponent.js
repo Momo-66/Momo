@@ -4,21 +4,12 @@ import {CategoryRoutineList} from './CategoryRoutineList';
 import {PretendardedText} from '../CustomComponent/PretendardedText';
 import {getRoutine} from '../../api/routineApi';
 import GreenStar from '../../assets/images/green_star.svg';
+import RedStar from '../../assets/images/red_star.svg'
+
+import { useDispatch, useSelector } from 'react-redux';
 
 export const RoutineAddListComponent = props => {
   const dispatch = useDispatch();
-
-  function setremainTimeFun(value) {
-    dispatch(setremainTime({
-      remainingTime: value,
-    }));
-  }
-
-  function setTotalDifficultyFun(value) {
-    dispatch(setTotalDifficulty({
-      totalDifficulty: value,
-    }));
-  }
 
   const CalcDiffTime = () => {
     var tempStartTime = new Date(startTime);
@@ -35,7 +26,6 @@ export const RoutineAddListComponent = props => {
   const [remainingtime, setremainingtime] = useState(CalcDiffTime());
   const [validDifficulty, setvalidDifficulty] = useState(true);
   const [validraminingTime, setvalidraminingTime] = useState(true);
-  const clickedRoutineList = useSelector((state) => state.routineSlice.clickedRoutineList);
   const startTime = useSelector((state) => state.user.wakeUpTime);
   const finishTime = useSelector((state) => state.user.completeTime);
 
@@ -46,10 +36,30 @@ export const RoutineAddListComponent = props => {
   const [totalDifficulty, setTotalDifficulty] = useState();
   const [remainTime, setRemainTime] = useState();
 
-
   useEffect(() => {
     if (props.isTutorial === true) {
       // TODO: 튜토리얼 로직 추가 (khlee)
+      const clickedRoutineList = clickedState.clickedRoutineList;
+      const sumOfDifficulty = clickedRoutineList.reduce((sum, item) => sum + Number(item.difficulty), 0);
+      setsumdifficulty(sumOfDifficulty);
+
+      const diffTime = CalcDiffTime();
+      const sumOfTime = clickedRoutineList.reduce((sum, item) => sum + Number(item.duration), 0);
+      setremainingtime(Math.abs(diffTime - sumOfTime));
+
+      if (sumOfDifficulty > 28) {
+        setvalidDifficulty(false);
+      }
+      else {
+        setvalidDifficulty(true);
+      }
+
+      if (diffTime - sumOfTime < 0) {
+        setvalidraminingTime(false);
+      }
+      else {
+        setvalidraminingTime(true);
+      }
     } else {
       const clickedDifficulty = clickedState.clickedRoutineDifficulty;
       const clickedDuration = clickedState.clickedRoutineDuration;
@@ -64,6 +74,13 @@ export const RoutineAddListComponent = props => {
   
       let tmpRemainTime = Math.round((Date.parse(completeTime) - Date.parse(wakeUpTime)) / 1000 / 60) - clickedDuration;
       setRemainTime(tmpRemainTime);
+
+      if (tmpTotalDifficulty > 28) {
+        setvalidDifficulty(false);
+      }
+      else {
+        setvalidDifficulty(true);
+      }
     }
   }, [totalDifficulty, remainTime, clickedState])
 
@@ -110,32 +127,6 @@ export const RoutineAddListComponent = props => {
       console.error(err);
     }
   };
-
-  useEffect(() => {
-    const sumOfDifficulty = clickedRoutineList.reduce((sum, item) => sum + Number(item.difficulty), 0);
-    setsumdifficulty(sumOfDifficulty);
-    setTotalDifficultyFun(sumOfDifficulty);
-
-    const diffTime = CalcDiffTime();
-    const sumOfTime = clickedRoutineList.reduce((sum, item) => sum + Number(item.duration), 0);
-    setremainingtime(Math.abs(diffTime - sumOfTime));
-    setremainTimeFun(diffTime - sumOfTime);
-
-    if (sumOfDifficulty > 28) {
-      setvalidDifficulty(false);
-    }
-    else {
-      setvalidDifficulty(true);
-    }
-
-    if (diffTime - sumOfTime < 0) {
-      setvalidraminingTime(false);
-    }
-    else {
-      setvalidraminingTime(true);
-    }
-    
-  }, [clickedRoutineList]);
 
   useEffect(() => {
     fetchData();
