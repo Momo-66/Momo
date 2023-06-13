@@ -9,7 +9,6 @@ import RedStar from '../../assets/images/red_star.svg'
 import { useDispatch, useSelector } from 'react-redux';
 
 export const RoutineAddListComponent = props => {
-  const dispatch = useDispatch();
 
   const CalcDiffTime = () => {
     var tempStartTime = new Date(startTime);
@@ -38,7 +37,6 @@ export const RoutineAddListComponent = props => {
 
   useEffect(() => {
     if (props.isTutorial === true) {
-      // TODO: 튜토리얼 로직 추가 (khlee)
       const clickedRoutineList = clickedState.clickedRoutineList;
       const sumOfDifficulty = clickedRoutineList.reduce((sum, item) => sum + Number(item.difficulty), 0);
       setsumdifficulty(sumOfDifficulty);
