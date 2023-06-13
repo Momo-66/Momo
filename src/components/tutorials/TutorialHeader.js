@@ -11,6 +11,7 @@ import { PretendardedText } from '../CustomComponent/PretendardedText';
 import LightBackIcon from '../../assets/icons/light/backIcon.svg';
 import DarkBackIcon from '../../assets/icons/dark/backIcon.svg';
 import LightNextIcon from '../../assets/icons/light/nextIcon.svg';
+import DarkNextIcon from '../../assets/images/right_arrow.svg';
 
 export const TutorialHeader = (props) => {
     const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export const TutorialHeader = (props) => {
         </TouchableOpacity>
         <TouchableOpacity onPress={clickRightButton} style={{opacity:enableHeaderRightBtn ? 1 : 0, flexDirection:"row", alignItems:'center'}} disabled={!enableHeaderRightBtn}>
             <PretendardedText style={{color:enableBackgroundImg ? 'white' : 'black', marginRight:4, fontSize:14}}>다음으로</PretendardedText>
-            <LightNextIcon/>
+            {enableBackgroundImg ? <LightNextIcon/> : <DarkNextIcon/> }
         </TouchableOpacity>
     </View>
     )
