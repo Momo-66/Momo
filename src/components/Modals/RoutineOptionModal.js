@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {Modal, StyleSheet, View, Text, TouchableOpacity, Pressable} from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PretendardedText } from '../CustomComponent/PretendardedText';
-import { closeRoutineOptionModal, openPairTypeModal } from '../../redux/reducerSlices/modalSlice';
+import { closeRoutineOptionModal, openPairTypeModal, nextStepRoutineAddList, openRoutineAddListModal, openRoutineEditModal } from '../../redux/reducerSlices/modalSlice';
 import { PairTypeModal } from './PairTypeModal';
+import { RoutineEditModal } from './RoutineEditModal';
 
 const RoutineOptionModal = () => {
   const dispatch = useDispatch();
@@ -12,7 +13,7 @@ const RoutineOptionModal = () => {
   const posX = useSelector(state => state.modal.routineOptionModalPositionX);
   const posY = useSelector(state => state.modal.routineOptionModalPositionY);
 
-  const onColose = () => {
+  const onColse = () => {
     dispatch(closeRoutineOptionModal());
   }
 
@@ -20,12 +21,16 @@ const RoutineOptionModal = () => {
     dispatch(openPairTypeModal());
   }
 
+  const openRoutineInfoEditModal = () => {
+    dispatch(openRoutineEditModal());
+  }
+
   return (
     <Modal transparent={true} visible={isModalVisible}>
-      <Pressable style={{flex: 1}} onPressOut={onColose}>
+      <Pressable style={{flex: 1}} onPressOut={onColse}>
         <View style={[styles.modalView, {top: posY + 20, left: posX - 70}]}>
           <View style={{flex: 1, alignItems: 'center'}}>
-            <TouchableOpacity style={[styles.button, styles.editButton]}>
+            <TouchableOpacity style={[styles.button, styles.editButton]} onPress={openRoutineInfoEditModal}>
                 <PretendardedText style={{color: '#4C4C4C', fontWeight: '600', fontSize: 14,}}>편집하기</PretendardedText>
             </TouchableOpacity>
           </View>
@@ -38,6 +43,7 @@ const RoutineOptionModal = () => {
       </Pressable>
       <View>
         <PairTypeModal type='deleteRoutineModal'/>
+        <RoutineEditModal/>
       </View>
     </Modal>
   );
