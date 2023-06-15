@@ -10,6 +10,7 @@ const initialState = {
   breakModal: false,
   routineOptionModal: false,
   routineTimePickerModal: false,
+  routineEditModal: false,
   routineOptionModalPositionX: -1,
   routineOptionModalPositionY: -1,
   selectedRoutineId: '',
@@ -76,6 +77,12 @@ export const modalSlice = createSlice({
     setBreakModalStatus: (state, action) => {
       state.breakModal = action.payload.status;
     },
+    openRoutineEditModal: (state) => {
+      state.routineEditModal = true;
+    },
+    closeRoutineEditModal: (state) => {
+      state.routineEditModal = false;
+    },
   },
 });
 
@@ -96,6 +103,8 @@ export const {
   backStepRoutineAddList,
   setPhotoModalStatus,
   setBreakModalStatus,
+  openRoutineEditModal,
+  closeRoutineEditModal,
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
