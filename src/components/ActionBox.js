@@ -1,11 +1,10 @@
 import React, {useRef} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { openRoutineOptionModal } from '../redux/reducerSlices/modalSlice';
 import RoutineOptionModal from './Modals/RoutineOptionModal';
 
-// import settingImg from '../assets/images/settingButton.png';
 import SettingButton from '../assets/images/setting_button.svg';
 
 import DayList from './DayList';

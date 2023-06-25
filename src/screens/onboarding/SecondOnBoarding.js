@@ -1,11 +1,10 @@
-import { View, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import { View, SafeAreaView, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 
 import { PretendardedText } from '../../components/CustomComponent/PretendardedText';
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 
-import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
 import OnBoardingImg from '../../assets/images/SecondOnboarding.gif';
 import OnBoardingIndicatorImg from '../../assets/images/SecondOnboardingIndicator.svg';
 

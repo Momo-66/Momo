@@ -1,10 +1,9 @@
 import React from 'react';
-import {StyleSheet, Image, View, Pressable} from 'react-native';
+import {StyleSheet, View, Pressable} from 'react-native';
 import { useDispatch } from 'react-redux';
 
 import { openRoutineAddModal } from '../redux/reducerSlices/modalSlice';
 
-// import AddButton from '../assets/images/add.png';
 import AddButton from '../assets/images/add.svg';
 
 const RoutineAddButton = () => {

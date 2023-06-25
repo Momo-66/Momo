@@ -5,7 +5,6 @@ import React from 'react';
 import { PretendardedText } from '../../components/CustomComponent/PretendardedText';
 import { ButtonLarge } from '../../components/Buttons/ButtonLarge';
 
-import RightBlackButtonImg from '../../assets/images/TutorialHeaderRightBlackButton.png';
 import OnBoardingImg from '../../assets/images/ThirdOnboarding.gif';
 import OnBoardingIndicatorImg from '../../assets/images/ThirdOnboardingIndicator.svg';
 
