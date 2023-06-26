@@ -83,6 +83,7 @@ export const RoutineAddListModal = (props) => {
         routine_id: { stringValue: clickedRoutineId },
         routine_name: { stringValue: clickedRoutineName},
         streak: { integerValue: 0 },
+        execution_time: { integerValue: 0 },
       }
     }
     return data

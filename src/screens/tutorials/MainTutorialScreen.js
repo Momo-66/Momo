@@ -97,6 +97,7 @@ export const MainTutorialScreen = () => {
                     routine_id: { stringValue: item.id },
                     routine_name: { stringValue: item.name },
                     streak: { integerValue: 0 },
+                    execution_time: { integerValue: 0 },
                 }
             }
 
