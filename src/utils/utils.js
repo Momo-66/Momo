@@ -19,4 +19,12 @@ const getAuthToken = async (callBack) => {
   }
 };
 
-export {storeAuthToken, getAuthToken};
+const getUUID = async() => {
+  try {
+    return await AsyncStorage.getItem('@authToken');
+  } catch(e) {
+    console.log(e);
+  }
+}
+
+export {storeAuthToken, getAuthToken, getUUID};
