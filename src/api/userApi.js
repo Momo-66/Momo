@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { FIRESTORE_API_URL, PROJECT_ID } from '@env';
 
-import { getAuthToken } from '../utils/utils';
+import { getUUID } from '../utils/utils';
 
 export const getUserBasic = async () => {
+  const UUID = await getUUID();
   const response = await axios.get(
-    // TODO: replace 'user1' with token
-    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/user1`
+    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/${UUID}`
   ).then(res => {
     return res;
   }).catch(e => {
@@ -16,24 +16,26 @@ export const getUserBasic = async () => {
 };
 
 export const getUserRoutine = async () => {
-    const response = await axios.get(
-      // TODO: replace 'user1' with token
-        `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/user1/Routine_Collection`
-    ).then(res => {
-      return res;
-    }).catch(e => {
-      return e;
-    });
-    return response;
+  const UUID = await getUUID();
+  const response = await axios.get(
+      `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/${UUID}/Routine_Collection`
+  ).then(res => {
+    return res;
+  }).catch(e => {
+    return e;
+  });
+  return response;
 };
 
 export const patchUser = async(data, updateMask) => {
+  const UUID = await getUUID();
   let updateMaskParam = '';
   updateMask.forEach(field => {
     updateMaskParam = updateMaskParam.concat('updateMask.fieldPaths=', field, '&');
   });
+  
   const response = await axios.patch(
-    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/user1?${updateMaskParam}`,
+    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/${UUID}?${updateMaskParam}`,
     data,
     {
       headers: {
@@ -53,8 +55,9 @@ export const patchIndividualUserRoutine = async (routineId, data, updateMask) =>
   updateMask.forEach(field => {
     updateMaskParam = updateMaskParam.concat('updateMask.fieldPaths=', field, '&');
   });
+  const UUID = await getUUID();
   const response = await axios.patch(
-    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/user1/Routine_Collection/${routineId}?${updateMaskParam}`,
+    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/${UUID}/Routine_Collection/${routineId}?${updateMaskParam}`,
     data,
     {
       headers: {
@@ -70,8 +73,9 @@ export const patchIndividualUserRoutine = async (routineId, data, updateMask) =>
 };
 
 export const patchNewUserRoutine = async(routineId, data) => {
+  const UUID = await getUUID();
   const response = await axios.patch(
-    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/user1/Routine_Collection/${routineId}`,
+    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/${UUID}/Routine_Collection/${routineId}`,
     data,
     {
       headers: {
