@@ -44,6 +44,7 @@ export const userDocumnetSetup = async (uuid) => {
       is_activated: { booleanValue: false },
       momo_exp: { integerValue: 0 },
       password: { stringValue: 'password' },
+      recentaction_start_time: { timestampValue: '2023-03-22T12:30:00.834Z' },
       routine_complete_time: { timestampValue: '2023-03-22T12:30:00.834Z' },
       streak: { integerValue: 0 },
       user_name: { stringValue: 'alpha 사용자' },
@@ -63,5 +64,13 @@ export const userDocumnetSetup = async (uuid) => {
       return response
     }).catch(e => {
       console.log(e);
-    })
+    }
+  )
+  await axios.post(
+    `${FIRESTORE_API_URL}${PROJECT_ID}/databases/(default)/documents/User_Collection/${uuid}/Routine_Collection`,
+    []
+  ).then(
+  ).catch(e => {
+    console.log(e);
+  })
 }
