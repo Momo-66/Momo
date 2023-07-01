@@ -40,6 +40,7 @@ function routineSerializer(payload) {
     activeDay = binaryString.split('').map((digit) => digit === '1');
     const today = new Date().getDay();
     const isActiveToday = activeDay[((today + 6) % 7)];
+    const executionTime = fields.execution_time.integerValue;
 
     const routineObj = {
       id: id,
@@ -52,7 +53,7 @@ function routineSerializer(payload) {
       streak: parseInt(streak),
       activeDay: activeDay,
       isActiveToday: isActiveToday,
-      executionTime: 0,
+      executionTime: parseInt(executionTime),
     };
     userRoutineActionList.push(routineObj);
   }
