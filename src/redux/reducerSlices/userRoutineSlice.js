@@ -133,12 +133,16 @@ export const userRoutineSlice = createSlice({
       })
       .addCase(fetchUserRoutine.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.userRoutineActionList = routineSerializer(action.payload);
-        state.remainingTime = calculateDuration(state.userRoutineActionList);
-        state.numberOfReaminingRoutines = countRoutines(state.userRoutineActionList, 'complete', false);
-        state.numberOfCompleteRoutines = countRoutines(state.userRoutineActionList, 'complete', true);
-        state.pointSumOfReaminingRoutines = calculatePoints(state.userRoutineActionList, 'complete', false);
-        state.pointSumOfCompleteRoutines = calculatePoints(state.userRoutineActionList, 'complete', true);
+        try {
+          state.userRoutineActionList = routineSerializer(action.payload);
+          state.remainingTime = calculateDuration(state.userRoutineActionList);
+          state.numberOfReaminingRoutines = countRoutines(state.userRoutineActionList, 'complete', false);
+          state.numberOfCompleteRoutines = countRoutines(state.userRoutineActionList, 'complete', true);
+          state.pointSumOfReaminingRoutines = calculatePoints(state.userRoutineActionList, 'complete', false);
+          state.pointSumOfCompleteRoutines = calculatePoints(state.userRoutineActionList, 'complete', true);
+        } catch (error) {
+          state.userRoutineActionList = [];
+        }
       })
       .addCase(fetchUserRoutine.rejected, (state, action) => {
         state.isLoading = false;

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, View, SafeAreaView, ScrollView} from 'react-native';
+import { StyleSheet, View, SafeAreaView, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import { ActionBox } from '../components/ActionBox';
@@ -30,22 +30,23 @@ const RoutineScreen = () => {
   return (
     <View style={styles.contianer}>
       <SafeAreaView
-        style={{flex: 1, backgroundColor: '#F9F9F9', width: '100%'}}>
+        style={{ flex: 1, backgroundColor: '#F9F9F9', width: '100%' }}>
         <View style={styles.headerContainer}>
-          <PretendardedText style={{fontSize: 16, fontWeight: '700'}}>마이 루틴</PretendardedText>
+          <PretendardedText style={{ fontSize: 16, fontWeight: '700' }}>마이 루틴</PretendardedText>
         </View>
 
-        <TotalRoutineBox/>
+        <TotalRoutineBox />
 
         <View style={styles.routineListContainer}>
-          <ScrollView width="100%" showsVerticalScrollIndicator={false}>
-            {actionList.map(action => renderActionList(action))}
-          </ScrollView>
-          <RoutineAddButton/>
-          <RoutineAddModal/>
-          <RoutineAddListModal isTutorial={false}/>
-          <RoutineTimePickerModal/>
-        </View>  
+          {userRoutineState.userRoutineActionList.length === 0 ? <PretendardedText style={{color: '#4C4C4C'}}>아직 추가된 루틴이 없습니다</PretendardedText> :
+            <ScrollView width="100%" showsVerticalScrollIndicator={false}>
+              {actionList.map(action => renderActionList(action))}
+            </ScrollView>}
+          <RoutineAddButton />
+          <RoutineAddModal />
+          <RoutineAddListModal isTutorial={false} />
+          <RoutineTimePickerModal />
+        </View>
       </SafeAreaView>
     </View>
   );
@@ -67,6 +68,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F9F9F9',
     marginHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 

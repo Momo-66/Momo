@@ -54,14 +54,15 @@ export const TodayRoutine = () => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.actionsList}>
-        <ScrollView style={{ width: '100%' }} showsVerticalScrollIndicator={false}>
-          {userRoutineState.userRoutineActionList.map((action, index) => (action.isActiveToday ?
-            <Action key={index} id={action.id} setAnimatedPoint={setAnimatedPoint} pointAnimation={pointAnimation} /> : null
-          ))}
-          <Pressable style={styles.quitButton} onPress={openModal}>
-            <PretendardedText style={styles.quitBtnText}>오늘의 루틴 종료하기</PretendardedText>
-          </Pressable>
-        </ScrollView>
+        {userRoutineState.userRoutineActionList.length === 0 ? <PretendardedText style={{color: '#4C4C4C'}}>아직 추가된 루틴이 없습니다</PretendardedText> :
+          <ScrollView style={{ width: '100%' }} showsVerticalScrollIndicator={false}>
+            {userRoutineState.userRoutineActionList.map((action, index) => (action.isActiveToday ?
+              <Action key={index} id={action.id} setAnimatedPoint={setAnimatedPoint} pointAnimation={pointAnimation} /> : null
+            ))}
+            <Pressable style={styles.quitButton} onPress={openModal}>
+              <PretendardedText style={styles.quitBtnText}>오늘의 루틴 종료하기</PretendardedText>
+            </Pressable>
+          </ScrollView>}
       </View>
       <RoutineBreakModal/>
       <PhotoModal />
