@@ -49,6 +49,8 @@ export const InactiveMain = () => {
                     style={[styles.activateBtn, styles.activateBtnShadow]}
                     onPress={openModal}>
                     <LinearGradient
+                        start={{x: 0, y: 0}}
+                        end={{x: 0, y: 1}}
                         colors={['#3CE3AC', '#32CACA']}
                         style={[styles.linearGradient, styles.activateBtnShadow]}>
                         <PretendardedText style={styles.activateText}>모모를 깨워 루틴 시작하기</PretendardedText>
