@@ -14,6 +14,7 @@ import ClosetScreen from '../screens/ClosetScreen';
 import { SettingsScreen } from '../screens/SettingsScreen';
 import LoginScreenAlpha from '../screens/LoginScreenAlpha';
 import { MainTutorialScreen } from '../screens/tutorials/MainTutorialScreen';
+import { VersionScreen } from '../screens/ViersionScreen';
 import { OnBoardingNavigator } from '../screens/onboarding/OnBoardingNavigator';
 
 import { HomeTab } from '../components/NavigatorComponent/HomeTab';
@@ -147,14 +148,12 @@ export const RootNavigator = () => {
       }}
     >
       {isTutorialFinished && isAuthUser? (
-        <AuthStack.Screen name="Tabs" component={TabComponent}
-          options={{
-            gestureEnabled: false,
-          }}
-          />
+        <AuthStack.Screen name="Tabs" component={TabComponent} options={{gestureEnabled: false,}}/>
+        
       ) : !isTutorialFinished && isAuthUser ? (<AuthStack.Screen name="Tutorial" component={MainTutorialScreen}/>) 
       : (<AuthStack.Screen name="Onboarding" component={OnBoardingNavigator}/>)
       }
+      <AuthStack.Screen name="Version" component={VersionScreen}/>
     </AuthStack.Navigator>
   );
 };
