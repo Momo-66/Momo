@@ -1,6 +1,7 @@
-import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, View, Pressable, Modal, SafeAreaView, TextInput } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { globalStyles } from '../../styles';
+import { useState, useEffect } from 'react';
 
 import { closeRoutineAddListModal } from '../../redux/reducerSlices/modalSlice';
 
@@ -26,13 +27,17 @@ export const RoutineAddListModal = (props) => {
   const routineAddListStep = modalState.routineAddListStep;
 
   const routineState = useSelector(state => state.routineSlice);
+  const userRoutineState = useSelector(state => state.userRoutineSlice);
   const clickedRoutineId = routineState.clickedRoutineId;
   const clickedRoutineCategory = routineState.clickedRoutineCategory;
   const clickedRoutineName = routineState.clickedRoutineName;
   const clickedRoutineEmoji = routineState.clickedRoutineEmoji;
   const clickedRoutineDuration = routineState.clickedRoutineDuration;
   const clickedActiveDay = routineState.clickedActiveDay;
+  const clickedRoutineDifficulty = routineState.clickedRoutineDifficulty;
   
+  const [totalDifficulty, setTotalDifficulty] = useState();
+  const [validDifficulty, setValidDifficulty] = useState(true);
 
   function handleModal(action) {
     if (routineAddListStep == 1) {
@@ -75,7 +80,7 @@ export const RoutineAddListModal = (props) => {
       fields:{
         active_day: { integerValue: active_day },
         category: { stringValue: clickedRoutineCategory},
-        difficulty: { integerValue: 1 },
+        difficulty: { integerValue: clickedRoutineDifficulty },
         duration: { integerValue: clickedRoutineDuration },
         emoji: { stringValue: clickedRoutineEmoji},
         finished: { booleanValue: false },
@@ -98,7 +103,6 @@ export const RoutineAddListModal = (props) => {
   }
 
   function confirmAddRoutineOnPress() {
-    // TODO: API 날리기
     const data = routineDataJsonify();
     patchNewUserRoutine(clickedRoutineId, data);
 
@@ -123,6 +127,20 @@ export const RoutineAddListModal = (props) => {
     dispatch(toggleDayClick(dayIndex))
   }
 
+  useEffect(() => {
+    let tmpTotalDifficulty = 0;
+    for (let i = 0; i < userRoutineState.userRoutineActionList.length; i++){
+      tmpTotalDifficulty += parseInt(userRoutineState.userRoutineActionList[i].difficulty);
+    }
+    setTotalDifficulty(tmpTotalDifficulty + parseInt(clickedRoutineDifficulty));
+      
+    if (totalDifficulty > 28) {
+      setValidDifficulty(false);
+    } else {
+      setValidDifficulty(true);
+    }
+  },[totalDifficulty, routineState])
+
   return (
     <Modal
       animationType="slide"
@@ -146,7 +164,9 @@ export const RoutineAddListModal = (props) => {
         </SafeAreaView><ButtonBottom
             text="추가하기"
             action={addButtonOnPress}
-            style={globalStyles.oneFlex} /></> :
+            style={globalStyles.oneFlex}
+            backgroundColor={validDifficulty ? null : '#EEEEEE'}
+            disabled={validDifficulty ? true : false}/></> :
         <><SafeAreaView style={styles.container}>
           <Pressable style={globalStyles.rowFlex}>
             <Pressable
@@ -219,7 +239,8 @@ export const RoutineAddListModal = (props) => {
         </SafeAreaView><ButtonBottom
             text="완료"
             action={confirmAddRoutineOnPress}
-            style={globalStyles.oneFlex} /></>
+            style={globalStyles.oneFlex} 
+            disabled={validDifficulty ? true : false}/></>
         }
     </Modal>
   );

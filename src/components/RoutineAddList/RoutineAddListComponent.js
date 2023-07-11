@@ -72,8 +72,8 @@ export const RoutineAddListComponent = props => {
   
       let tmpRemainTime = Math.round((Date.parse(completeTime) - Date.parse(wakeUpTime)) / 1000 / 60) - clickedDuration;
       setRemainTime(tmpRemainTime);
-
-      if (tmpTotalDifficulty > 28) {
+      
+      if (totalDifficulty > 28) {
         setvalidDifficulty(false);
       }
       else {
